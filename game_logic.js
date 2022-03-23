@@ -49,6 +49,12 @@ document.onkeydown = function(e) {
                     currentPiece.location[0] = 7;
                 }
                 break;
+            case 'r':
+                rotatePiece(currentPiece);
+                break;
+            case 'f':
+                flipPiece(currentPiece);
+                break;
         }
         renderPiece(currentPiece);
     }
@@ -198,6 +204,22 @@ function renderPiece(piece) {
     }
     renderBoard(tempBoard);
     delete tempBoard;
+}
+
+function rotatePiece(piece) {
+    let shape = piece.shape;
+    for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
+        let temp = shape[blockNumber][1];
+        shape[blockNumber][1] = -shape[blockNumber][0]
+        shape[blockNumber][0] = temp;
+    }
+}
+
+function flipPiece(piece) {
+    let shape = piece.shape;
+    for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
+        shape[blockNumber][0] *= -1;
+    }
 }
 
 function copyBoard(copy, original) {
