@@ -85,6 +85,7 @@ function startGame() {
     cardsThisSeason = 4;
 
     currentPiece = exploreDeck.pop();
+    checkCurrentPieceCanBePlaced();
     renderPiece(currentPiece);
 }
 
@@ -171,6 +172,7 @@ function successfullyPlacedPiece(piece) {
 function checkIfSeasonOver() {
     if (cardsThisSeason != 0) {
         currentPiece = exploreDeck.pop();
+        checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
     } else {
         switch(scoreCardOrder[seasonsScored]) {
@@ -192,13 +194,54 @@ function checkIfSeasonOver() {
 
 function checkIfGameOver() {
     if (seasonsScored == 3) {
-        //game over!
+        currentPiece = "";
+        document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
     } else {
         initializeExploreDeck();
         cardsThisSeason = 4;
 
         currentPiece = exploreDeck.pop();
+        checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
+    }
+}
+
+function checkCurrentPieceCanBePlaced() {
+    var ableToBePlaced = false;
+    for (let i = 0; i < gameBoard.length; i++) {
+        for (let j = 0; j < gameBoard[0].length; j++) {
+            for (let rotation = 0; rotation < 4; rotation++) {
+                let blockCanBePlaced = true;
+                let blockCanBePlaced_flipped = true;
+                rotatePiece(currentPiece);
+                for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
+                    let x_coord_block = currentPiece.shape[blockNumber][1] + j;
+                    let y_coord_block = currentPiece.shape[blockNumber][0] + i;
+                    if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block > gameBoard.length-1 || y_coord_block > gameBoard.length-1 
+                        || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
+                        blockCanBePlaced = false;
+                    }
+                }
+                if (!blockCanBePlaced) {
+                    flipPiece(currentPiece);
+                    for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
+                        let x_coord_block = currentPiece.shape[blockNumber][1] + j;
+                        let y_coord_block = currentPiece.shape[blockNumber][0] + i;
+                        if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block > gameBoard.length-1 || y_coord_block > gameBoard.length-1 
+                            || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
+                            blockCanBePlaced_flipped = false;
+                        }
+                    }
+                    flipPiece(currentPiece);
+                }
+                if (blockCanBePlaced || blockCanBePlaced_flipped) {
+                    ableToBePlaced = true;
+                }
+            }
+        }
+    }
+    if (!ableToBePlaced) {
+        currentPiece.shape = [[0,0]]
     }
 }
 
