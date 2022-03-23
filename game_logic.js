@@ -13,47 +13,40 @@ var playerPoints;
 var scoreCardOrder;
 var exploreDeck;
 var currentPiece;
+var seasonsScored;
+var cardsThisSeason;
 
 document.onkeydown = function(e) {
     if (currentPiece.toString() != "") {
         switch (e.key) {
             case "ArrowLeft":
                 currentPiece.location[1]--;
-                if (currentPiece.location[1] < 0) {
-                    currentPiece.location[1] = 0;
-                } else if (currentPiece.location[1] > 7) {
-                    currentPiece.location[1] = 7;
-                }
+                checkCurrentPieceLegallyPlaced();
                 break;
             case "ArrowRight":
                 currentPiece.location[1]++;
-                if (currentPiece.location[1] < 0) {
-                    currentPiece.location[1] = 0;
-                } else if (currentPiece.location[1] > 7) {
-                    currentPiece.location[1] = 7;
-                }
+                checkCurrentPieceLegallyPlaced();
                 break;
             case "ArrowUp":
                 currentPiece.location[0]--;
-                if (currentPiece.location[0] < 0) {
-                    currentPiece.location[0] = 0;
-                } else if (currentPiece.location[0] > 7) {
-                    currentPiece.location[0] = 7;
-                }
+                checkCurrentPieceLegallyPlaced();
                 break;
             case "ArrowDown":
                 currentPiece.location[0]++;
-                if (currentPiece.location[0] < 0) {
-                    currentPiece.location[0] = 0;
-                } else if (currentPiece.location[0] > 7) {
-                    currentPiece.location[0] = 7;
-                }
+                checkCurrentPieceLegallyPlaced();
                 break;
             case 'r':
                 rotatePiece(currentPiece);
+                checkCurrentPieceLegallyPlaced();
                 break;
             case 'f':
                 flipPiece(currentPiece);
+                checkCurrentPieceLegallyPlaced();
+                break;
+            case "Enter":
+                if (successfullyPlacedPiece(currentPiece)) {
+                    checkIfSeasonOver();
+                }
                 break;
         }
         renderPiece(currentPiece);
@@ -88,27 +81,11 @@ function startGame() {
 
     initializeExploreDeck();
 
-    let seasonsScored = 0;
+    seasonsScored = 0;
+    cardsThisSeason = 4;
 
     currentPiece = exploreDeck.pop();
     renderPiece(currentPiece);
-
-    /*
-    while (seasonsScored < 3) {
-        let cardsThisSeason = 4;
-        while (cardsThisSeason > 0) {
-            currentPiece = exploreDeck.pop();
-            currentPiece.state = "being_placed";
-            renderPiece(currentPiece);
-            while (currentPiece.state == "being_placed") {
-                currentPiece.state == "banana";
-            }
-            cardsThisSeason = 0;
-        }
-        seasonsScored = 3;
-    }
-    */
-
 }
 
 
@@ -153,6 +130,102 @@ function renderBoard(board) {
         }
         var boardRender = document.getElementById("boardRow"+i);
         boardRender.innerHTML = colourBoard;
+    }
+}
+
+
+function successfullyPlacedPiece(piece) {
+    let tempBoard = [
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0]
+    ];
+    copyBoard(tempBoard, gameBoard);
+    let type = piece.type;
+    let shape = piece.shape;
+    let x_coord = piece.location[0];
+    let y_coord = piece.location[1];
+    for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
+        let x_coord_block = shape[blockNumber][0] + x_coord;
+        let y_coord_block = shape[blockNumber][1] + y_coord;
+        if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
+            if (tempBoard[x_coord_block][y_coord_block] == 0) {
+                tempBoard[x_coord_block][y_coord_block] = type;
+            } else {
+                return false;
+            }
+        }
+    }
+    copyBoard(gameBoard, tempBoard);
+    renderBoard(gameBoard);
+    delete tempBoard;
+    cardsThisSeason--;
+    return true;
+}
+
+function checkIfSeasonOver() {
+    if (cardsThisSeason != 0) {
+        currentPiece = exploreDeck.pop();
+        renderPiece(currentPiece);
+    } else {
+        switch(scoreCardOrder[seasonsScored]) {
+            case "R":
+                scoreCardRed(gameBoard);
+                break;
+            case "G":
+                scoreCardGreen(gameBoard);
+                break;
+            case "B":
+                scoreCardBlueYellow(gameBoard);
+                break;
+        }
+        renderPlayerPoints();
+        seasonsScored++;
+        checkIfGameOver();
+    }
+}
+
+function checkIfGameOver() {
+    if (seasonsScored == 3) {
+        //game over!
+    } else {
+        initializeExploreDeck();
+        cardsThisSeason = 4;
+
+        currentPiece = exploreDeck.pop();
+        renderPiece(currentPiece);
+    }
+}
+
+function checkCurrentPieceLegallyPlaced() {
+    var allBlocksLegal = false;
+    while (!allBlocksLegal) {
+        for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
+            let x_coord_block = currentPiece.shape[blockNumber][1] + currentPiece.location[1];
+            let y_coord_block = currentPiece.shape[blockNumber][0] + currentPiece.location[0];
+            if (x_coord_block < 0) {
+                currentPiece.location[1]++;
+                break;
+            }
+            if (x_coord_block > gameBoard.length-1) {
+                currentPiece.location[1]--;
+                break;
+            }
+            if (y_coord_block < 0) {
+                currentPiece.location[0]++;
+                break;
+            }
+            if (y_coord_block > gameBoard.length-1) {
+                currentPiece.location[0]--;
+                break;
+            }
+        }
+        allBlocksLegal = true;
     }
 }
 
