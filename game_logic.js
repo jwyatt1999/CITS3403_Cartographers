@@ -1,47 +1,66 @@
+/** Enumerated constant that represents an empty space on the game board. */
 const EMPTY = 0;
+/** Enumerated constant that represents a mountain space on the game board. */
 const MOUNTAIN = 1;
+/** Enumerated constant that represents a blocked space on the game board. */
 const BLOCKED = 2;
+/** Enumerated constant that represents a farm space on the game board. */
 const FARM = 3;
+/** Enumerated constant that represents a forest space on the game board. */
 const FOREST = 4;
+/** Enumerated constant that represents a village space on the game board. */
 const VILLAGE = 5;
+/** Enumerated constant that represents a river space on the game board. */
 const RIVER = 6;
+/** Enumerated constant that represents an enemy space on the game board. */
 const ENEMY = 7;
+/** Enumerated constant that represents an overlap space on the game board. Only used for tempGameBoard. */
 const OVERLAP = 8;
 
+/** Global variable that holds the state of the game board after the previous piece was placed. */
 var gameBoard;
+/** Global variable that holds the total points the player has scored this game. */
 var playerPoints;
+/** Global variable that holds the randomized order of the score cards, which determines which season they are scored in. */
 var scoreCardOrder;
+/** Global variable that holds the explore deck, which determines what piece the player will be placing next. */
 var exploreDeck;
+/** Global variable that holds the piece that the player is currently placing. */
 var currentPiece;
+/** Global variable that holds a value between 0 and 3, which is used to determine when the game is over (when 3 seasons have been scored). */
 var seasonsScored;
+/** Global variable that holds a value which is reduced whenever a piece is placed. When it reaches zero, the current season is scored and the next season begins. */
 var cardsThisSeason;
 
+/**
+ * This function allows the player to interact with the game with arrow keys, 'r', 'f', and 'Enter'.
+ * If a currentPiece has been assigned, the arrow keys move the currentPiece left, right, up, and down
+ * on the board, the 'r' key rotates the piece 90 degrees clockwise, the 'f' key flips the piece 
+ * across the x-axis, and the 'Enter' key will place the piece if it can legally be placed where it is.
+ * After any of these transformations, we check that the piece has not left the bounds of the game board,
+ * and if it has then we translate it back onto the game board.
+ * @param {*} e The key that was pressed.
+ */
 document.onkeydown = function(e) {
     if (currentPiece.toString() != "") {
         switch (e.key) {
             case "ArrowLeft":
                 currentPiece.location[1]--;
-                checkCurrentPieceLegallyPlaced();
                 break;
             case "ArrowRight":
                 currentPiece.location[1]++;
-                checkCurrentPieceLegallyPlaced();
                 break;
             case "ArrowUp":
                 currentPiece.location[0]--;
-                checkCurrentPieceLegallyPlaced();
                 break;
             case "ArrowDown":
                 currentPiece.location[0]++;
-                checkCurrentPieceLegallyPlaced();
                 break;
             case 'r':
                 rotatePiece(currentPiece);
-                checkCurrentPieceLegallyPlaced();
                 break;
             case 'f':
-                flipPiece(currentPiece);
-                checkCurrentPieceLegallyPlaced();
+                flipPiece(currentPiece);     
                 break;
             case "Enter":
                 if (successfullyPlacedPiece(currentPiece)) {
@@ -49,9 +68,11 @@ document.onkeydown = function(e) {
                 }
                 break;
         }
+        checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
     }
 };
+
 
 function startGame() {
     document.getElementById("startButton").hidden=true;
