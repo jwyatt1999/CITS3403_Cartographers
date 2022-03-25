@@ -73,18 +73,22 @@ document.onkeydown = function(e) {
     }
 };
 
-
+/**
+ * Starts a new game by initialising and rendering the game board, player points, score cards, 
+ * and explore deck, and revealing the top card of the explore deck to the player.
+ */
 function startGame() {
     document.getElementById("startButton").hidden=true;
+    document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
-        [1,0,0,0,0,0,0,0],
-        [2,0,0,0,0,0,0,0],
-        [3,0,0,0,0,0,0,0],
-        [4,0,0,0,0,0,0,0],
-        [5,0,0,0,0,0,0,0],
-        [6,0,0,0,0,0,0,0],
-        [7,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0]
     ];
 
@@ -110,13 +114,16 @@ function startGame() {
     renderPiece(currentPiece);
 }
 
-
-
-
+/**
+ * Renders the given game board on the game_page. The board is stored in a html table on the game_page.
+ * The style ensures the cells of the table are fully coloured.
+ * @param {*} board The board to render
+ */
 function renderBoard(board) {
     for (let i = 0; i < board.length; i++) {
-        var gameBoardRow = board[i].toString().replace(/[^0-8]/g,"");
-        var colourBoard = "";
+        //Convert each board row from (eg.) "0,0,0,0,0,0,0,0" to "00000000". We remove everything that isn't 0-8 (the values of the enumerated constants).
+        let gameBoardRow = board[i].toString().replace(/[^0-8]/g,""); 
+        let colourBoard = "";
         for (let j = 0; j < gameBoardRow.length; j++) {
             let c = gameBoardRow.charAt(j);
             switch (parseInt(c)) {
@@ -147,16 +154,23 @@ function renderBoard(board) {
                 case OVERLAP:
                     colourBoard += "<td style=\"color:orange;background-color:orange;\">8</td>";
                     break;
-                default:
             }
         }
+        //game_page.html stores the game board in a table which has rows with id from boardRow0 to boardRow7
         var boardRender = document.getElementById("boardRow"+i);
         boardRender.innerHTML = colourBoard;
     }
 }
 
-
+/**
+ * Attempts to place the given piece on the current game board. If the current piece is found to overlap
+ * any existing pieces or if any of it's blocks are placed outside the bounds of the game board then the piece
+ * is not placed.
+ * @param {*} piece The piece to be placed
+ * @returns True if the piece was successfully placed on the game board, false otherwise
+ */
 function successfullyPlacedPiece(piece) {
+    //We don't want to manipulate the original game board so we create a copy
     let tempBoard = [
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0],
@@ -170,26 +184,36 @@ function successfullyPlacedPiece(piece) {
     copyBoard(tempBoard, gameBoard);
     let type = piece.type;
     let shape = piece.shape;
-    let x_coord = piece.location[0];
-    let y_coord = piece.location[1];
+    let x_coord = piece.location[1];
+    let y_coord = piece.location[0];
+    //Attempt to place the piece on the temporary game board
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let x_coord_block = shape[blockNumber][0] + x_coord;
-        let y_coord_block = shape[blockNumber][1] + y_coord;
+        let x_coord_block = shape[blockNumber][1] + x_coord;
+        let y_coord_block = shape[blockNumber][0] + y_coord;
         if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
-            if (tempBoard[x_coord_block][y_coord_block] == 0) {
+            if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
                 tempBoard[x_coord_block][y_coord_block] = type;
             } else {
                 return false;
             }
         }
     }
+    //If we got here then the piece has been legally placed on the temporary board so we make that the new game board
     copyBoard(gameBoard, tempBoard);
     renderBoard(gameBoard);
     delete tempBoard;
+    //A piece has been placed so we decrement the number of explore cards (pieces) remaining until we score this season
     cardsThisSeason--;
     return true;
 }
 
+/**
+ * Check if the season is over. This function is called after a piece has been placed successfully. 
+ * The season is over when there are no explore cards remaining this season.
+ * If the season is over then we score the current score card, render the player's new total points, then check if we
+ * have scored 3 seasons (in which case the game is over).
+ * Otherwise, if the season is not over, we reveal the next card on the explore deck and this season continues.
+ */
 function checkIfSeasonOver() {
     if (cardsThisSeason != 0) {
         currentPiece = exploreDeck.pop();
@@ -213,14 +237,17 @@ function checkIfSeasonOver() {
     }
 }
 
+/**
+ * 
+ */
 function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
+        document.getElementById("startButton").hidden=false;
     } else {
         initializeExploreDeck();
         cardsThisSeason = 4;
-
         currentPiece = exploreDeck.pop();
         checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
