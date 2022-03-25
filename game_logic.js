@@ -91,24 +91,19 @@ function startGame() {
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0]
     ];
-
     renderBoard(gameBoard);
 
     playerPoints = 0;
-
     renderPlayerPoints();
 
+    seasonsScored = 0;
     initializeScoreCards();
-
     for (let card = 1; card < scoreCardOrder.length+1; card++) {
         document.getElementById("scoreCard" + card).innerHTML = scoreCardOrder[card-1]; 
     }
 
-    initializeExploreDeck();
-
-    seasonsScored = 0;
     cardsThisSeason = 4;
-
+    initializeExploreDeck();
     currentPiece = exploreDeck.pop();
     checkCurrentPieceCanBePlaced();
     renderPiece(currentPiece);
@@ -238,7 +233,10 @@ function checkIfSeasonOver() {
 }
 
 /**
- * 
+ * Check if the game is over. This function is called after a season has been scored.
+ * The game is over when three seasons have been scored.
+ * If the game is not over, then we re-create the explore deck, reveal the top card to the player,
+ * and the next season begins.
  */
 function checkIfGameOver() {
     if (seasonsScored == 3) {
@@ -254,35 +252,47 @@ function checkIfGameOver() {
     }
 }
 
+/**
+ * Check if the current piece can be placed on the game board.
+ * If the piece cannot legally be placed anywhere then we reduce the piece to a 1x1 block.
+ */
 function checkCurrentPieceCanBePlaced() {
-    var ableToBePlaced = false;
+    let ableToBePlaced = false;
+    //Check each position on the game board
     for (let i = 0; i < gameBoard.length; i++) {
         for (let j = 0; j < gameBoard[0].length; j++) {
+            //If the location of the primary block isn't empty then regardless of rotation / flipping the piece cannot be placed
+            if (gameBoard[i][j] != EMPTY) {
+                continue;
+            }
+            //Check each possible rotation of the current piece
             for (let rotation = 0; rotation < 4; rotation++) {
-                let blockCanBePlaced = true;
-                let blockCanBePlaced_flipped = true;
+                let pieceCanBePlaced = true;
+                let pieceCanBePlaced_flipped = true;
                 rotatePiece(currentPiece);
                 for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
                     let x_coord_block = currentPiece.shape[blockNumber][1] + j;
                     let y_coord_block = currentPiece.shape[blockNumber][0] + i;
-                    if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block > gameBoard.length-1 || y_coord_block > gameBoard.length-1 
+                    if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block >= gameBoard.length || y_coord_block >= gameBoard.length 
                         || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
-                        blockCanBePlaced = false;
+                        pieceCanBePlaced = false;
                     }
                 }
-                if (!blockCanBePlaced) {
+                //Check if flipping the piece allows the piece to be placed
+                if (!pieceCanBePlaced) {
                     flipPiece(currentPiece);
                     for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
                         let x_coord_block = currentPiece.shape[blockNumber][1] + j;
                         let y_coord_block = currentPiece.shape[blockNumber][0] + i;
-                        if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block > gameBoard.length-1 || y_coord_block > gameBoard.length-1 
+                        if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block >= gameBoard.length || y_coord_block >= gameBoard.length 
                             || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
-                            blockCanBePlaced_flipped = false;
+                            pieceCanBePlaced_flipped = false;
                         }
                     }
+                    //Flip the piece back to it's original orientation
                     flipPiece(currentPiece);
                 }
-                if (blockCanBePlaced || blockCanBePlaced_flipped) {
+                if (pieceCanBePlaced || pieceCanBePlaced_flipped) {
                     ableToBePlaced = true;
                 }
             }
@@ -293,17 +303,24 @@ function checkCurrentPieceCanBePlaced() {
     }
 }
 
+/**
+ * Check that the current piece is wholly contained within the bounds of the game board.
+ * If any blocks of the piece are outside the bounds of the game board then move the piece
+ * back onto the game board until it is wholly contained within the bounds.
+ */
 function checkCurrentPieceLegallyPlaced() {
-    var allBlocksLegal = false;
+    let allBlocksLegal = false;
     while (!allBlocksLegal) {
         for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
             let x_coord_block = currentPiece.shape[blockNumber][1] + currentPiece.location[1];
             let y_coord_block = currentPiece.shape[blockNumber][0] + currentPiece.location[0];
             if (x_coord_block < 0) {
                 currentPiece.location[1]++;
+                //The for loop is broken after each translation to prevent the block being moved back (eg.) 3 spaces
+                //if it had 3 blocks out of bounds but the piece would be within the bounds after 1 translation.
                 break;
             }
-            if (x_coord_block > gameBoard.length-1) {
+            if (x_coord_block >= gameBoard.length) {
                 currentPiece.location[1]--;
                 break;
             }
@@ -311,7 +328,7 @@ function checkCurrentPieceLegallyPlaced() {
                 currentPiece.location[0]++;
                 break;
             }
-            if (y_coord_block > gameBoard.length-1) {
+            if (y_coord_block >= gameBoard.length) {
                 currentPiece.location[0]--;
                 break;
             }
@@ -320,26 +337,40 @@ function checkCurrentPieceLegallyPlaced() {
     }
 }
 
+/**
+ * Update game_page.html to display the player's current points.
+ */
 function renderPlayerPoints() {
-    var points = document.getElementById("playerPoints");
+    let points = document.getElementById("playerPoints");
     points.innerHTML = "Points: " + playerPoints;
 }
 
+/**
+ * Select the score cards for this game and randomize their order.
+ */
 function initializeScoreCards() {
     scoreCardOrder = ["R","G","B"];
     shuffle(scoreCardOrder);
 }
 
+/**
+ * Create the explore deck by adding the base 4 pre-determined (for now) cards and shuffling.
+ */
 function initializeExploreDeck() {
     exploreDeck = [];
-    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],location:[4,4],state:"in_deck"});
-    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],location:[4,4],state:"in_deck"});
-    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],location:[4,4],state:"in_deck"});
-    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],location:[4,4],state:"in_deck"});
+    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],location:[4,4]});
+    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],location:[4,4]});
+    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],location:[4,4]});
+    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],location:[4,4]});
     shuffle(exploreDeck);
 }
 
+/**
+ * Renders the location of the given piece on the current game board without altering the current game board.
+ * @param {*} piece The piece to render
+ */
 function renderPiece(piece) {
+    //We don't want to manipulate the original game board so we create a copy
     let tempBoard = [
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0],
@@ -353,13 +384,13 @@ function renderPiece(piece) {
     copyBoard(tempBoard, gameBoard);
     let type = piece.type;
     let shape = piece.shape;
-    let x_coord = piece.location[0];
-    let y_coord = piece.location[1];
+    let x_coord = piece.location[1];
+    let y_coord = piece.location[0];
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let x_coord_block = shape[blockNumber][0] + x_coord;
-        let y_coord_block = shape[blockNumber][1] + y_coord;
+        let x_coord_block = shape[blockNumber][1] + x_coord;
+        let y_coord_block = shape[blockNumber][0] + y_coord;
         if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
-            if (tempBoard[x_coord_block][y_coord_block] == 0) {
+            if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
                 tempBoard[x_coord_block][y_coord_block] = type;
             } else {
                 tempBoard[x_coord_block][y_coord_block] = OVERLAP;
@@ -370,15 +401,23 @@ function renderPiece(piece) {
     delete tempBoard;
 }
 
+/**
+ * Rotates the given piece 90 degrees clockwise about the primary block.
+ * @param {*} piece The piece to rotate
+ */
 function rotatePiece(piece) {
     let shape = piece.shape;
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let temp = shape[blockNumber][1];
-        shape[blockNumber][1] = -shape[blockNumber][0]
-        shape[blockNumber][0] = temp;
+        let temp = shape[blockNumber][0];
+        shape[blockNumber][0] = -shape[blockNumber][1]
+        shape[blockNumber][1] = temp;
     }
 }
 
+/**
+ * Flips the given piece across the x-axis, which is defined by the primary block.
+ * @param {*} piece The piece to flip
+ */
 function flipPiece(piece) {
     let shape = piece.shape;
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
@@ -386,6 +425,11 @@ function flipPiece(piece) {
     }
 }
 
+/**
+ * Populates the values of the copy board with the corresponding values from the original board.
+ * @param {*} copy The board which will become a copy of the original
+ * @param {*} original The board which will be copied
+ */
 function copyBoard(copy, original) {
     for (let i = 0; i < original.length; i++) {
         for (let j = 0; j < original[0].length; j++) {
@@ -394,8 +438,11 @@ function copyBoard(copy, original) {
     }
 }
 
+/**
+ * Perform a Fisher-Yates shuffle on the given array, which randomizes the order of all elements in the array.
+ * @param {*} array The array to be shuffled
+ */
 function shuffle (array) {
-    //perform Fisher-Yates shuffle on the given array
     let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
