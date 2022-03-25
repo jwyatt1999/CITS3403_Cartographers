@@ -289,11 +289,11 @@ function renderPiece(piece) {
     copyBoard(tempBoard, gameBoard);
     let type = piece.type;
     let shape = piece.shape;
-    let x_coord = piece.location[1];
-    let y_coord = piece.location[0];
+    let x_coord = piece.location[0];
+    let y_coord = piece.location[1];
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let x_coord_block = shape[blockNumber][1] + x_coord;
-        let y_coord_block = shape[blockNumber][0] + y_coord;
+        let x_coord_block = shape[blockNumber][0] + x_coord;
+        let y_coord_block = shape[blockNumber][1] + y_coord;
         if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
             if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
                 tempBoard[x_coord_block][y_coord_block] = type;
@@ -313,9 +313,9 @@ function renderPiece(piece) {
 function rotatePiece(piece) {
     let shape = piece.shape;
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let temp = shape[blockNumber][0];
-        shape[blockNumber][0] = -shape[blockNumber][1]
-        shape[blockNumber][1] = temp;
+        let temp = shape[blockNumber][1];
+        shape[blockNumber][1] = -shape[blockNumber][0]
+        shape[blockNumber][0] = temp;
     }
 }
 
@@ -365,12 +365,12 @@ function copyBoard(copy, original) {
     copyBoard(tempBoard, gameBoard);
     let type = piece.type;
     let shape = piece.shape;
-    let x_coord = piece.location[1];
-    let y_coord = piece.location[0];
+    let x_coord = piece.location[0];
+    let y_coord = piece.location[1];
     //Attempt to place the piece on the temporary game board
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let x_coord_block = shape[blockNumber][1] + x_coord;
-        let y_coord_block = shape[blockNumber][0] + y_coord;
+        let x_coord_block = shape[blockNumber][0] + x_coord;
+        let y_coord_block = shape[blockNumber][1] + y_coord;
         if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
             if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
                 tempBoard[x_coord_block][y_coord_block] = type;
