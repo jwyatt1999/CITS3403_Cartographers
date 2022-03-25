@@ -2,3 +2,31 @@
     background-color: wheat;
     color: maroon;
 }
+
+.hero-text{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.bgimage{
+    height: 100vh;
+    background: url("./images/main_bg.jpg");
+    background-size: cover;
+    position: relative;
+  }
+
+.hero-title {
+    font-size: 4rem;
+}
+  
+.hero-description{
+    font: 2rem;
+}
+  
+.navbar-inner {
+    background: transparent;
+}
