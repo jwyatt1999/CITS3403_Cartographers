@@ -158,98 +158,31 @@ function renderBoard(board) {
 }
 
 /**
- * Attempts to place the given piece on the current game board. If the current piece is found to overlap
- * any existing pieces or if any of it's blocks are placed outside the bounds of the game board then the piece
- * is not placed.
- * @param {*} piece The piece to be placed
- * @returns True if the piece was successfully placed on the game board, false otherwise
+ * Update game_page.html to display the player's current points.
  */
-function successfullyPlacedPiece(piece) {
-    //We don't want to manipulate the original game board so we create a copy
-    let tempBoard = [
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0]
-    ];
-    copyBoard(tempBoard, gameBoard);
-    let type = piece.type;
-    let shape = piece.shape;
-    let x_coord = piece.location[1];
-    let y_coord = piece.location[0];
-    //Attempt to place the piece on the temporary game board
-    for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
-        let x_coord_block = shape[blockNumber][1] + x_coord;
-        let y_coord_block = shape[blockNumber][0] + y_coord;
-        if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
-            if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
-                tempBoard[x_coord_block][y_coord_block] = type;
-            } else {
-                return false;
-            }
-        }
-    }
-    //If we got here then the piece has been legally placed on the temporary board so we make that the new game board
-    copyBoard(gameBoard, tempBoard);
-    renderBoard(gameBoard);
-    delete tempBoard;
-    //A piece has been placed so we decrement the number of explore cards (pieces) remaining until we score this season
-    cardsThisSeason--;
-    return true;
+ function renderPlayerPoints() {
+    let points = document.getElementById("playerPoints");
+    points.innerHTML = "Points: " + playerPoints;
 }
 
 /**
- * Check if the season is over. This function is called after a piece has been placed successfully. 
- * The season is over when there are no explore cards remaining this season.
- * If the season is over then we score the current score card, render the player's new total points, then check if we
- * have scored 3 seasons (in which case the game is over).
- * Otherwise, if the season is not over, we reveal the next card on the explore deck and this season continues.
+ * Select the score cards for this game and randomize their order.
  */
-function checkIfSeasonOver() {
-    if (cardsThisSeason != 0) {
-        currentPiece = exploreDeck.pop();
-        checkCurrentPieceCanBePlaced();
-        renderPiece(currentPiece);
-    } else {
-        switch(scoreCardOrder[seasonsScored]) {
-            case "R":
-                scoreCardRed(gameBoard);
-                break;
-            case "G":
-                scoreCardGreen(gameBoard);
-                break;
-            case "B":
-                scoreCardBlueYellow(gameBoard);
-                break;
-        }
-        renderPlayerPoints();
-        seasonsScored++;
-        checkIfGameOver();
-    }
+function initializeScoreCards() {
+    scoreCardOrder = ["R","G","B"];
+    shuffle(scoreCardOrder);
 }
 
 /**
- * Check if the game is over. This function is called after a season has been scored.
- * The game is over when three seasons have been scored.
- * If the game is not over, then we re-create the explore deck, reveal the top card to the player,
- * and the next season begins.
+ * Create the explore deck by adding the base 4 pre-determined (for now) cards and shuffling.
  */
-function checkIfGameOver() {
-    if (seasonsScored == 3) {
-        currentPiece = "";
-        document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        document.getElementById("startButton").hidden=false;
-    } else {
-        initializeExploreDeck();
-        cardsThisSeason = 4;
-        currentPiece = exploreDeck.pop();
-        checkCurrentPieceCanBePlaced();
-        renderPiece(currentPiece);
-    }
+function initializeExploreDeck() {
+    exploreDeck = [];
+    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],location:[4,4]});
+    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],location:[4,4]});
+    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],location:[4,4]});
+    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],location:[4,4]});
+    shuffle(exploreDeck);
 }
 
 /**
@@ -338,34 +271,6 @@ function checkCurrentPieceLegallyPlaced() {
 }
 
 /**
- * Update game_page.html to display the player's current points.
- */
-function renderPlayerPoints() {
-    let points = document.getElementById("playerPoints");
-    points.innerHTML = "Points: " + playerPoints;
-}
-
-/**
- * Select the score cards for this game and randomize their order.
- */
-function initializeScoreCards() {
-    scoreCardOrder = ["R","G","B"];
-    shuffle(scoreCardOrder);
-}
-
-/**
- * Create the explore deck by adding the base 4 pre-determined (for now) cards and shuffling.
- */
-function initializeExploreDeck() {
-    exploreDeck = [];
-    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],location:[4,4]});
-    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],location:[4,4]});
-    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],location:[4,4]});
-    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],location:[4,4]});
-    shuffle(exploreDeck);
-}
-
-/**
  * Renders the location of the given piece on the current game board without altering the current game board.
  * @param {*} piece The piece to render
  */
@@ -435,6 +340,101 @@ function copyBoard(copy, original) {
         for (let j = 0; j < original[0].length; j++) {
             copy[i][j] = original[i][j];
         }
+    }
+}
+
+/**
+ * Attempts to place the given piece on the current game board. If the current piece is found to overlap
+ * any existing pieces or if any of it's blocks are placed outside the bounds of the game board then the piece
+ * is not placed.
+ * @param {*} piece The piece to be placed
+ * @returns True if the piece was successfully placed on the game board, false otherwise
+ */
+ function successfullyPlacedPiece(piece) {
+    //We don't want to manipulate the original game board so we create a copy
+    let tempBoard = [
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0]
+    ];
+    copyBoard(tempBoard, gameBoard);
+    let type = piece.type;
+    let shape = piece.shape;
+    let x_coord = piece.location[1];
+    let y_coord = piece.location[0];
+    //Attempt to place the piece on the temporary game board
+    for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
+        let x_coord_block = shape[blockNumber][1] + x_coord;
+        let y_coord_block = shape[blockNumber][0] + y_coord;
+        if (0 <= x_coord_block && x_coord_block < tempBoard.length && 0 <= y_coord_block && y_coord_block < tempBoard.length) {
+            if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
+                tempBoard[x_coord_block][y_coord_block] = type;
+            } else {
+                return false;
+            }
+        }
+    }
+    //If we got here then the piece has been legally placed on the temporary board so we make that the new game board
+    copyBoard(gameBoard, tempBoard);
+    renderBoard(gameBoard);
+    delete tempBoard;
+    //A piece has been placed so we decrement the number of explore cards (pieces) remaining until we score this season
+    cardsThisSeason--;
+    return true;
+}
+
+/**
+ * Check if the season is over. This function is called after a piece has been placed successfully. 
+ * The season is over when there are no explore cards remaining this season.
+ * If the season is over then we score the current score card, render the player's new total points, then check if we
+ * have scored 3 seasons (in which case the game is over).
+ * Otherwise, if the season is not over, we reveal the next card on the explore deck and this season continues.
+ */
+function checkIfSeasonOver() {
+    if (cardsThisSeason != 0) {
+        currentPiece = exploreDeck.pop();
+        checkCurrentPieceCanBePlaced();
+        renderPiece(currentPiece);
+    } else {
+        switch(scoreCardOrder[seasonsScored]) {
+            case "R":
+                scoreCardRed(gameBoard);
+                break;
+            case "G":
+                scoreCardGreen(gameBoard);
+                break;
+            case "B":
+                scoreCardBlueYellow(gameBoard);
+                break;
+        }
+        renderPlayerPoints();
+        seasonsScored++;
+        checkIfGameOver();
+    }
+}
+
+/**
+ * Check if the game is over. This function is called after a season has been scored.
+ * The game is over when three seasons have been scored.
+ * If the game is not over, then we re-create the explore deck, reveal the top card to the player,
+ * and the next season begins.
+ */
+function checkIfGameOver() {
+    if (seasonsScored == 3) {
+        currentPiece = "";
+        document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
+        document.getElementById("startButton").hidden=false;
+    } else {
+        initializeExploreDeck();
+        cardsThisSeason = 4;
+        currentPiece = exploreDeck.pop();
+        checkCurrentPieceCanBePlaced();
+        renderPiece(currentPiece);
     }
 }
 
