@@ -232,7 +232,7 @@ function checkCurrentPieceCanBePlaced() {
         }
     }
     if (!ableToBePlaced) {
-        currentPiece.shape = [[0,0]]
+        currentPiece.shape = [[0,0]];
     }
 }
 
@@ -303,7 +303,6 @@ function renderPiece(piece) {
         }
     }
     renderBoard(tempBoard);
-    delete tempBoard;
 }
 
 /**
@@ -314,7 +313,7 @@ function rotatePiece(piece) {
     let shape = piece.shape;
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
         let temp = shape[blockNumber][1];
-        shape[blockNumber][1] = -shape[blockNumber][0]
+        shape[blockNumber][1] = -shape[blockNumber][0];
         shape[blockNumber][0] = temp;
     }
 }
@@ -382,7 +381,6 @@ function copyBoard(copy, original) {
     //If we got here then the piece has been legally placed on the temporary board so we make that the new game board
     copyBoard(gameBoard, tempBoard);
     renderBoard(gameBoard);
-    delete tempBoard;
     //A piece has been placed so we decrement the number of explore cards (pieces) remaining until we score this season
     cardsThisSeason--;
     return true;
