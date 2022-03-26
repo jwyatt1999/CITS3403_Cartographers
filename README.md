@@ -3,8 +3,6 @@ CITS3403 Project - Josh Wyatt &amp; Joo Kai Tay
 
 # Rough Timeline:
 
-**Week 4 (21/03 - 27/03)**: Complete mock-ups, planning, and research
-
 **Weeks 5 to 7 (28/03 - 17/04)**: Sprint 1 (3 weeks, Get prototype up and deployed online that has all functionality except account creation and login - Spend few days testing to identify bugs and ways to improve)
 
 ~~~
