@@ -33,7 +33,7 @@ Week 6 (08/04): Mid-Semester Test 9am
 # Development Agreement
 1. We will stick to the HTML/CSS style guidelines here: https://teaching.csse.uwa.edu.au/units/CITS3403/laboratories/htmlcssguide.html
 2. We will each work on branches off of main (could be separate, though we could work on the same branch if necessary). We can merge when it seems appropriate via pull request but our code must be code reviewed before it is merged - this will be an opportunity for learning and catching mistakes 
-3. We will have meetings twice a week (after commencement of the first sprint) to ensure we don’t stay blocked on tasks and ensure we are doing continual work
+3. We will have meetings once a week to ensure we don’t stay blocked on tasks and ensure we are doing continual work
 
 # CITS3403 Unit Page
 https://teaching.csse.uwa.edu.au/units/CITS3403/
