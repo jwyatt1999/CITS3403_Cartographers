@@ -16,11 +16,9 @@
   }
 
 .hero-title {
-    font-size: 4rem;
-}
-  
-.hero-description{
-    font: 2rem;
+    font-size: 8rem;
+    font-size: 8vw;
+
 }
   
 .navbar-inner {
@@ -82,26 +80,35 @@
 }
 
 .btn_daily {
-    height: 100px;
+    background-color: goldenrod;
+    opacity: 0.8;
+    border-color: whitesmoke;
+    border-width: 5px;
+    color: royalblue;
     font-weight: bold;
-    text-align: center;
     text-shadow: 2px 2px blue;
     font-size: 50px;
-    background-color: goldenrod;
-    border-color: goldenrod;
-    font: 40rem;
-    color: royalblue;
-    opacity: 0.8;
+    font-size: 3.5vw;
 }
 
 .btn_freeplay {
     opacity: 0.8;
     background-color: goldenrod;
-    border-color: goldenrod;
+    border-color: whitesmoke;
+    border-width: 5px;
+    color: royalblue;
+    font-weight: bold;
+    font-size: 30px;
+    font-size: 2vw;
 }
 
-.btn-primary {
+.btn_sec {
     opacity: 0.8;
     background-color: goldenrod;
-    border-color: goldenrod;
+    border-color: whitesmoke;
+    border-width: 5px;
+    color: royalblue;
+    font-weight: bold;
+    font-size: 25px;
+    font-size: 1.25vw;
 }
