@@ -1,15 +1,10 @@
-* {
-    background-color: wheat;
-    color: maroon;
-}
-
 .hero-text{
     text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: royalblue;
 }
 
 .bgimage{
@@ -17,6 +12,7 @@
     background: url("./images/main_bg.jpg");
     background-size: cover;
     position: relative;
+    opacity: 0.85;
   }
 
 .hero-title {
@@ -29,4 +25,48 @@
   
 .navbar-inner {
     background: transparent;
+}
+
+.nav-link, .nav-item {
+    color: whitesmoke !important;
+    font-weight: bold;
+    font-size: large;
+ }
+
+ .navbar-brand {
+    color: whitesmoke !important;
+    font-weight: bold;
+    font-size: xx-large;
+ }
+
+ .information_scroll, .rule_scroll {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -18%);
+    max-height: 100%;
+    max-width: 100%;
+    z-index: -1;
+}
+
+.info_header, .rule_header {
+    text-align: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: royalblue;
+}
+
+.info_paragraph, .rule_paragraph {
+    text-align: center;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font: 2rem;
+    color: royalblue;
 }
