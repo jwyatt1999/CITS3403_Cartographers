@@ -1,4 +1,12 @@
 * {
     background-color: wheat;
-    color: maroon;
+}
+
+table {
+    border: 2px solid black;
+}
+
+td {
+    height: 60px;
+    width: 60px;
 }
