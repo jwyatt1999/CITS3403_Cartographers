@@ -62,6 +62,9 @@ document.onkeydown = function(e) {
             case 'f':
                 flipPiece(currentPiece);     
                 break;
+            case 't':
+                swapPieceType(currentPiece);
+                break;
             case "Enter":
                 if (successfullyPlacedPiece(currentPiece)) {
                     checkIfSeasonOver();
@@ -136,7 +139,6 @@ function initializeGameBoard() {
         y1 = 5 * Math.round(Math.random()) + 1; 
     }
     gameBoard[x1][y1] = MOUNTAIN;
-    console.log(gameBoard);
     let adjacentToMountain = [[x1,y1], [x1+1,y1], [x1-1,y1], [x1,y1+1], [x1,y1-1]];
     //Determine the position of the second mountain.
     if (x1 == 1) {
@@ -153,7 +155,6 @@ function initializeGameBoard() {
         y2 = 2;
     }
     gameBoard[x2][y2] = MOUNTAIN;
-    console.log(gameBoard);
     adjacentToMountain += [[x2,y2], [x2+1,y2], [x2-1,y2], [x2,y2+1], [x2,y2-1]];
     //Randomly place the blocked spaces.
     let blockedPlaced = 0;
@@ -239,10 +240,10 @@ function initializeScoreCards() {
  */
 function initializeExploreDeck() {
     exploreDeck = [];
-    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],location:[4,4]});
-    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],location:[4,4]});
-    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],location:[4,4]});
-    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],location:[4,4]});
+    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],altShape:[[0,0],[0,1],[1,0]],alt:"shape",location:[4,4]});
+    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],altShape:[[0,0],[0,1],[1,0]],alt:"shape",location:[4,4]});
+    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],altType:RIVER,alt:"type",location:[4,4]});
+    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],altType:FARM,alt:"type",location:[4,4]});
     shuffle(exploreDeck);
 }
 
@@ -251,7 +252,9 @@ function initializeExploreDeck() {
  * If the piece cannot legally be placed anywhere then we reduce the piece to a 1x1 block.
  */
 function checkCurrentPieceCanBePlaced() {
-    let ableToBePlaced = false;
+    console.clear();
+    let ableToBePlaced_default = false;
+    let ableToBePlaced_alt = false;
     //Check each position on the game board
     for (let i = 0; i < gameBoard.length; i++) {
         for (let j = 0; j < gameBoard[0].length; j++) {
@@ -263,6 +266,12 @@ function checkCurrentPieceCanBePlaced() {
             for (let rotation = 0; rotation < 4; rotation++) {
                 let pieceCanBePlaced = true;
                 let pieceCanBePlaced_flipped = true;
+                let altPieceCanBePlaced = false;
+                let altPieceCanBePlaced_flipped = false;
+                if (currentPiece.alt == "shape") {
+                    altPieceCanBePlaced = true;
+                    altPieceCanBePlaced_flipped = true;
+                }
                 rotatePiece(currentPiece);
                 for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
                     let x_coord_block = currentPiece.shape[blockNumber][1] + j;
@@ -272,8 +281,18 @@ function checkCurrentPieceCanBePlaced() {
                         pieceCanBePlaced = false;
                     }
                 }
+                if (currentPiece.alt == "shape") {
+                    for (let blockNumber = 0; blockNumber < currentPiece.altShape.length; blockNumber++) {
+                        let x_coord_block = currentPiece.altShape[blockNumber][1] + j;
+                        let y_coord_block = currentPiece.altShape[blockNumber][0] + i;
+                        if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block >= gameBoard.length || y_coord_block >= gameBoard.length 
+                            || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
+                            altPieceCanBePlaced = false;
+                        }
+                    }
+                }
                 //Check if flipping the piece allows the piece to be placed
-                if (!pieceCanBePlaced) {
+                if (!pieceCanBePlaced || (currentPiece.alt == "shape" && !altPieceCanBePlaced)) {
                     flipPiece(currentPiece);
                     for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
                         let x_coord_block = currentPiece.shape[blockNumber][1] + j;
@@ -283,18 +302,50 @@ function checkCurrentPieceCanBePlaced() {
                             pieceCanBePlaced_flipped = false;
                         }
                     }
+                    if (currentPiece.alt == "shape") {
+                        for (let blockNumber = 0; blockNumber < currentPiece.altShape.length; blockNumber++) {
+                            let x_coord_block = currentPiece.altShape[blockNumber][1] + j;
+                            let y_coord_block = currentPiece.altShape[blockNumber][0] + i;
+                            if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block >= gameBoard.length || y_coord_block >= gameBoard.length 
+                                || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
+                                altPieceCanBePlaced_flipped = false;
+                            }
+                        }
+                    }
                     //Flip the piece back to it's original orientation
                     flipPiece(currentPiece);
                 }
                 if (pieceCanBePlaced || pieceCanBePlaced_flipped) {
-                    ableToBePlaced = true;
+                    ableToBePlaced_default = true;
+                }
+                if (altPieceCanBePlaced || altPieceCanBePlaced_flipped) {
+                    ableToBePlaced_alt = true;
+                }
+
+                if (pieceCanBePlaced) {
+                    console.log("piece can be placed with default type at x: " + j + ", y:" + i);
+                }
+                if (pieceCanBePlaced_flipped) {
+                    console.log("piece can be placed with default type, flipped at x: " + j + ", y:" + i);
+                }
+                if (altPieceCanBePlaced) {
+                    console.log("piece can be placed with alternative type at x: " + j + ", y:" + i);
+                }
+                if (altPieceCanBePlaced_flipped) {
+                    console.log("piece can be placed with alternative type, flipped at x: " + j + ", y:" + i);
                 }
             }
         }
     }
-    if (!ableToBePlaced) {
+    if (!ableToBePlaced_default && ableToBePlaced_alt) {
+        currentPiece.shape = currentPiece.altShape;
+    } else if (ableToBePlaced_default && !ableToBePlaced_alt) {
+        if (currentPiece.alt == "shape") {currentPiece.altShape = currentPiece.shape;}
+    } else if (!ableToBePlaced_default && !ableToBePlaced_alt) {
         currentPiece.shape = [[0,0]];
+        if (currentPiece.alt == "shape") {currentPiece.altShape = [[0,0]];}
     }
+    console.log("ableToBePlacedDefault: " + ableToBePlaced_default + ", ableToBePlacedAlt: " + ableToBePlaced_alt);
 }
 
 /**
@@ -377,6 +428,15 @@ function rotatePiece(piece) {
         shape[blockNumber][1] = -shape[blockNumber][0];
         shape[blockNumber][0] = temp;
     }
+    //We want to avoid flipping twice in situations where the alt shape is the same as the default shape
+    if (piece.alt == "shape" && piece.altShape != piece.shape) {
+        let altShape = piece.altShape;
+        for (let blockNumber = 0; blockNumber < altShape.length; blockNumber++) {
+            let temp = altShape[blockNumber][1];
+            altShape[blockNumber][1] = -altShape[blockNumber][0];
+            altShape[blockNumber][0] = temp;
+        }
+    }
 }
 
 /**
@@ -387,6 +447,29 @@ function flipPiece(piece) {
     let shape = piece.shape;
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
         shape[blockNumber][0] *= -1;
+    }
+    //We want to avoid flipping twice in situations where the alt shape is the same as the default shape
+    if (piece.alt == "shape" && piece.altShape != piece.shape) {
+        let altShape = piece.altShape;
+        for (let blockNumber = 0; blockNumber < altShape.length; blockNumber++) {
+            altShape[blockNumber][0] *= -1;
+        }
+    }
+}
+
+/**
+ * Swaps the piece type, which either means the shape of the piece is changed or the type of block it places.
+ * @param {*} piece The piece which will have it's type swapped
+ */
+function swapPieceType(piece) {
+    if (piece.alt == "shape") {
+        let temp = piece.altShape;
+        piece.altShape = piece.shape;
+        piece.shape = temp;
+    } else if (piece.alt == "type") {
+        let temp = piece.altType;
+        piece.altType = piece.type;
+        piece.type = temp;
     }
 }
 
