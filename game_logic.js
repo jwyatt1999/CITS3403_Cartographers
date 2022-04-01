@@ -118,8 +118,8 @@ function startGame() {
         document.getElementById("scoreCard" + card).innerHTML = scoreCardOrder[card-1]; 
     }
 
-    cardsThisSeason = 4;
     initializeExploreDeck();
+    determineNumberOfCardsThisSeason();
     currentPiece = exploreDeck.pop();
     checkCurrentPieceCanBePlaced();
     renderPiece(currentPiece);
@@ -229,7 +229,7 @@ function renderBoard(board) {
             }
         }
         //game_page.html stores the game board in a table which has rows with id from boardRow0 to boardRow7
-        var boardRender = document.getElementById("boardRow"+i);
+        let boardRender = document.getElementById("boardRow"+i);
         boardRender.innerHTML = colourBoard;
     }
 }
@@ -259,21 +259,46 @@ function initializeScoreCards() {
 }
 
 /**
+ * Looks at the explore deck and determines, based on the season, the number of cards that will be drawn this season.
+ * The first season has a time total of 6, the second season has a time total of 5, and the third season has a time total of 4.
+ */
+function determineNumberOfCardsThisSeason() {
+    let seasonTimeTotal = 6 - seasonsScored;
+    let numberOfCards = 1;
+    let determinedNumberOfCards = false;
+    while (!determinedNumberOfCards) {
+        let totalTimeOfCards = 0;
+        for (let i = 1; i <= numberOfCards; i++) {
+            totalTimeOfCards += exploreDeck[exploreDeck.length - i].time;
+        }
+        if (totalTimeOfCards >= seasonTimeTotal) {
+            determinedNumberOfCards = true;
+            cardsThisSeason = numberOfCards;
+            document.getElementById("cardsRemaining1").innerHTML = "";
+            document.getElementById("cardsRemaining2").innerHTML = "";
+            document.getElementById("cardsRemaining3").innerHTML = "";
+            document.getElementById("cardsRemaining" + (seasonsScored + 1)).innerHTML = "Cards remaining: " + cardsThisSeason;
+        }
+        numberOfCards++;
+    }
+}
+
+/**
  * Create the explore deck by adding the base 10 pre-determined (for now) cards and shuffling.
  */
 function initializeExploreDeck() {
     exploreDeck = [];
-    exploreDeck.push({type:FOREST,  shape:[[0,0],[0,1],[1,1],[-1,0],[-2,0]],   altType:VILLAGE,               alt:"type",  coin:false, location:[4,4]});
-    exploreDeck.push({type:FARM,    shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],   altShape:[[0,0],[0,1]],        alt:"shape", coin:false, location:[4,4]});
-    exploreDeck.push({type:FOREST,  shape:[[0,0],[-1,0],[1,0],[1,1]],          altShape:[[0,0],[1,1]],        alt:"shape", coin:false, location:[4,4]});
-    exploreDeck.push({type:FOREST,  shape:[[0,0],[0,1],[0,2],[-1,0]],          altType:FARM,                  alt:"type",  coin:false, location:[4,4]});
-    exploreDeck.push({type:VILLAGE, shape:[[0,0],[1,0],[-1,0],[-1,-1],[0,-1]], altShape:[[0,0],[1,0],[0,-1]], alt:"shape", coin:false, location:[4,4]});
-    exploreDeck.push({type:VILLAGE, shape:[[0,0],[-1,0],[1,0],[0,-1]],         altType:FARM,                  alt:"type",  coin:false, location:[4,4]});
-    exploreDeck.push({type:FARM,    shape:[[0,0],[1,0],[2,0],[0,1],[0,2]],     altType:RIVER,                 alt:"type",  coin:false, location:[4,4]});
-    exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[1,1],[0,-1],[-1,-1]],  altShape:[[0,0],[-1,0],[1,0]], alt:"shape", coin:false, location:[4,4]});
-    exploreDeck.push({type:FOREST,  shape:[[0,0],[1,0],[-1,0],[1,1],[1,-1]],   altType:RIVER,                 alt:"type",  coin:false, location:[4,4]});
-    exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[2,0],[3,0]],           altType:VILLAGE,               alt:"type",  coin:false, location:[4,4]});
-    exploreDeck.push({type:FARM,    shape:[[0,0]],                             altType:FOREST,                alt:"rift",  coin:false, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[0,1],[1,1],[-1,0],[-2,0]],   altType:VILLAGE,               alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:FARM,    shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],   altShape:[[0,0],[0,1]],        alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[-1,0],[1,0],[1,1]],          altShape:[[0,0],[1,1]],        alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[0,1],[0,2],[-1,0]],          altType:FARM,                  alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:VILLAGE, shape:[[0,0],[1,0],[-1,0],[-1,-1],[0,-1]], altShape:[[0,0],[1,0],[0,-1]], alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:VILLAGE, shape:[[0,0],[-1,0],[1,0],[0,-1]],         altType:FARM,                  alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:FARM,    shape:[[0,0],[1,0],[2,0],[0,1],[0,2]],     altType:RIVER,                 alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[1,1],[0,-1],[-1,-1]],  altShape:[[0,0],[-1,0],[1,0]], alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[1,0],[-1,0],[1,1],[1,-1]],   altType:RIVER,                 alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[2,0],[3,0]],           altType:VILLAGE,               alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:FARM,    shape:[[0,0]],                             altType:FOREST,                alt:"rift",  coin:false, time:0, location:[4,4]});
     shuffle(exploreDeck);
 }
 
@@ -555,6 +580,10 @@ function copyBoard(copy, original) {
     renderPlayerCoins();
     //A piece has been placed so we decrement the number of explore cards (pieces) remaining until we score this season
     cardsThisSeason--;
+    document.getElementById("cardsRemaining1").innerHTML = "";
+    document.getElementById("cardsRemaining2").innerHTML = "";
+    document.getElementById("cardsRemaining3").innerHTML = "";
+    document.getElementById("cardsRemaining" + (seasonsScored + 1)).innerHTML = "Cards remaining: " + cardsThisSeason;
     return true;
 }
 
@@ -623,7 +652,7 @@ function checkIfGameOver() {
         document.getElementById("startButton").hidden=false;
     } else {
         initializeExploreDeck();
-        cardsThisSeason = 4;
+        determineNumberOfCardsThisSeason();
         currentPiece = exploreDeck.pop();
         checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
