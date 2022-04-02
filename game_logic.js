@@ -294,9 +294,9 @@ function determineNumberOfCardsThisSeason() {
 function initializeAmbushCards() {
     ambushCards = [];
     ambushCards.push({type:ENEMY, shape:[[0,0],[1,1],[2,2]],       time:0, location:[0,0]});
-    ambushCards.push({type:ENEMY, shape:[[0,0],[0,1],[0,2],[1,1]], time:0, location:[0,4]});
-    ambushCards.push({type:ENEMY, shape:[[0,0],[0,1],[2,0],[2,1]], time:0, location:[4,0]});
-    ambushCards.push({type:ENEMY, shape:[[0,0],[0,1],[1,1],[1,2]], time:0, location:[4,4]});
+    ambushCards.push({type:ENEMY, shape:[[0,0],[1,0],[2,0],[1,1]], time:0, location:[0,4]});
+    ambushCards.push({type:ENEMY, shape:[[0,0],[1,0],[0,2],[1,2]], time:0, location:[4,0]});
+    ambushCards.push({type:ENEMY, shape:[[0,0],[1,0],[1,1],[2,1]], time:0, location:[4,4]});
     shuffle(ambushCards);
 }
 
