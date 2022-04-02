@@ -91,6 +91,9 @@ function startGame() {
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0]
     ];
+
+    initializeGameBoard();
+
     renderBoard(gameBoard);
 
     playerPoints = 0;
@@ -107,6 +110,64 @@ function startGame() {
     currentPiece = exploreDeck.pop();
     checkCurrentPieceCanBePlaced();
     renderPiece(currentPiece);
+}
+
+/**
+ * Initializes the game board with 2 mountains and 4 blocked spaces.
+ * First a mountain is placed on a random space that is 1 away from the edge of the game board.
+ * Then a second mountain is placed on a space that is 2 away from the edge of the game board and at least
+ * 4 spaces away vertically or horizontally from the first mountain.
+ * Lastly, 3 blocked spaces are placed on random locations that aren't cardinally adjacent to either of the mountains.
+ * @param {*} board 
+ */
+function initializeGameBoard() {
+    //(x1,y1) represents the position of the first mountain, (x2,y2) represents the position of the second mountain.
+    let x1, y1, x2, y2;
+    //Determine the axis which the first mountain will be placed along.
+    if (Math.random() <= 0.5) {
+        //x1 is randomly either 1 or 6
+        x1 = 5 * Math.round(Math.random()) + 1;
+        //y1 is random from 1 to 6
+        y1 = Math.round(5 * Math.random() + 1);
+    } else {
+        //x1 is random from 1 to 6
+        x1 = Math.round(5 * Math.random() + 1);
+        //y1 is randomly either 1 or 6
+        y1 = 5 * Math.round(Math.random()) + 1; 
+    }
+    gameBoard[x1][y1] = MOUNTAIN;
+    console.log(gameBoard);
+    let adjacentToMountain = [[x1,y1], [x1+1,y1], [x1-1,y1], [x1,y1+1], [x1,y1-1]];
+    //Determine the position of the second mountain.
+    if (x1 == 1) {
+        x2 = 5;
+        y2 = Math.round(3 * Math.random() + 2);
+    } else if (x1 == 6) {
+        x2 = 2;
+        y2 = Math.round(3 * Math.random() + 2);
+    } else if (y1 == 1) {
+        x2 = Math.round(3 * Math.random() + 2);
+        y2 = 5;
+    } else if (y1 == 6) {
+        x2 = Math.round(3 * Math.random() + 2);
+        y2 = 2;
+    }
+    gameBoard[x2][y2] = MOUNTAIN;
+    console.log(gameBoard);
+    adjacentToMountain += [[x2,y2], [x2+1,y2], [x2-1,y2], [x2,y2+1], [x2,y2-1]];
+    //Randomly place the blocked spaces.
+    let blockedPlaced = 0;
+    while (blockedPlaced < 3) {
+        let xb = Math.round(7 * Math.random());
+        let yb = Math.round(7 * Math.random());
+        if (adjacentToMountain.includes([xb,yb],0) || gameBoard[xb][yb] == BLOCKED) {
+            //Cannot place blocked piece adjacent to a mountain or over the top of another blocked piece
+            continue;
+        } else {
+            gameBoard[xb][yb] = BLOCKED;
+            blockedPlaced++;
+        }
+    }
 }
 
 /**
