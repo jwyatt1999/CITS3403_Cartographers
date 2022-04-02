@@ -1,3 +1,5 @@
+'use strict'
+
 /** Enumerated constant that represents an empty space on the game board. */
 const EMPTY = 0;
 /** Enumerated constant that represents a mountain space on the game board with a coin. */
