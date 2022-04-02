@@ -31,6 +31,8 @@ var playerCoins;
 var scoreCardOrder;
 /** Global variable that holds the explore deck, which determines what piece the player will be placing next. */
 var exploreDeck;
+/** Global variable that holds the ambush cards, which determines the negative cards the player will encounter. */
+var ambushCards;
 /** Global variable that holds the piece that the player is currently placing. */
 var currentPiece;
 /** Global variable that holds a value between 0 and 3, which is used to determine when the game is over (when 3 seasons have been scored). */
@@ -120,6 +122,7 @@ function startGame() {
         document.getElementById("scoreCard" + card).innerHTML = scoreCardOrder[card-1]; 
     }
 
+    initializeAmbushCards();
     initializeExploreDeck();
     determineNumberOfCardsThisSeason();
     currentPiece = exploreDeck.pop();
@@ -286,6 +289,18 @@ function determineNumberOfCardsThisSeason() {
 }
 
 /**
+ * Create the set of ambush cards by adding the base 4 pre-determined (for now) cards and shuffling.
+ */
+function initializeAmbushCards() {
+    ambushCards = [];
+    ambushCards.push({type:ENEMY, shape:[[0,0],[0,1],[1,0],[1,1]],       time:0, location:[0,4]});
+    ambushCards.push({type:ENEMY, shape:[[0,0],[0,1],[1,1]],             time:0, location:[0,0]});
+    ambushCards.push({type:ENEMY, shape:[[0,0],[-1,0],[-2,0]],           time:0, location:[4,4]});
+    ambushCards.push({type:ENEMY, shape:[[0,0],[1,0],[0,1],[0,2],[1,2]], time:0, location:[0,4]});
+    shuffle(ambushCards);
+}
+
+/**
  * Create the explore deck by adding the base 10 pre-determined (for now) cards and shuffling.
  */
 function initializeExploreDeck() {
@@ -301,6 +316,8 @@ function initializeExploreDeck() {
     exploreDeck.push({type:FOREST,  shape:[[0,0],[1,0],[-1,0],[1,1],[1,-1]],   altType:RIVER,                 alt:"type",  coin:false, time:2, location:[4,4]});
     exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[2,0],[3,0]],           altType:VILLAGE,               alt:"type",  coin:false, time:2, location:[4,4]});
     exploreDeck.push({type:FARM,    shape:[[0,0]],                             altType:FOREST,                alt:"rift",  coin:false, time:0, location:[4,4]});
+    //Add an ambush card to the explore deck
+    exploreDeck.push(ambushCards.pop());
     shuffle(exploreDeck);
 }
 
@@ -309,6 +326,9 @@ function initializeExploreDeck() {
  * If the piece cannot legally be placed anywhere then we reduce the piece to a 1x1 block.
  */
 function checkCurrentPieceCanBePlaced() {
+    if (currentPiece.type == ENEMY) {
+        placeAmbushCard();
+    }
     let ableToBePlaced_default = false;
     let ableToBePlaced_alt = false;
     //Check each position on the game board
@@ -421,6 +441,49 @@ function checkCurrentPieceLegallyPlaced() {
             }
         }
         allBlocksLegal = true;
+    }
+}
+
+/**
+ * Places the current ambush card on the board if possible without rotating or flipping the piece.
+ * If the piece cannot be placed then the card is ignored.
+ */
+function placeAmbushCard () {
+    let placedAmbushCard = false;
+    if (successfullyPlacedPiece(currentPiece)) {
+        placedAmbushCard = true;
+        checkIfSeasonOver();
+    }
+    for (let i = 0; i < gameBoard.length; i++) {
+        for (let j = 0; j < gameBoard[0].length; j++) {
+            if (placedAmbushCard) {
+                break;
+            }
+            currentPiece.location[0] = (currentPiece.location[0] + 1) % gameBoard.length;
+            if (successfullyPlacedPiece(currentPiece)) {
+                placedAmbushCard = true;
+                checkIfSeasonOver();
+            }
+        }
+        if (placedAmbushCard) {
+            break;
+        }
+        currentPiece.location[1] = (currentPiece.location[1] + 1) % gameBoard.length;
+        if (successfullyPlacedPiece(currentPiece)) {
+            placedAmbushCard = true;
+            checkIfSeasonOver();
+        }
+    }
+    if (!placedAmbushCard) {
+        cardsThisSeason--;
+        document.getElementById("cardsRemaining1").innerHTML = "";
+        document.getElementById("cardsRemaining2").innerHTML = "";
+        document.getElementById("cardsRemaining3").innerHTML = "";
+        document.getElementById("cardsRemaining" + (seasonsScored + 1)).innerHTML = "Cards remaining: " + cardsThisSeason;
+    
+        currentPiece = exploreDeck.pop();
+        checkCurrentPieceCanBePlaced();
+        renderPiece(currentPiece);
     }
 }
 
@@ -568,8 +631,12 @@ function copyBoard(copy, original) {
             if (tempBoard[x_coord_block][y_coord_block] == EMPTY) {
                 tempBoard[x_coord_block][y_coord_block] = type;
             } else {
+                //The piece would be placed on top of a non-empty space
                 return false;
             }
+        } else {
+            //The piece would be placed off of the board
+            return false;
         }
     }
     //If we got here then the piece has been legally placed on the temporary board so we make that the new game board
@@ -635,9 +702,49 @@ function checkIfSeasonOver() {
                 break;
         }
         playerPoints += playerCoins;
+        losePointsFromEnemySpaces();
         renderPlayerPoints();
         seasonsScored++;
         checkIfGameOver();
+    }
+}
+
+/**
+ * For each enemy space on the game board, lose 1 point for each space that is cardinally adjacent
+ * to at least one enemy space.
+ */
+function losePointsFromEnemySpaces() {
+    let adjacentToEnemySpace = [];
+    for (let i = 0; i < gameBoard.length; i++) {
+        for (let j = 0; j < gameBoard[0].length; j++) {
+            if (gameBoard[i][j] != ENEMY) {
+                continue;
+            }
+            if ((i-1) >= 0) {
+                if (gameBoard[i-1][j] == EMPTY && !adjacentToEnemySpace.includes([i-1,j],0)) {
+                    playerPoints--;
+                    adjacentToEnemySpace += [i-1,j];
+                }
+            } 
+            if ((j-1) >= 0) {
+                if (gameBoard[i][j-1] == EMPTY && !adjacentToEnemySpace.includes([i,j-1],0)) {
+                    playerPoints--;
+                    adjacentToEnemySpace += [i,j-1];
+                }
+            }
+            if ((i+1) < gameBoard.length) {
+                if (gameBoard[i+1][j] == EMPTY && !adjacentToEnemySpace.includes([i+1,j],0)) {
+                    playerPoints--;
+                    adjacentToEnemySpace += [i+1,j];
+                }
+            }
+            if ((j+1) < gameBoard.length) {
+                if (gameBoard[i][j+1] == EMPTY && !adjacentToEnemySpace.includes([i,j+1],0)) {
+                    playerPoints--;
+                    adjacentToEnemySpace += [i,j+1];
+                }
+            }
+        }
     }
 }
 
