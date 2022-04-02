@@ -1,6 +1,6 @@
 /** Enumerated constant that represents an empty space on the game board. */
 const EMPTY = 0;
-/** Enumerated constant that represents a mountain space on the game board. */
+/** Enumerated constant that represents a mountain space on the game board with a coin. */
 const MOUNTAIN = 1;
 /** Enumerated constant that represents a blocked space on the game board. */
 const BLOCKED = 2;
@@ -16,11 +16,15 @@ const RIVER = 6;
 const ENEMY = 7;
 /** Enumerated constant that represents an overlap space on the game board. Only used for tempGameBoard. */
 const OVERLAP = 8;
+/** Enumerated constant that represents a mountain space on the game board with no coin. */
+const MOUNTAIN_CLAIMED = 9;
 
 /** Global variable that holds the state of the game board after the previous piece was placed. */
 var gameBoard;
 /** Global variable that holds the total points the player has scored this game. */
 var playerPoints;
+/** Global variable that holds the total coins the player has gained this game. */
+var playerCoins;
 /** Global variable that holds the randomized order of the score cards, which determines which season they are scored in. */
 var scoreCardOrder;
 /** Global variable that holds the explore deck, which determines what piece the player will be placing next. */
@@ -31,6 +35,9 @@ var currentPiece;
 var seasonsScored;
 /** Global variable that holds a value which is reduced whenever a piece is placed. When it reaches zero, the current season is scored and the next season begins. */
 var cardsThisSeason;
+/** Global array that holds the locations of all the unclaimed mountains on the gameboard. */
+var unclaimedMountains = [];
+
 
 /**
  * This function allows the player to interact with the game with arrow keys, 'r', 'f', and 'Enter'.
@@ -61,6 +68,9 @@ document.onkeydown = function(e) {
                 break;
             case 'f':
                 flipPiece(currentPiece);     
+                break;
+            case 't':
+                swapPieceType(currentPiece);
                 break;
             case "Enter":
                 if (successfullyPlacedPiece(currentPiece)) {
@@ -99,14 +109,17 @@ function startGame() {
     playerPoints = 0;
     renderPlayerPoints();
 
+    playerCoins = 0;
+    renderPlayerCoins();
+
     seasonsScored = 0;
     initializeScoreCards();
     for (let card = 1; card < scoreCardOrder.length+1; card++) {
         document.getElementById("scoreCard" + card).innerHTML = scoreCardOrder[card-1]; 
     }
 
-    cardsThisSeason = 4;
     initializeExploreDeck();
+    determineNumberOfCardsThisSeason();
     currentPiece = exploreDeck.pop();
     checkCurrentPieceCanBePlaced();
     renderPiece(currentPiece);
@@ -136,7 +149,7 @@ function initializeGameBoard() {
         y1 = 5 * Math.round(Math.random()) + 1; 
     }
     gameBoard[x1][y1] = MOUNTAIN;
-    console.log(gameBoard);
+    unclaimedMountains.push([x1,y1]);
     let adjacentToMountain = [[x1,y1], [x1+1,y1], [x1-1,y1], [x1,y1+1], [x1,y1-1]];
     //Determine the position of the second mountain.
     if (x1 == 1) {
@@ -153,7 +166,7 @@ function initializeGameBoard() {
         y2 = 2;
     }
     gameBoard[x2][y2] = MOUNTAIN;
-    console.log(gameBoard);
+    unclaimedMountains.push([x2,y2]);
     adjacentToMountain += [[x2,y2], [x2+1,y2], [x2-1,y2], [x2,y2+1], [x2,y2-1]];
     //Randomly place the blocked spaces.
     let blockedPlaced = 0;
@@ -177,8 +190,8 @@ function initializeGameBoard() {
  */
 function renderBoard(board) {
     for (let i = 0; i < board.length; i++) {
-        //Convert each board row from (eg.) "0,0,0,0,0,0,0,0" to "00000000". We remove everything that isn't 0-8 (the values of the enumerated constants).
-        let gameBoardRow = board[i].toString().replace(/[^0-8]/g,""); 
+        //Convert each board row from (eg.) "0,0,0,0,0,0,0,0" to "00000000". We remove everything that isn't 0-9 (the values of the enumerated constants).
+        let gameBoardRow = board[i].toString().replace(/[^0-9]/g,""); 
         let colourBoard = "";
         for (let j = 0; j < gameBoardRow.length; j++) {
             let c = gameBoardRow.charAt(j);
@@ -210,10 +223,13 @@ function renderBoard(board) {
                 case OVERLAP:
                     colourBoard += "<td style=\"color:orange;background-color:orange;\">8</td>";
                     break;
+                case MOUNTAIN_CLAIMED:
+                    colourBoard += "<td style=\"color:gray;background-color:gray;\">9</td>";
+                    break;
             }
         }
         //game_page.html stores the game board in a table which has rows with id from boardRow0 to boardRow7
-        var boardRender = document.getElementById("boardRow"+i);
+        let boardRender = document.getElementById("boardRow"+i);
         boardRender.innerHTML = colourBoard;
     }
 }
@@ -227,6 +243,14 @@ function renderBoard(board) {
 }
 
 /**
+ * Update game_page.html to display the player's current coins.
+ */
+ function renderPlayerCoins() {
+    let points = document.getElementById("playerCoins");
+    points.innerHTML = "Coins: " + playerCoins;
+}
+
+/**
  * Select the score cards for this game and randomize their order.
  */
 function initializeScoreCards() {
@@ -235,14 +259,46 @@ function initializeScoreCards() {
 }
 
 /**
- * Create the explore deck by adding the base 4 pre-determined (for now) cards and shuffling.
+ * Looks at the explore deck and determines, based on the season, the number of cards that will be drawn this season.
+ * The first season has a time total of 6, the second season has a time total of 5, and the third season has a time total of 4.
+ */
+function determineNumberOfCardsThisSeason() {
+    let seasonTimeTotal = 6 - seasonsScored;
+    let numberOfCards = 1;
+    let determinedNumberOfCards = false;
+    while (!determinedNumberOfCards) {
+        let totalTimeOfCards = 0;
+        for (let i = 1; i <= numberOfCards; i++) {
+            totalTimeOfCards += exploreDeck[exploreDeck.length - i].time;
+        }
+        if (totalTimeOfCards >= seasonTimeTotal) {
+            determinedNumberOfCards = true;
+            cardsThisSeason = numberOfCards;
+            document.getElementById("cardsRemaining1").innerHTML = "";
+            document.getElementById("cardsRemaining2").innerHTML = "";
+            document.getElementById("cardsRemaining3").innerHTML = "";
+            document.getElementById("cardsRemaining" + (seasonsScored + 1)).innerHTML = "Cards remaining: " + cardsThisSeason;
+        }
+        numberOfCards++;
+    }
+}
+
+/**
+ * Create the explore deck by adding the base 10 pre-determined (for now) cards and shuffling.
  */
 function initializeExploreDeck() {
     exploreDeck = [];
-    exploreDeck.push({type:FOREST,shape:[[0,0],[-1,0],[0,1],[1,1]],location:[4,4]});
-    exploreDeck.push({type:FARM,shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],location:[4,4]});
-    exploreDeck.push({type:VILLAGE,shape:[[0,0],[1,0],[-1,0],[0,-1],[-1,-1]],location:[4,4]});
-    exploreDeck.push({type:RIVER,shape:[[0,0],[1,1],[-1,-1],[1,0],[0,-1]],location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[0,1],[1,1],[-1,0],[-2,0]],   altType:VILLAGE,               alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:FARM,    shape:[[0,0],[1,0],[-1,0],[0,1],[0,-1]],   altShape:[[0,0],[0,1]],        alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[-1,0],[1,0],[1,1]],          altShape:[[0,0],[1,1]],        alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[0,1],[0,2],[-1,0]],          altType:FARM,                  alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:VILLAGE, shape:[[0,0],[1,0],[-1,0],[-1,-1],[0,-1]], altShape:[[0,0],[1,0],[0,-1]], alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:VILLAGE, shape:[[0,0],[-1,0],[1,0],[0,-1]],         altType:FARM,                  alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:FARM,    shape:[[0,0],[1,0],[2,0],[0,1],[0,2]],     altType:RIVER,                 alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[1,1],[0,-1],[-1,-1]],  altShape:[[0,0],[-1,0],[1,0]], alt:"shape", coin:false, time:1, location:[4,4]});
+    exploreDeck.push({type:FOREST,  shape:[[0,0],[1,0],[-1,0],[1,1],[1,-1]],   altType:RIVER,                 alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:RIVER,   shape:[[0,0],[1,0],[2,0],[3,0]],           altType:VILLAGE,               alt:"type",  coin:false, time:2, location:[4,4]});
+    exploreDeck.push({type:FARM,    shape:[[0,0]],                             altType:FOREST,                alt:"rift",  coin:false, time:0, location:[4,4]});
     shuffle(exploreDeck);
 }
 
@@ -251,7 +307,8 @@ function initializeExploreDeck() {
  * If the piece cannot legally be placed anywhere then we reduce the piece to a 1x1 block.
  */
 function checkCurrentPieceCanBePlaced() {
-    let ableToBePlaced = false;
+    let ableToBePlaced_default = false;
+    let ableToBePlaced_alt = false;
     //Check each position on the game board
     for (let i = 0; i < gameBoard.length; i++) {
         for (let j = 0; j < gameBoard[0].length; j++) {
@@ -263,6 +320,12 @@ function checkCurrentPieceCanBePlaced() {
             for (let rotation = 0; rotation < 4; rotation++) {
                 let pieceCanBePlaced = true;
                 let pieceCanBePlaced_flipped = true;
+                let altPieceCanBePlaced = false;
+                let altPieceCanBePlaced_flipped = false;
+                if (currentPiece.alt == "shape") {
+                    altPieceCanBePlaced = true;
+                    altPieceCanBePlaced_flipped = true;
+                }
                 rotatePiece(currentPiece);
                 for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
                     let x_coord_block = currentPiece.shape[blockNumber][1] + j;
@@ -272,8 +335,18 @@ function checkCurrentPieceCanBePlaced() {
                         pieceCanBePlaced = false;
                     }
                 }
+                if (currentPiece.alt == "shape") {
+                    for (let blockNumber = 0; blockNumber < currentPiece.altShape.length; blockNumber++) {
+                        let x_coord_block = currentPiece.altShape[blockNumber][1] + j;
+                        let y_coord_block = currentPiece.altShape[blockNumber][0] + i;
+                        if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block >= gameBoard.length || y_coord_block >= gameBoard.length 
+                            || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
+                            altPieceCanBePlaced = false;
+                        }
+                    }
+                }
                 //Check if flipping the piece allows the piece to be placed
-                if (!pieceCanBePlaced) {
+                if (!pieceCanBePlaced || (currentPiece.alt == "shape" && !altPieceCanBePlaced)) {
                     flipPiece(currentPiece);
                     for (let blockNumber = 0; blockNumber < currentPiece.shape.length; blockNumber++) {
                         let x_coord_block = currentPiece.shape[blockNumber][1] + j;
@@ -283,17 +356,35 @@ function checkCurrentPieceCanBePlaced() {
                             pieceCanBePlaced_flipped = false;
                         }
                     }
+                    if (currentPiece.alt == "shape") {
+                        for (let blockNumber = 0; blockNumber < currentPiece.altShape.length; blockNumber++) {
+                            let x_coord_block = currentPiece.altShape[blockNumber][1] + j;
+                            let y_coord_block = currentPiece.altShape[blockNumber][0] + i;
+                            if (x_coord_block < 0 || y_coord_block < 0 || x_coord_block >= gameBoard.length || y_coord_block >= gameBoard.length 
+                                || gameBoard[y_coord_block][x_coord_block] != EMPTY) {
+                                altPieceCanBePlaced_flipped = false;
+                            }
+                        }
+                    }
                     //Flip the piece back to it's original orientation
                     flipPiece(currentPiece);
                 }
                 if (pieceCanBePlaced || pieceCanBePlaced_flipped) {
-                    ableToBePlaced = true;
+                    ableToBePlaced_default = true;
+                }
+                if (altPieceCanBePlaced || altPieceCanBePlaced_flipped) {
+                    ableToBePlaced_alt = true;
                 }
             }
         }
     }
-    if (!ableToBePlaced) {
+    if (!ableToBePlaced_default && ableToBePlaced_alt) {
+        currentPiece.shape = currentPiece.altShape;
+    } else if (ableToBePlaced_default && !ableToBePlaced_alt) {
+        if (currentPiece.alt == "shape") {currentPiece.altShape = currentPiece.shape;}
+    } else if (!ableToBePlaced_default && !ableToBePlaced_alt) {
         currentPiece.shape = [[0,0]];
+        if (currentPiece.alt == "shape") {currentPiece.altShape = [[0,0]];}
     }
 }
 
@@ -312,19 +403,19 @@ function checkCurrentPieceLegallyPlaced() {
                 currentPiece.location[1]++;
                 //The for loop is broken after each translation to prevent the block being moved back (eg.) 3 spaces
                 //if it had 3 blocks out of bounds but the piece would be within the bounds after 1 translation.
-                break;
+                continue;
             }
             if (x_coord_block >= gameBoard.length) {
                 currentPiece.location[1]--;
-                break;
+                continue;
             }
             if (y_coord_block < 0) {
                 currentPiece.location[0]++;
-                break;
+                continue;
             }
             if (y_coord_block >= gameBoard.length) {
                 currentPiece.location[0]--;
-                break;
+                continue;
             }
         }
         allBlocksLegal = true;
@@ -364,6 +455,7 @@ function renderPiece(piece) {
         }
     }
     renderBoard(tempBoard);
+    document.getElementById("pieceCoin").innerHTML = "You will gain a coin from this piece: " + piece.coin;
 }
 
 /**
@@ -377,6 +469,15 @@ function rotatePiece(piece) {
         shape[blockNumber][1] = -shape[blockNumber][0];
         shape[blockNumber][0] = temp;
     }
+    //We want to avoid flipping twice in situations where the alt shape is the same as the default shape
+    if (piece.alt == "shape" && piece.altShape != piece.shape) {
+        let altShape = piece.altShape;
+        for (let blockNumber = 0; blockNumber < altShape.length; blockNumber++) {
+            let temp = altShape[blockNumber][1];
+            altShape[blockNumber][1] = -altShape[blockNumber][0];
+            altShape[blockNumber][0] = temp;
+        }
+    }
 }
 
 /**
@@ -387,6 +488,36 @@ function flipPiece(piece) {
     let shape = piece.shape;
     for (let blockNumber = 0; blockNumber < shape.length; blockNumber++) {
         shape[blockNumber][0] *= -1;
+    }
+    //We want to avoid flipping twice in situations where the alt shape is the same as the default shape
+    if (piece.alt == "shape" && piece.altShape != piece.shape) {
+        let altShape = piece.altShape;
+        for (let blockNumber = 0; blockNumber < altShape.length; blockNumber++) {
+            altShape[blockNumber][0] *= -1;
+        }
+    }
+}
+
+/**
+ * Swaps the piece type, which either means the shape of the piece is changed or the type of block it places.
+ * @param {*} piece The piece which will have it's type swapped
+ */
+function swapPieceType(piece) {
+    if (piece.alt == "shape") {
+        let temp = piece.altShape;
+        piece.altShape = piece.shape;
+        piece.shape = temp;
+        //Only pieces that change shape can grant coins. Only their starting alternative shape grants a coin.
+        piece.coin = !piece.coin;
+    } else if (piece.alt == "type") {
+        let temp = piece.altType;
+        piece.altType = piece.type;
+        piece.type = temp;
+    } else if (piece.alt == "rift") {
+        let temp = piece.altType;
+        //For rift pieces, the type moves through FARM (3), FOREST (4), VILLAGE (5), and RIVER (6), then repeats
+        piece.altType = (piece.altType - 2) % 4 + 3;
+        piece.type = temp;
     }
 }
 
@@ -441,10 +572,40 @@ function copyBoard(copy, original) {
     }
     //If we got here then the piece has been legally placed on the temporary board so we make that the new game board
     copyBoard(gameBoard, tempBoard);
+    checkIfMountainsClaimed();
     renderBoard(gameBoard);
+    if (piece.coin) {
+        playerCoins++;
+    }
+    renderPlayerCoins();
     //A piece has been placed so we decrement the number of explore cards (pieces) remaining until we score this season
     cardsThisSeason--;
+    document.getElementById("cardsRemaining1").innerHTML = "";
+    document.getElementById("cardsRemaining2").innerHTML = "";
+    document.getElementById("cardsRemaining3").innerHTML = "";
+    document.getElementById("cardsRemaining" + (seasonsScored + 1)).innerHTML = "Cards remaining: " + cardsThisSeason;
     return true;
+}
+
+/**
+ * Check if any mountains on the gameboard have been claimed.
+ * A mountain is claimed when all cardinally adjacent squares are filled.
+ * Claiming a mountain grants the player 1 coin.
+ */
+function checkIfMountainsClaimed() {
+    if (unclaimedMountains.length != 0) {
+        for (let mtn = 0; mtn < unclaimedMountains.length; mtn++) {
+            let mountain_x = unclaimedMountains[mtn][0];
+            let mountain_y = unclaimedMountains[mtn][1];
+            if (gameBoard[mountain_x-1][mountain_y] != EMPTY && gameBoard[mountain_x+1][mountain_y] != EMPTY &&
+                gameBoard[mountain_x][mountain_y-1] != EMPTY && gameBoard[mountain_x][mountain_y+1] != EMPTY) {
+                    gameBoard[mountain_x][mountain_y] = MOUNTAIN_CLAIMED;
+                    playerCoins++;
+                    unclaimedMountains.splice(mtn,mtn+1);
+                }
+
+        }
+    }
 }
 
 /**
@@ -471,6 +632,7 @@ function checkIfSeasonOver() {
                 scoreCardBlueYellow(gameBoard);
                 break;
         }
+        playerPoints += playerCoins;
         renderPlayerPoints();
         seasonsScored++;
         checkIfGameOver();
@@ -490,7 +652,7 @@ function checkIfGameOver() {
         document.getElementById("startButton").hidden=false;
     } else {
         initializeExploreDeck();
-        cardsThisSeason = 4;
+        determineNumberOfCardsThisSeason();
         currentPiece = exploreDeck.pop();
         checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
