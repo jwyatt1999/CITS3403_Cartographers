@@ -89,6 +89,7 @@ document.onkeydown = function(e) {
  */
 function startGame() {
     document.getElementById("startButton").hidden=true;
+    document.getElementById("points_table").hidden=false;
     document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [

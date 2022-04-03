@@ -10,6 +10,10 @@ app.config['SECRET_KEY'] = 'mysecret'
 def main_page():
     return render_template("index.html")
 
+@app.route("/game")
+def game():
+    return render_template("game_page.html")
+
 @app.route("/rules")
 def rules():
     return render_template("rules.html")
