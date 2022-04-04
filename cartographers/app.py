@@ -2,22 +2,21 @@ from distutils.log import info
 from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDB.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-@app.route("/")
-def main_page():
-    return render_template("index.html")
+login = LoginManager(app)
+login.login_view = 'login'
 
-@app.route("/game")
-def game():
-    return render_template("game_page.html")
+import routes, models
 
-@app.route("/rules")
-def rules():
-    return render_template("rules.html")
-
-@app.route("/info")
-def information():
-    return render_template("info.html")
+# Used to initalize database
+db.create_all()
