@@ -5,10 +5,6 @@ CITS3403 Project - Josh Wyatt &amp; Joo Kai Tay
 
 **Weeks 5 to 7 (28/03 - 17/04)**: Sprint 1 (3 weeks, Get prototype up and deployed online that has all functionality except account creation and login - Spend few days testing to identify bugs and ways to improve)
 
-~~~
-Week 6 (08/04): Mid-Semester Test 9am
-~~~
-
 **Weeks 8 to 10 (18/04 - 08/05)**: Sprint 2 (3 weeks, Iterate on prototype and add user creation and login functionality and any other functionality we wish to add - Spend few days testing to identify bugs and ways to improve)
 
 **Weeks 11 to 12 (09/05-22/05)**: Sprint 3 (2 weeks, Iterate on prototype and clean up any bugs - This process will involve lots of testing)
