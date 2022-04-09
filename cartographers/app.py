@@ -19,4 +19,4 @@ login.login_view = 'login'
 import routes, models
 
 # Used to initalize database
-db.create_all()
+#db.create_all()
