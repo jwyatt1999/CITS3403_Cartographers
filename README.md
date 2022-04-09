@@ -1,5 +1,5 @@
 # CITS3403_Cartographers
-CITS3403 Project - Josh Wyatt &amp; Joo Kai Tay
+CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 
 # Rough Timeline:
 
