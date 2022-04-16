@@ -7,7 +7,7 @@ CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 
 **Weeks 8 to 10 (18/04 - 08/05)**: Sprint 2 (3 weeks, CONFIRM WHAT ELSE WE MUST DO TO MEET THE MINIMUM REQUIREMENTS FOR THE PROJECT, Iterate on prototype and add user creation and login functionality and any other functionality we wish to add, add unit tests - Spend few days testing to identify bugs and ways to improve)
 
-**Weeks 11 to 12 (09/05-22/05)**: Sprint 3 (2 weeks, Iterate on prototype and clean up any bugs - This process will involve lots of testing)
+**Weeks 11 to 12 (09/05-22/05)**: Sprint 3 (2 weeks, Iterate on prototype and clean up any bugs - This process will involve lots of testing, Update readme to meet the requirements specified on the project page)
 
 **Week 13 (23/05): Project Due 12pm**
 
