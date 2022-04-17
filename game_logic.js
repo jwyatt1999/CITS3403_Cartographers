@@ -136,7 +136,6 @@ function startGame() {
  * Then a second mountain is placed on a space that is 2 away from the edge of the game board and at least
  * 4 spaces away vertically or horizontally from the first mountain.
  * Lastly, 3 blocked spaces are placed on random locations that aren't cardinally adjacent to either of the mountains.
- * @param {*} board 
  */
 function initializeGameBoard() {
     //(x1,y1) represents the position of the first mountain, (x2,y2) represents the position of the second mountain.
@@ -696,7 +695,7 @@ function checkIfSeasonOver() {
                 scoreCardRed(gameBoard);
                 break;
             case "G":
-                scoreCardGreen(gameBoard);
+                scoreCard_SentinelWood(gameBoard);
                 break;
             case "B":
                 scoreCardBlueYellow(gameBoard);
