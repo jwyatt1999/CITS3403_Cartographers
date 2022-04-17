@@ -52,8 +52,35 @@ function scoreCard_CanalLake(gameBoard) {
  function scoreCard_MagesValley(gameBoard) {
     for (let i = 0; i < gameBoard.length; i++) {
         for (let j = 0; j < gameBoard[0].length; j++) {
-            if (gameBoard[i][j] == RIVER || gameBoard[i][j] == FARM) {
-                playerPoints += 1;
+            if (gameBoard[i][j] == MOUNTAIN || gameBoard[i][j] == MOUNTAIN_CLAIMED) {
+                if ((i-1) >= 0) {
+                    if (gameBoard[i-1][j] == RIVER) {
+                        playerPoints += 2;
+                    } else if (gameBoard[i-1][j] == FARM) {
+                        playerPoints++;
+                    }
+                }
+                if ((j-1) >= 0) {
+                    if (gameBoard[i][j-1] == RIVER) {
+                        playerPoints += 2;
+                    } else if (gameBoard[i][j-1] == FARM) {
+                        playerPoints++;
+                    }
+                }
+                if ((i+1) < gameBoard.length) {
+                    if (gameBoard[i+1][j] == RIVER) {
+                        playerPoints += 2;
+                    } else if (gameBoard[i+1][j] == FARM) {
+                        playerPoints++;
+                    }
+                }
+                if ((j+1) < gameBoard.length) {
+                    if (gameBoard[i][j+1] == RIVER) {
+                        playerPoints += 2;
+                    } else if (gameBoard[i][j+1] == FARM) {
+                        playerPoints++;
+                    }
+                }
             }
         }
     }
