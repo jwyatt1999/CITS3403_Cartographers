@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 /** Enumerated constant that represents an empty space on the game board. */
 const EMPTY = 0;
