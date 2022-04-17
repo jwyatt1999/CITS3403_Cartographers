@@ -695,7 +695,7 @@ function checkIfSeasonOver() {
                 scoreCardRed(gameBoard);
                 break;
             case "G":
-                scoreCard_SentinelWood(gameBoard);
+                scoreCard_Greenbough(gameBoard);
                 break;
             case "B":
                 scoreCardBlueYellow(gameBoard);

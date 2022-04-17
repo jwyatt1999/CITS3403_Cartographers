@@ -32,13 +32,22 @@ function scoreCard_SentinelWood(gameBoard) {
  * @param {*} gameBoard The board to score
  */
  function scoreCard_Greenbough(gameBoard) {
+    let rowsWithForests = [];
+    let colsWithForests = [];
+    //Iterate over gameboard and keep track of what columns and rows contain forests.
     for (let i = 0; i < gameBoard.length; i++) {
         for (let j = 0; j < gameBoard[0].length; j++) {
             if (gameBoard[i][j] == FOREST) {
-                playerPoints += 2;
+                if (!rowsWithForests.includes(i)) {
+                    rowsWithForests += i;
+                }
+                if (!colsWithForests.includes(j)) {
+                    colsWithForests += j;
+                }
             }
         }
     }
+    playerPoints += rowsWithForests.length + colsWithForests.length;
 }
 
 /**
