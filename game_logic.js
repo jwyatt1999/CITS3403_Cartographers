@@ -476,6 +476,7 @@ function placeAmbushCard () {
     }
     if (!placedAmbushCard) {
         cardsThisSeason--;
+        //Clear the innerHTML of the cardsRemaining elements so that you only see a number for the season you are currently in
         document.getElementById("cardsRemaining1").innerHTML = "";
         document.getElementById("cardsRemaining2").innerHTML = "";
         document.getElementById("cardsRemaining3").innerHTML = "";
@@ -710,7 +711,7 @@ function checkIfSeasonOver() {
 }
 
 /**
- * For each enemy space on the game board, lose 1 point for each space that is cardinally adjacent
+ * For each enemy space on the game board, lose 1 point for each empty space that is cardinally adjacent
  * to at least one enemy space.
  */
 function losePointsFromEnemySpaces() {
