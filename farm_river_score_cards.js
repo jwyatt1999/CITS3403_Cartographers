@@ -92,11 +92,19 @@ function scoreCard_CanalLake(gameBoard) {
  * @param {*} gameBoard The board to score
  */
  function scoreCard_Jorekburg(gameBoard) {
+    //Iterate over the columns of the gameboard, keeping track of the number of rivers and farms.
     for (let i = 0; i < gameBoard.length; i++) {
+        let riverCount = 0;
+        let farmCount = 0;
         for (let j = 0; j < gameBoard[0].length; j++) {
-            if (gameBoard[i][j] == RIVER || gameBoard[i][j] == FARM) {
-                playerPoints += 1;
+            if (gameBoard[j][i] == RIVER) {
+                riverCount++;
+            } else if (gameBoard[j][i] == FARM) {
+                farmCount++;
             }
+        }
+        if (riverCount == farmCount && riverCount != 0) {
+            playerPoints += 4;
         }
     }
 }

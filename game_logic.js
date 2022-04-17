@@ -698,7 +698,7 @@ function checkIfSeasonOver() {
                 scoreCard_FaunlostThicket(gameBoard);
                 break;
             case "B":
-                scoreCard_MagesValley(gameBoard);
+                scoreCard_Jorekburg(gameBoard);
                 break;
         }
         playerPoints += playerCoins;
