@@ -55,11 +55,24 @@ function scoreCard_SentinelWood(gameBoard) {
  * @param {*} gameBoard The board to score
  */
  function scoreCard_FaunlostThicket(gameBoard) {
+    let longestUnbrokenColumn = 0;
+    //Iterate over the columns of the gameboard, keeping track of the longest unbroken column of forests.
     for (let i = 0; i < gameBoard.length; i++) {
+        let unbrokenColumnLength = 0;
         for (let j = 0; j < gameBoard[0].length; j++) {
-            if (gameBoard[i][j] == FOREST) {
-                playerPoints += 2;
+            if (gameBoard[j][i] == FOREST) {
+                unbrokenColumnLength++;
+            } else {
+                if (unbrokenColumnLength > longestUnbrokenColumn) {
+                    longestUnbrokenColumn = unbrokenColumnLength;
+                }
+                unbrokenColumnLength = 0;
             }
         }
+        //Check the unbrokenColumnLength if the forests extend to the bottom of the gameboard
+        if (unbrokenColumnLength > longestUnbrokenColumn) {
+            longestUnbrokenColumn = unbrokenColumnLength;
+        }
     }
+    playerPoints += 2 * longestUnbrokenColumn;
 }
