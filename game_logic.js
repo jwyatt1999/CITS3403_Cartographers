@@ -703,8 +703,11 @@ function checkIfSeasonOver() {
         }
         playerPoints += playerCoins;
         losePointsFromEnemySpaces();
-        renderPlayerPoints();
         seasonsScored++;
+        if (seasonsScored == 3) {
+            scoreCard_TheBrokenRoad(gameBoard);
+        }
+        renderPlayerPoints();
         checkIfGameOver();
     }
 }
