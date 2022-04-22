@@ -26,6 +26,9 @@ CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 1. Review everything we completed this sprint
 2. Discuss what went well this sprint, what went poorly, and how we can improve processes to ensure this project is a success
 
+# Sprint 1 Retrospective and Sprint 2 Kick-Off Notes:
+- https://docs.google.com/document/d/1RUKDAd9BfHIhNcFmOqSdoINlhxawhGFtcPW6xkHBycw/edit?usp=sharing
+
 # Development Agreement
 1. We will stick to the HTML/CSS style guidelines here: https://teaching.csse.uwa.edu.au/units/CITS3403/laboratories/htmlcssguide.html
 2. We will each work on branches off of main (could be separate, though we could work on the same branch if necessary). We can merge when it seems appropriate via pull request but our code must be code reviewed before it is merged - this will be an opportunity for learning and catching mistakes 
