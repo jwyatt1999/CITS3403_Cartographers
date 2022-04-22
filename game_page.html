@@ -21,6 +21,14 @@
 </head>
 
 <body>
+    <button onclick="buttonMoveLeft()"   style="left:30px;bottom:90px;">Move Left</button> 
+    <button onclick="buttonMoveRight()"  style="left:150px;bottom:90px;">Move Right</button> 
+    <button onclick="buttonMoveUp()"     style="left:90px;bottom:150px;">Move Up</button> 
+    <button onclick="buttonMoveDown()"   style="left:90px;bottom:30px;">Move Down</button> 
+    <button onclick="buttonRotate()"     style="right:150px;bottom:90px;">Rotate</button> 
+    <button onclick="buttonFlip()"       style="right:90px;bottom:150px;">Flip</button> 
+    <button onclick="buttonSwapType()"   style="right:90px;bottom:30px;">Swap Type</button> 
+    <button onclick="buttonPlacePiece()" style="right:30px;bottom:90px;">Place Piece</button>
     <div>
         <h1>The game page!</h1>
     </div>
@@ -28,7 +36,7 @@
         <a href="main_page.html">Link to main page</a>
     </div>
     <div>
-        <button id="startButton" type="submit" onclick="startGame();">Start Game!</button>
+        <button id="startButton" type="submit" onclick="startGame()" style="display:block">Start Game!</button>
     </div>
     <div class="container">
         <div class="row justify-content-md-center" style="text-align:center;color:white">
@@ -90,9 +98,7 @@
     <br>
     <div>
         <p id="gameOver" style="text-align:center"></p>
-    </div>
-
-    
+    </div>    
 </body>
 
 </html>

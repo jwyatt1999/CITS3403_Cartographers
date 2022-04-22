@@ -88,11 +88,102 @@ document.onkeydown = function(e) {
 };
 
 /**
+ * The function called when the player presses the "Move Left" button.
+ */
+function buttonMoveLeft() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[1]--;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Move Right" button.
+ */
+function buttonMoveRight() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[1]++;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Move Up" button.
+ */
+function buttonMoveUp() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[0]--;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Move Down" button.
+ */
+function buttonMoveDown() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[0]++;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Rotate" button.
+ */
+function buttonRotate() {
+    if (currentPiece.toString() != "") {
+        rotatePiece(currentPiece);
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Flip" button.
+ */
+function buttonFlip() {
+    if (currentPiece.toString() != "") {
+        flipPiece(currentPiece);
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Swap Type" button.
+ */
+function buttonSwapType() {
+    if (currentPiece.toString() != "") {
+        swapPieceType(currentPiece);
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Place Piece" button.
+ */
+function buttonPlacePiece() {
+    if (currentPiece.toString() != "") {
+        if (successfullyPlacedPiece(currentPiece)) {
+            checkIfSeasonOver();
+        }
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
  * Starts a new game by initialising and rendering the game board, player points, score cards, 
  * and explore deck, and revealing the top card of the explore deck to the player.
  */
 function startGame() {
-    document.getElementById("startButton").hidden=true;
+    document.getElementById("startButton").style.display = "none";
+    //un-hide the interactive buttons
     document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
