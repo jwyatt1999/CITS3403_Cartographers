@@ -11,8 +11,7 @@ td {
     width: 60px;
 }
 
-button {
-    display: none; /* Hidden by default */
+.interactiveButton {
     position: fixed; /* Fixed/sticky position */
     z-index: 99; /* Make sure it does not overlap */
     border: none; /* Remove borders */
@@ -20,11 +19,13 @@ button {
     background-color: white; /* Set a background color */
     color: black; /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
+    width: 150px; /* Ensure all buttons are same width */
+    height: 60px; /* Ensure all buttons are same height */
     padding: 15px; /* Some padding */
     border-radius: 10px; /* Rounded corners */
     font-size: 18px; /* Increase font size */
 }
 
-button:hover {
+.interactiveButton:hover {
     background-color: red;
 }
