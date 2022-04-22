@@ -3,11 +3,11 @@
 {% block content %}
     
     <div class="container-fluid">
-        <h1>Welcome back {{user.username}}!</h1>
+        <h1>Global Ranking</h1>
     </div>
     <div>
-        <h3>Your Recent Scores Are:</h3>
-        {% for score in user.scorelist_freeplay.scorecards %}
+        <h3>High Scores from Users:</h3>
+        {% for score in score_global %}
             <li class="list-group-item">{{ score }}</li>
         {% endfor %}
     </div>
