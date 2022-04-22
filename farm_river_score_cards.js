@@ -1,6 +1,19 @@
 "use strict";
 
 /**
+ * Returns an array of the farm-river score cards in this file.
+ * When adding a new score card to this file, you must also add the score card
+ * to this method for it to be used in the game.
+ */
+ function getFarmRiverScoreCards() {
+    let farmRiverScoreCards = [];
+    farmRiverScoreCards.push({name:"Canal Lake",   function:scoreCard_CanalLake});
+    farmRiverScoreCards.push({name:"Mages Valley", function:scoreCard_MagesValley});
+    farmRiverScoreCards.push({name:"Jorekburg",    function:scoreCard_Jorekburg});
+    return farmRiverScoreCards;
+}
+
+/**
  * Earn one point for each river space adjacent to at least one farm space, and
  * earn one point for each farm space adjacent to at least one river space.
  * @param {*} gameBoard The board to score

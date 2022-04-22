@@ -1,6 +1,19 @@
 "use strict";
 
 /**
+ * Returns an array of the village score cards in this file.
+ * When adding a new score card to this file, you must also add the score card
+ * to this method for it to be used in the game.
+ */
+ function getVillageScoreCards() {
+    let villageScoreCards = [];
+    villageScoreCards.push({name:"Wildholds",        function:scoreCard_Wildholds});
+    villageScoreCards.push({name:"Greengold Plains", function:scoreCard_GreengoldPlains});
+    villageScoreCards.push({name:"Great City",       function:scoreCard_GreatCity});
+    return villageScoreCards;
+}
+
+/**
  * Earn eight points for each distinct cluster of six or more village spaces.
  * Adjacency is only determined orthogonally.
  * @param {*} gameBoard The board to score

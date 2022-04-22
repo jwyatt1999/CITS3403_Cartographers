@@ -1,6 +1,19 @@
 "use strict";
 
 /**
+ * Returns an array of the forest score cards in this file.
+ * When adding a new score card to this file, you must also add the score card
+ * to this method for it to be used in the game.
+ */
+ function getForestScoreCards() {
+    let forestScoreCards = [];
+    forestScoreCards.push({name:"Sentinel Wood",    function:scoreCard_SentinelWood});
+    forestScoreCards.push({name:"Greenbough",       function:scoreCard_Greenbough});
+    forestScoreCards.push({name:"Faunlost Thicket", function:scoreCard_FaunlostThicket});
+    return forestScoreCards;
+}
+
+/**
  * Earn one point for each forest space adjacent to the edge of the map.
  * @param {*} gameBoard The board to score
  */

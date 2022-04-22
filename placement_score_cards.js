@@ -1,6 +1,19 @@
 "use strict";
 
 /**
+ * Returns an array of the placement score cards in this file.
+ * When adding a new score card to this file, you must also add the score card
+ * to this method for it to be used in the game.
+ */
+ function getPlacementScoreCards() {
+    let placementScoreCards = [];
+    placementScoreCards.push({name:"Borderlands",     function:scoreCard_Borderlands});
+    placementScoreCards.push({name:"The Cauldrons",   function:scoreCard_TheCauldrons});
+    placementScoreCards.push({name:"The Broken Road", function:scoreCard_TheBrokenRoad});
+    return placementScoreCards;
+}
+
+/**
  * Earn six points for each complete row or complete column of filled spaces.
  * @param {*} gameBoard The board to score
  */
