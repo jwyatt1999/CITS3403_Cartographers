@@ -692,7 +692,7 @@ function checkIfSeasonOver() {
     } else {
         switch(scoreCardOrder[seasonsScored]) {
             case "R":
-                scoreCardRed(gameBoard);
+                scoreCard_GreatCity(gameBoard);
                 break;
             case "G":
                 scoreCard_FaunlostThicket(gameBoard);
