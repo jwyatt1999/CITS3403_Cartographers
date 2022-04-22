@@ -7,9 +7,12 @@
  */
  function getVillageScoreCards() {
     let villageScoreCards = [];
-    villageScoreCards.push({name:"Wildholds",        function:scoreCard_Wildholds});
-    villageScoreCards.push({name:"Greengold Plains", function:scoreCard_GreengoldPlains});
-    villageScoreCards.push({name:"Great City",       function:scoreCard_GreatCity});
+    villageScoreCards.push({type:"Village", name:"Wildholds",        function:scoreCard_Wildholds, 
+        description:"Earn eight points for each distinct cluster of six or more village spaces."});
+    villageScoreCards.push({type:"Village", name:"Greengold Plains", function:scoreCard_GreengoldPlains, 
+        description:"Earn three points for each distinct cluster of villages that is adjacent to three or more different non-empty terrain types."});
+    villageScoreCards.push({type:"Village", name:"Great City",       function:scoreCard_GreatCity, 
+        description:"Earn one point for each village space in the largest cluster of village spaces that is not adjacent to a mountain space."});
     return villageScoreCards;
 }
 
@@ -74,8 +77,8 @@ function scoreCard_Wildholds(gameBoard) {
 
 /**
  * Earn three points for each distinct cluster of villages that is adjacent
- * to three or more different terrain types.
- * Empty is not a terrain type, and villages are not counted (they are part of the cluster!)
+ * to three or more different non-empty terrain types.
+ * Note: Villages are not counted (they are part of the cluster!)
  * @param {*} gameBoard The board to score
  */
  function scoreCard_GreengoldPlains(gameBoard) {
@@ -160,7 +163,7 @@ function scoreCard_Wildholds(gameBoard) {
 /**
  * Earn one point for each village space in the largest cluster of village
  * spaces that is not adjacent to a mountain space.
- * Claimed mountains are still considered mountains.
+ * Note: Claimed mountains are still considered mountains.
  * @param {*} gameBoard The board to score
  */
  function scoreCard_GreatCity(gameBoard) {

@@ -7,9 +7,12 @@
  */
  function getFarmRiverScoreCards() {
     let farmRiverScoreCards = [];
-    farmRiverScoreCards.push({name:"Canal Lake",   function:scoreCard_CanalLake});
-    farmRiverScoreCards.push({name:"Mages Valley", function:scoreCard_MagesValley});
-    farmRiverScoreCards.push({name:"Jorekburg",    function:scoreCard_Jorekburg});
+    farmRiverScoreCards.push({type:"FarmRiver", name:"Canal Lake",   function:scoreCard_CanalLake, 
+        description:"Earn one point for each river space adjacent to at least one farm space, and earn one point for each farm space adjacent to at least one river space."});
+    farmRiverScoreCards.push({type:"FarmRiver", name:"Mages Valley", function:scoreCard_MagesValley,
+        description:"Earn two points for each river space adjacent to a mountain space, and earn one point for each farm space adjacent to a mountain space."});
+    farmRiverScoreCards.push({type:"FarmRiver", name:"Jorekburg",    function:scoreCard_Jorekburg,
+        description:"Earn four points for each column that contains an equal number of farm paces and river spaces. There must be at least one of each."});
     return farmRiverScoreCards;
 }
 

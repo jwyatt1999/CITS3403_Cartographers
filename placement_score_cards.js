@@ -7,9 +7,12 @@
  */
  function getPlacementScoreCards() {
     let placementScoreCards = [];
-    placementScoreCards.push({name:"Borderlands",     function:scoreCard_Borderlands});
-    placementScoreCards.push({name:"The Cauldrons",   function:scoreCard_TheCauldrons});
-    placementScoreCards.push({name:"The Broken Road", function:scoreCard_TheBrokenRoad});
+    placementScoreCards.push({type:"Placement", name:"Borderlands",     function:scoreCard_Borderlands,
+        description:"Earn six points for each complete row or complete column of filled spaces."});
+    placementScoreCards.push({type:"Placement", name:"The Cauldrons",   function:scoreCard_TheCauldrons,
+        description:"Earn one point for each empty space surrounded on all four sides by filled spaces or the edge of the board."});
+    placementScoreCards.push({type:"Placement", name:"The Broken Road", function:scoreCard_TheBrokenRoad,
+        description:"Earn three points for each complete diagonal line of filled spaces that touches the left and bottom edges of the board."});
     return placementScoreCards;
 }
 

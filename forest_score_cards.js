@@ -7,9 +7,12 @@
  */
  function getForestScoreCards() {
     let forestScoreCards = [];
-    forestScoreCards.push({name:"Sentinel Wood",    function:scoreCard_SentinelWood});
-    forestScoreCards.push({name:"Greenbough",       function:scoreCard_Greenbough});
-    forestScoreCards.push({name:"Faunlost Thicket", function:scoreCard_FaunlostThicket});
+    forestScoreCards.push({type:"Forest", name:"Sentinel Wood",    function:scoreCard_SentinelWood,    
+        description:"Earn one point for each forest space adjacent to the edge of the map"});
+    forestScoreCards.push({type:"Forest", name:"Greenbough",       function:scoreCard_Greenbough,      
+        description:"Earn one point for each row and each column with at least one forest space. The same forest space may be scored in a row and a column."});
+    forestScoreCards.push({type:"Forest", name:"Faunlost Thicket", function:scoreCard_FaunlostThicket, 
+        description:"Earn two points for each forest space in the longest unbroken column of forest spaces."});
     return forestScoreCards;
 }
 
