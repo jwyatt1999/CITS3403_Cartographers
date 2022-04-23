@@ -14,7 +14,7 @@ td {
 .interactiveButton {
     position: fixed; /* Fixed/sticky position */
     z-index: 99; /* Make sure it does not overlap */
-    border: none; /* Remove borders */
+    border: 2px solid black; /* Add borders */
     outline: none; /* Remove outline */
     background-color: white; /* Set a background color */
     color: black; /* Text color */
