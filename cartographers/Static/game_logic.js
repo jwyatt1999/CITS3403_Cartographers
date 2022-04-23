@@ -776,12 +776,21 @@ function losePointsFromEnemySpaces() {
  * The game is over when three seasons have been scored.
  * If the game is not over, then we re-create the explore deck, reveal the top card to the player,
  * and the next season begins.
+ * At the end of the game, the players final score is passed to the database to be stored 
  */
 function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
         document.getElementById("startButton").hidden=false;
+        const s = JSON.stringify(playerPoints);
+        
+        $.ajax({
+            url:"/add_score",
+            type:"POST",
+            contentType:"application/json",
+            data: JSON.stringify(s)
+        });
     } else {
         initializeExploreDeck();
         determineNumberOfCardsThisSeason();
