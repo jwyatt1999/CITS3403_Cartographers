@@ -182,7 +182,7 @@ function buttonPlacePiece() {
  * and explore deck, and revealing the top card of the explore deck to the player.
  */
 function startGame() {
-    document.getElementById("gameContents").hidden = false;
+    document.getElementById("gameContents").style.display = 'block';
     document.getElementById("startButton").hidden = true;
     document.getElementById("gameOver").innerHTML = "";
 
@@ -872,7 +872,6 @@ function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        //document.getElementById("gameContents").hidden = true;
         document.getElementById("startButton").hidden = false;
     } else {
         initializeExploreDeck();
