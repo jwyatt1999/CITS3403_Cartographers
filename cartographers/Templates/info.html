@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class = "row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <h1 class="info_header">Information Page</h1>
+                <h3 class="info_header">Developers</h2>
+                <p class="info_paragraph">This is a game created by Joo Kai Tay and Josh Wyatt</p>
+                <h3 class="info_header">Special Thanks</h2>
+                <p class="info_paragraph">The University of Western Australia <br> Tim French</p>
+                <!--Source: https://www.pngitem.com/middle/bmohxh_scroll-vector-png-dead-crow-a-samad-said/-->
+                <img src ="{{url_for('static', filename = 'images/scroll_information.png')}}" class="information_scroll">
+        </div>
+
+    </div>
+
+{% endblock %}
