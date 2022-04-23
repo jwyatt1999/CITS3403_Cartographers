@@ -754,9 +754,9 @@ function losePointsFromEnemySpaces() {
  * The game is over when three seasons have been scored.
  * If the game is not over, then we re-create the explore deck, reveal the top card to the player,
  * and the next season begins.
- * Passes the score to the databse 
+ * At the end of the game, the players final score is passed to the database to be stored 
  */
- function checkIfGameOver() {
+function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";

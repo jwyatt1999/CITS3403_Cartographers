@@ -16,17 +16,17 @@ def game():
 
 @app.route("/rules")
 def rules():
-    return render_template("rules.html", user=current_user)
+    return render_template("rules_page.html", user=current_user)
 
 @app.route("/info")
 def information():
-    return render_template("info.html", user=current_user)
+    return render_template("information_page.html", user=current_user)
 
 @app.route('/user/<username>',methods=['GET', 'POST'])
 @login_required
 def user(username):
     user = current_user
-    return render_template('user.html', user=user)
+    return render_template('profile_page.html', user=user)
 
 @app.route('/leaderboard',methods=['GET', 'POST'])
 def leaderboard():
