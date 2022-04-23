@@ -29,11 +29,11 @@ class Scorecard(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer, index = True, unique=False)
     uname = db.Column(db.String(64), index=True, unique=False)
-    date = db.Column(db.DateTime(), default=func.now())
+    date = db.Column(db.Date(), default=func.now())
     scorelist_id = db.Column(db.Integer, db.ForeignKey('scorelist.id'))
 
     def __repr__(self):
-        return "{} scored {} points".format(self.uname, self.score)
+        return "{} scored {} points on {}".format(self.uname, self.score, self.date)
 
 
 class Scorelist(db.Model):

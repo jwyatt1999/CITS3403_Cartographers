@@ -28,10 +28,10 @@ def user(username):
     user = current_user
     return render_template('user.html', user=user)
 
-@app.route('/statistics',methods=['GET', 'POST'])
-def statistics():
-    scores_global = Scorecard.query.order_by(Scorecard.score)
-    return render_template('statistics_page.html', user=current_user, score_global=scores_global)
+@app.route('/leaderboard',methods=['GET', 'POST'])
+def leaderboard():
+    scores_global = Scorecard.query.order_by(Scorecard.score.desc())
+    return render_template('leaderboard_page.html', user=current_user, score_global=scores_global)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
