@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <br><br><br>
+
+    <div class="container scorecards_header">
+        <div class="row justify-content-md-center" style="text-align:center;color:white">
+            <div class="col col-md-3" id="scoreCard1">scoreCard1</div>
+            <div class="col col-md-3" id="scoreCard2">scoreCard2</div>
+            <div class="col col-md-3" id="scoreCard3">scoreCard3</div>
+            <div class="col col-md-3" id="scoreCard4">scoreCard4</div>
+        </div>
+        <div class="row justify-content-md-center" style="text-align:center;color:white">
+            <div class="col col-md-3" id="scoreCardDescription1">scoreCardDescription1</div>
+            <div class="col col-md-3" id="scoreCardDescription2">scoreCardDescription2</div>
+            <div class="col col-md-3" id="scoreCardDescription3">scoreCardDescription3</div>
+            <div class="col col-md-3" id="scoreCardDescription4">scoreCardDescription4</div>
+        </div>
+        <div class="row justify-content-md-center" style="text-align:center">
+            <div class="col col-md-3" id="cardsRemaining1"></div>
+            <div class="col col-md-3" id="cardsRemaining2"></div>
+            <div class="col col-md-6" id="cardsRemaining3"></div>
+        </div>
+    </div>
+    <br>
+
+    <table class="board" style="margin-left:auto;margin-right:auto;">
+        <tr id="boardRow0">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow1">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow2">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow3">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow4">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow5">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow6">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow7">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+    </table>
+    <br>
+
+    <div class="container">
+        <div class="center">
+            <button id="startButton" class="btn btn-primary btn_start" type="submit" onclick="startGame();">Start Game!</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="center">
+            <table class="point_table" id="points_table">
+                <tr>
+                    <td id="playerPoints">Points: 0</td>
+                    <td id="playerCoins">Coins: 0</td>
+                    <td id="pieceCoin">You will gain a coin from this piece:</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <br>
+    <div>
+        <p id="gameOver" style="text-align:center"></p>
+    </div> 
+{% endblock %}
