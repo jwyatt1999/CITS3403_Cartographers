@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <div class="container-fluid">
+        <h1>Global Ranking</h1>
+    </div>
+    <div>
+        <h3>High Scores from Users:</h3>
+        {% for score in score_global %}
+            <li class="list-group-item">{{ score }}</li>
+        {% endfor %}
+    </div>
+
+{% endblock %}
