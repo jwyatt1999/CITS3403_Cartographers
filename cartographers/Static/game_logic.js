@@ -27,8 +27,8 @@ var gameBoard;
 var playerPoints;
 /** Global variable that holds the total coins the player has gained this game. */
 var playerCoins;
-/** Global variable that holds the randomized order of the score cards, which determines which season they are scored in. */
-var scoreCardOrder;
+/** Global variable that holds the score cards. The order determines which season they are scored in. */
+var scoreCards;
 /** Global variable that holds the explore deck, which determines what piece the player will be placing next. */
 var exploreDeck;
 /** Global variable that holds the ambush cards, which determines the negative cards the player will encounter. */
@@ -118,8 +118,27 @@ function startGame() {
 
     seasonsScored = 0;
     initializeScoreCards();
-    for (let card = 1; card < scoreCardOrder.length+1; card++) {
-        document.getElementById("scoreCard" + card).innerHTML = scoreCardOrder[card-1]; 
+    for (let card = 1; card < scoreCards.length+1; card++) {
+        document.getElementById("scoreCard" + card).innerHTML = scoreCards[card-1].name; 
+        document.getElementById("scoreCardDescription" + card).innerHTML = scoreCards[card-1].description;
+        switch (scoreCards[card-1].type) {
+            case "Forest":
+                document.getElementById("scoreCard" + card).style.background = 'green';
+                document.getElementById("scoreCardDescription" + card).style.background = 'green';
+                break;
+            case "FarmRiver":
+                document.getElementById("scoreCard" + card).style.background = 'linear-gradient(to right, yellow 0%, blue 100%';
+                document.getElementById("scoreCardDescription" + card).style.background = 'linear-gradient(to right, yellow 0%, blue 100%';
+                break;
+            case "Village":
+                document.getElementById("scoreCard" + card).style.background = 'red';
+                document.getElementById("scoreCardDescription" + card).style.background = 'red';
+                break;
+            case "Placement":
+                document.getElementById("scoreCard" + card).style.background = 'grey';  
+                document.getElementById("scoreCardDescription" + card).style.background = 'grey';  
+                break;
+        }
     }
 
     initializeAmbushCards();
@@ -136,7 +155,6 @@ function startGame() {
  * Then a second mountain is placed on a space that is 2 away from the edge of the game board and at least
  * 4 spaces away vertically or horizontally from the first mountain.
  * Lastly, 3 blocked spaces are placed on random locations that aren't cardinally adjacent to either of the mountains.
- * @param {*} board 
  */
 function initializeGameBoard() {
     //(x1,y1) represents the position of the first mountain, (x2,y2) represents the position of the second mountain.
@@ -259,8 +277,18 @@ function renderBoard(board) {
  * Select the score cards for this game and randomize their order.
  */
 function initializeScoreCards() {
-    scoreCardOrder = ["R","G","B"];
-    shuffle(scoreCardOrder);
+    //Randomly select a score card for each type.
+    let forestScoreCard = shuffle(getForestScoreCards()).pop();
+    let farmRiverScoreCard = shuffle(getFarmRiverScoreCards()).pop();
+    let villageScoreCard = shuffle(getVillageScoreCards()).pop();
+    let placementScoreCard = shuffle(getPlacementScoreCards()).pop();
+
+    //Randomly decide the order in which the score cards will be scored.
+    scoreCards = [forestScoreCard, farmRiverScoreCard, villageScoreCard];
+    shuffle(scoreCards);
+
+    //Add the placement score card last because it is always scored at the end of the third season.
+    scoreCards.push(placementScoreCard);
 }
 
 /**
@@ -691,21 +719,15 @@ function checkIfSeasonOver() {
         checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
     } else {
-        switch(scoreCardOrder[seasonsScored]) {
-            case "R":
-                scoreCardRed(gameBoard);
-                break;
-            case "G":
-                scoreCardGreen(gameBoard);
-                break;
-            case "B":
-                scoreCardBlueYellow(gameBoard);
-                break;
-        }
+        scoreCards[seasonsScored].function(gameBoard);
         playerPoints += playerCoins;
         losePointsFromEnemySpaces();
-        renderPlayerPoints();
         seasonsScored++;
+        if (seasonsScored == 3) {
+            //Score the placement score card
+            scoreCards[seasonsScored].function(gameBoard);
+        }
+        renderPlayerPoints();
         checkIfGameOver();
     }
 }
@@ -789,4 +811,5 @@ function shuffle (array) {
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [array[randomIndex],array[currentIndex]];
     }
+    return array;
 }
