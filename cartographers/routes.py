@@ -45,8 +45,9 @@ def user(username):
 
 @app.route('/leaderboard')
 def leaderboard():
-    scores_global = Scorecard.query.order_by(Scorecard.score.desc())
-    return render_template('leaderboard_page.html', user=current_user, score_global=scores_global)
+    scores_daily = Scorecard.query.filter(Scorecard.type == 1).order_by(Scorecard.score.desc())
+    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).order_by(Scorecard.score.desc())
+    return render_template('leaderboard_page.html', user=current_user, score_freeplay = scores_freeplay, score_daily = scores_daily)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -87,14 +88,3 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
-
-# #Listens for final score when user completes a game and passes it into the database
-# @app.route('/add_score', methods=['POST'])
-# @login_required
-# def add_score():
-#     output = int(request.get_json())
-#     user = current_user
-#     new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelist_freeplay.id)
-#     db.session.add(new_scorecard)
-#     db.session.commit()
-#     return ""
