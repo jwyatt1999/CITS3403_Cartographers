@@ -762,9 +762,9 @@ function checkIfGameOver() {
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
         document.getElementById("startButton").hidden=false;
         const s = JSON.stringify(playerPoints);
-        
+        var pathname = window.location.pathname;
         $.ajax({
-            url:"/add_score",
+            url:pathname,
             type:"POST",
             contentType:"application/json",
             data: JSON.stringify(s)
