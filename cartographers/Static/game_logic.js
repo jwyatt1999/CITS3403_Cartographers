@@ -223,9 +223,15 @@ function startGame(isDaily) {
     //Set the seed for the pseudo-random number generator to the current time (milliseconds since Jan 1, 1970).
     let seed = xmur3(currentDate.getTime().toString());
 
-    //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date.
+    console.log(seed());
+
+    //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
     if (isDaily) {
-        seed = xmur3(currentDate.getDate().toString() + currentDate.getMonth().toString() + currentDate.getYear().toString());
+        let serverDate = $.ajax({
+            url:"/get_date",
+            type:"GET"
+        });
+        seed = xmur3(serverDate.toString());
     }
 
     //Initialize the pseudo-random number generator with the given seed.

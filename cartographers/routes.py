@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from models import User, Scorelist, Scorecard
 from werkzeug.urls import url_parse
 from forms import RegistrationForm, LoginForm
+from datetime import datetime
 
 @app.route("/")
 def main_page():
@@ -83,3 +84,9 @@ def add_score():
     db.session.add(new_scorecard)
     db.session.commit()
     return ""
+
+@app.route('/get_date', methods=['GET'])
+@login_required
+def get_date():
+    currentDate = datetime.now()
+    return currentDate.strftime("%d/%m/%Y")
