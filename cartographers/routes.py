@@ -9,16 +9,31 @@ from forms import RegistrationForm, LoginForm
 def main_page():
     return render_template("index.html", user=current_user)
 
-@app.route("/game")
+@app.route("/game/<type>", methods=['GET', 'POST']) 
 @login_required
-def game():
-    return render_template("game_page.html", user=current_user)
+def game(type):
+    if request.method == 'GET':
+        return render_template("game_page.html", user=current_user)
+    
+    if request.method == 'POST':
+        output = int(request.get_json())
+        user = current_user
+        if type == 'daily':
+            scorelist_daily = Scorelist.query.filter(user_id = user.id).filter(type_of_game = 1)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=scorelist_daily.id)
+            db.session.add(new_scorecard)
+            db.session.commit()
+        elif type == 'freeplay':
+            scorelist_freeplay = Scorelist.query.filter(user_id = user.id).filter(type_of_game = 2)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=scorelist_freeplay.id, type = 2)
+            db.session.add(new_scorecard)
+            db.session.commit()
 
 @app.route("/rules")
 def rules():
     return render_template("rules_page.html", user=current_user)
 
-@app.route("/info")
+@app.route("/information")
 def information():
     return render_template("information_page.html", user=current_user)
 
@@ -28,7 +43,7 @@ def user(username):
     user = current_user
     return render_template('profile_page.html', user=user)
 
-@app.route('/leaderboard',methods=['GET', 'POST'])
+@app.route('/leaderboard')
 def leaderboard():
     scores_global = Scorecard.query.order_by(Scorecard.score.desc())
     return render_template('leaderboard_page.html', user=current_user, score_global=scores_global)
@@ -43,8 +58,10 @@ def register():
         user1.set_password(form.password.data)
         db.session.add(user1)
         db.session.commit()
-        scorelist1 = Scorelist(user_id = user1.id)
+        scorelist1 = Scorelist(user_id = user1.id, type_of_game = 1)
+        scorelist2 = Scorelist(user_id = user1.id, type_of_game = 2)
         db.session.add(scorelist1)
+        db.session.add(scorelist2)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
@@ -53,7 +70,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('game'))
+        return redirect(url_for(''))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -73,13 +90,13 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-#Listens for final score when user completes a game and passes it into the database
-@app.route('/add_score', methods=['POST'])
-@login_required
-def add_score():
-    output = int(request.get_json())
-    user = current_user
-    new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelist_freeplay.id)
-    db.session.add(new_scorecard)
-    db.session.commit()
-    return ""
+# #Listens for final score when user completes a game and passes it into the database
+# @app.route('/add_score', methods=['POST'])
+# @login_required
+# def add_score():
+#     output = int(request.get_json())
+#     user = current_user
+#     new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelist_freeplay.id)
+#     db.session.add(new_scorecard)
+#     db.session.commit()
+#     return ""
