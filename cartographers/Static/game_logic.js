@@ -41,6 +41,8 @@ var seasonsScored;
 var cardsThisSeason;
 /** Global array that holds the locations of all the unclaimed mountains on the gameboard. */
 var unclaimedMountains = [];
+/** Global variable that holds the pseudo-random number generator. */
+var rand;
 
 
 /**
@@ -178,12 +180,65 @@ function buttonPlacePiece() {
 }
 
 /**
+ * Turns a given string into a seed (via a hash function) that can be used in a pseudo-RNG.
+ * See here for reference: https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+ * @param {*} str The input string to be turned into a seed
+ * @returns A 32-bit hash that can be used to seed a pseudo-RNG
+ */
+function xmur3(str) {
+    for(var i = 0, h = 1779033703 ^ str.length; i < str.length; i++) {
+        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+        h = h << 13 | h >>> 19;
+    } return function() {
+        h = Math.imul(h ^ (h >>> 16), 2246822507);
+        h = Math.imul(h ^ (h >>> 13), 3266489909);
+        return (h ^= h >>> 16) >>> 0;
+    };
+}
+
+/**
+ * This function takes a given seed and returns a pseudo-random number generator with that seed.
+ * See here for reference: https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+ * @param {*} a The seed to use in the pseudo-RNG
+ * @returns A pseudo-RNG function with the given seed
+ */
+function mulberry32(a) {
+    return function() {
+      var t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+}
+
+/**
  * Starts a new game by initialising and rendering the game board, player points, score cards, 
  * and explore deck, and revealing the top card of the explore deck to the player.
+ * @param {*} isDaily A boolean that indicates if the game is a daily game or not. This determines the seed used.
  */
-function startGame() {
+function startGame(isDaily) {
+    //Initialize the date for the purpose of setting the pseudo-random number generator's seed.
+    let currentDate = new Date();
+
+    //Set the seed for the pseudo-random number generator to the current time (milliseconds since Jan 1, 1970).
+    let seed = xmur3(currentDate.getTime().toString());
+
+    console.log(seed());
+
+    //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
+    if (isDaily) {
+        let serverDate = $.ajax({
+            url:"/get_date",
+            type:"GET"
+        });
+        seed = xmur3(serverDate.toString());
+    }
+
+    //Initialize the pseudo-random number generator with the given seed.
+    rand = mulberry32(seed());
+   
     document.getElementById("gameContents").style.display = 'block';
-    document.getElementById("startButton").hidden = true;
+    document.getElementById("startButtons").hidden = true;
     document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
@@ -251,16 +306,16 @@ function initializeGameBoard() {
     //(x1,y1) represents the position of the first mountain, (x2,y2) represents the position of the second mountain.
     let x1, y1, x2, y2;
     //Determine the axis which the first mountain will be placed along.
-    if (Math.random() <= 0.5) {
+    if (rand() <= 0.5) {
         //x1 is randomly either 1 or 6
-        x1 = 5 * Math.round(Math.random()) + 1;
+        x1 = 5 * Math.round(rand()) + 1;
         //y1 is random from 1 to 6
-        y1 = Math.round(5 * Math.random() + 1);
+        y1 = Math.round(5 * rand() + 1);
     } else {
         //x1 is random from 1 to 6
-        x1 = Math.round(5 * Math.random() + 1);
+        x1 = Math.round(5 * rand() + 1);
         //y1 is randomly either 1 or 6
-        y1 = 5 * Math.round(Math.random()) + 1; 
+        y1 = 5 * Math.round(rand()) + 1; 
     }
     gameBoard[x1][y1] = MOUNTAIN;
     unclaimedMountains.push([x1,y1]);
@@ -268,15 +323,15 @@ function initializeGameBoard() {
     //Determine the position of the second mountain.
     if (x1 == 1) {
         x2 = 5;
-        y2 = Math.round(3 * Math.random() + 2);
+        y2 = Math.round(3 * rand() + 2);
     } else if (x1 == 6) {
         x2 = 2;
-        y2 = Math.round(3 * Math.random() + 2);
+        y2 = Math.round(3 * rand() + 2);
     } else if (y1 == 1) {
-        x2 = Math.round(3 * Math.random() + 2);
+        x2 = Math.round(3 * rand() + 2);
         y2 = 5;
     } else if (y1 == 6) {
-        x2 = Math.round(3 * Math.random() + 2);
+        x2 = Math.round(3 * rand() + 2);
         y2 = 2;
     }
     gameBoard[x2][y2] = MOUNTAIN;
@@ -285,8 +340,8 @@ function initializeGameBoard() {
     //Randomly place the blocked spaces.
     let blockedPlaced = 0;
     while (blockedPlaced < 3) {
-        let xb = Math.round(7 * Math.random());
-        let yb = Math.round(7 * Math.random());
+        let xb = Math.round(7 * rand());
+        let yb = Math.round(7 * rand());
         if (adjacentToMountain.includes([xb,yb],0) || gameBoard[xb][yb] == BLOCKED) {
             //Cannot place blocked piece adjacent to a mountain or over the top of another blocked piece
             continue;
@@ -873,7 +928,7 @@ function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        document.getElementById("startButton").hidden = false;
+        document.getElementById("startButtons").hidden = false;
         const s = JSON.stringify(playerPoints);
         
         $.ajax({
@@ -898,7 +953,7 @@ function checkIfGameOver() {
 function shuffle (array) {
     let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
+        randomIndex = Math.floor(rand() * currentIndex);
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [array[randomIndex],array[currentIndex]];
     }

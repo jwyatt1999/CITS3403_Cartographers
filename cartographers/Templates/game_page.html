@@ -5,8 +5,9 @@
     <br><br><br>
 
     <div class="container">
-        <div class="center">
-            <button id="startButton" class="interactiveButton btn btn-primary btn_start" type="submit" onclick="startGame();">Start Game!</button>
+        <div class="center" id="startButtons">
+			<button onclick="startGame(false)" class="interactiveButton btn btn-primary btn_start" style="top:45%;left:50%;transform:translate(-50%,-50%);width:300px;">Start New Freeplay Game!</button>
+        	<button onclick="startGame(true)" class="interactiveButton btn btn-primary btn_start" style="top:55%;left:50%;transform:translate(-50%,-50%);width:300px;">Start New Daily Game!</button>
         </div>
     </div>
 
