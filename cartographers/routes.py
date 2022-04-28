@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from models import User, Scorelist, Scorecard
 from werkzeug.urls import url_parse
 from forms import RegistrationForm, LoginForm
+from datetime import datetime
 
 @app.route("/")
 def main_page():
@@ -90,3 +91,20 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+#Listens for final score when user completes a game and passes it into the database
+@app.route('/add_score', methods=['POST'])
+@login_required
+def add_score():
+    output = int(request.get_json())
+    user = current_user
+    new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelist_freeplay.id)
+    db.session.add(new_scorecard)
+    db.session.commit()
+    return ""
+
+@app.route('/get_date', methods=['GET'])
+@login_required
+def get_date():
+    currentDate = datetime.now()
+    return currentDate.strftime("%d/%m/%Y")

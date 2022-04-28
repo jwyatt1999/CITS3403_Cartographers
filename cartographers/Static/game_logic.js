@@ -27,8 +27,8 @@ var gameBoard;
 var playerPoints;
 /** Global variable that holds the total coins the player has gained this game. */
 var playerCoins;
-/** Global variable that holds the randomized order of the score cards, which determines which season they are scored in. */
-var scoreCardOrder;
+/** Global variable that holds the score cards. The order determines which season they are scored in. */
+var scoreCards;
 /** Global variable that holds the explore deck, which determines what piece the player will be placing next. */
 var exploreDeck;
 /** Global variable that holds the ambush cards, which determines the negative cards the player will encounter. */
@@ -41,6 +41,8 @@ var seasonsScored;
 var cardsThisSeason;
 /** Global array that holds the locations of all the unclaimed mountains on the gameboard. */
 var unclaimedMountains = [];
+/** Global variable that holds the pseudo-random number generator. */
+var rand;
 
 
 /**
@@ -88,11 +90,155 @@ document.onkeydown = function(e) {
 };
 
 /**
+ * The function called when the player presses the "Move Left" button.
+ */
+function buttonMoveLeft() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[1]--;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Move Right" button.
+ */
+function buttonMoveRight() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[1]++;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Move Up" button.
+ */
+function buttonMoveUp() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[0]--;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Move Down" button.
+ */
+function buttonMoveDown() {
+    if (currentPiece.toString() != "") {
+        currentPiece.location[0]++;
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Rotate" button.
+ */
+function buttonRotate() {
+    if (currentPiece.toString() != "") {
+        rotatePiece(currentPiece);
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Flip" button.
+ */
+function buttonFlip() {
+    if (currentPiece.toString() != "") {
+        flipPiece(currentPiece);
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Swap Type" button.
+ */
+function buttonSwapType() {
+    if (currentPiece.toString() != "") {
+        swapPieceType(currentPiece);
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * The function called when the player presses the "Place Piece" button.
+ */
+function buttonPlacePiece() {
+    if (currentPiece.toString() != "") {
+        if (successfullyPlacedPiece(currentPiece)) {
+            checkIfSeasonOver();
+        }
+        checkCurrentPieceLegallyPlaced();
+        renderPiece(currentPiece);
+    }
+}
+
+/**
+ * Turns a given string into a seed (via a hash function) that can be used in a pseudo-RNG.
+ * See here for reference: https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+ * @param {*} str The input string to be turned into a seed
+ * @returns A 32-bit hash that can be used to seed a pseudo-RNG
+ */
+function xmur3(str) {
+    for(var i = 0, h = 1779033703 ^ str.length; i < str.length; i++) {
+        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+        h = h << 13 | h >>> 19;
+    } return function() {
+        h = Math.imul(h ^ (h >>> 16), 2246822507);
+        h = Math.imul(h ^ (h >>> 13), 3266489909);
+        return (h ^= h >>> 16) >>> 0;
+    };
+}
+
+/**
+ * This function takes a given seed and returns a pseudo-random number generator with that seed.
+ * See here for reference: https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+ * @param {*} a The seed to use in the pseudo-RNG
+ * @returns A pseudo-RNG function with the given seed
+ */
+function mulberry32(a) {
+    return function() {
+      var t = a += 0x6D2B79F5;
+      t = Math.imul(t ^ t >>> 15, t | 1);
+      t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+}
+
+/**
  * Starts a new game by initialising and rendering the game board, player points, score cards, 
  * and explore deck, and revealing the top card of the explore deck to the player.
+ * @param {*} isDaily A boolean that indicates if the game is a daily game or not. This determines the seed used.
  */
-function startGame() {
-    document.getElementById("startButton").hidden=true;
+function startGame(isDaily) {
+    //Initialize the date for the purpose of setting the pseudo-random number generator's seed.
+    let currentDate = new Date();
+
+    //Set the seed for the pseudo-random number generator to the current time (milliseconds since Jan 1, 1970).
+    let seed = xmur3(currentDate.getTime().toString());
+
+    console.log(seed());
+
+    //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
+    if (isDaily) {
+        let serverDate = $.ajax({
+            url:"/get_date",
+            type:"GET"
+        });
+        seed = xmur3(serverDate.toString());
+    }
+
+    //Initialize the pseudo-random number generator with the given seed.
+    rand = mulberry32(seed());
+   
+    document.getElementById("gameContents").style.display = 'block';
+    document.getElementById("startButtons").hidden = true;
     document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
@@ -118,8 +264,27 @@ function startGame() {
 
     seasonsScored = 0;
     initializeScoreCards();
-    for (let card = 1; card < scoreCardOrder.length+1; card++) {
-        document.getElementById("scoreCard" + card).innerHTML = scoreCardOrder[card-1]; 
+    for (let card = 1; card < scoreCards.length+1; card++) {
+        document.getElementById("scoreCard" + card).innerHTML = scoreCards[card-1].name; 
+        document.getElementById("scoreCardDescription" + card).innerHTML = scoreCards[card-1].description;
+        switch (scoreCards[card-1].type) {
+            case "Forest":
+                document.getElementById("scoreCard" + card).style.background = 'green';
+                document.getElementById("scoreCardDescription" + card).style.background = 'green';
+                break;
+            case "FarmRiver":
+                document.getElementById("scoreCard" + card).style.background = 'linear-gradient(to right, yellow 0%, blue 100%';
+                document.getElementById("scoreCardDescription" + card).style.background = 'linear-gradient(to right, yellow 0%, blue 100%';
+                break;
+            case "Village":
+                document.getElementById("scoreCard" + card).style.background = 'red';
+                document.getElementById("scoreCardDescription" + card).style.background = 'red';
+                break;
+            case "Placement":
+                document.getElementById("scoreCard" + card).style.background = 'grey';  
+                document.getElementById("scoreCardDescription" + card).style.background = 'grey';  
+                break;
+        }
     }
 
     initializeAmbushCards();
@@ -136,22 +301,21 @@ function startGame() {
  * Then a second mountain is placed on a space that is 2 away from the edge of the game board and at least
  * 4 spaces away vertically or horizontally from the first mountain.
  * Lastly, 3 blocked spaces are placed on random locations that aren't cardinally adjacent to either of the mountains.
- * @param {*} board 
  */
 function initializeGameBoard() {
     //(x1,y1) represents the position of the first mountain, (x2,y2) represents the position of the second mountain.
     let x1, y1, x2, y2;
     //Determine the axis which the first mountain will be placed along.
-    if (Math.random() <= 0.5) {
+    if (rand() <= 0.5) {
         //x1 is randomly either 1 or 6
-        x1 = 5 * Math.round(Math.random()) + 1;
+        x1 = 5 * Math.round(rand()) + 1;
         //y1 is random from 1 to 6
-        y1 = Math.round(5 * Math.random() + 1);
+        y1 = Math.round(5 * rand() + 1);
     } else {
         //x1 is random from 1 to 6
-        x1 = Math.round(5 * Math.random() + 1);
+        x1 = Math.round(5 * rand() + 1);
         //y1 is randomly either 1 or 6
-        y1 = 5 * Math.round(Math.random()) + 1; 
+        y1 = 5 * Math.round(rand()) + 1; 
     }
     gameBoard[x1][y1] = MOUNTAIN;
     unclaimedMountains.push([x1,y1]);
@@ -159,15 +323,15 @@ function initializeGameBoard() {
     //Determine the position of the second mountain.
     if (x1 == 1) {
         x2 = 5;
-        y2 = Math.round(3 * Math.random() + 2);
+        y2 = Math.round(3 * rand() + 2);
     } else if (x1 == 6) {
         x2 = 2;
-        y2 = Math.round(3 * Math.random() + 2);
+        y2 = Math.round(3 * rand() + 2);
     } else if (y1 == 1) {
-        x2 = Math.round(3 * Math.random() + 2);
+        x2 = Math.round(3 * rand() + 2);
         y2 = 5;
     } else if (y1 == 6) {
-        x2 = Math.round(3 * Math.random() + 2);
+        x2 = Math.round(3 * rand() + 2);
         y2 = 2;
     }
     gameBoard[x2][y2] = MOUNTAIN;
@@ -176,8 +340,8 @@ function initializeGameBoard() {
     //Randomly place the blocked spaces.
     let blockedPlaced = 0;
     while (blockedPlaced < 3) {
-        let xb = Math.round(7 * Math.random());
-        let yb = Math.round(7 * Math.random());
+        let xb = Math.round(7 * rand());
+        let yb = Math.round(7 * rand());
         if (adjacentToMountain.includes([xb,yb],0) || gameBoard[xb][yb] == BLOCKED) {
             //Cannot place blocked piece adjacent to a mountain or over the top of another blocked piece
             continue;
@@ -259,8 +423,18 @@ function renderBoard(board) {
  * Select the score cards for this game and randomize their order.
  */
 function initializeScoreCards() {
-    scoreCardOrder = ["R","G","B"];
-    shuffle(scoreCardOrder);
+    //Randomly select a score card for each type.
+    let forestScoreCard = shuffle(getForestScoreCards()).pop();
+    let farmRiverScoreCard = shuffle(getFarmRiverScoreCards()).pop();
+    let villageScoreCard = shuffle(getVillageScoreCards()).pop();
+    let placementScoreCard = shuffle(getPlacementScoreCards()).pop();
+
+    //Randomly decide the order in which the score cards will be scored.
+    scoreCards = [forestScoreCard, farmRiverScoreCard, villageScoreCard];
+    shuffle(scoreCards);
+
+    //Add the placement score card last because it is always scored at the end of the third season.
+    scoreCards.push(placementScoreCard);
 }
 
 /**
@@ -691,21 +865,15 @@ function checkIfSeasonOver() {
         checkCurrentPieceCanBePlaced();
         renderPiece(currentPiece);
     } else {
-        switch(scoreCardOrder[seasonsScored]) {
-            case "R":
-                scoreCardRed(gameBoard);
-                break;
-            case "G":
-                scoreCardGreen(gameBoard);
-                break;
-            case "B":
-                scoreCardBlueYellow(gameBoard);
-                break;
-        }
+        scoreCards[seasonsScored].function(gameBoard);
         playerPoints += playerCoins;
         losePointsFromEnemySpaces();
-        renderPlayerPoints();
         seasonsScored++;
+        if (seasonsScored == 3) {
+            //Score the placement score card
+            scoreCards[seasonsScored].function(gameBoard);
+        }
+        renderPlayerPoints();
         checkIfGameOver();
     }
 }
@@ -760,7 +928,7 @@ function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        document.getElementById("startButton").hidden=false;
+        document.getElementById("startButtons").hidden = false;
         const s = JSON.stringify(playerPoints);
         var pathname = window.location.pathname;
         $.ajax({
@@ -785,8 +953,9 @@ function checkIfGameOver() {
 function shuffle (array) {
     let currentIndex = array.length, randomIndex;
     while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
+        randomIndex = Math.floor(rand() * currentIndex);
         currentIndex--;
         [array[currentIndex], array[randomIndex]] = [array[randomIndex],array[currentIndex]];
     }
+    return array;
 }
