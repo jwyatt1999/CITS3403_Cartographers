@@ -41,12 +41,14 @@ def information():
 @login_required
 def user(username):
     user = current_user
-    return render_template('profile_page.html', user=user)
+    scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
+    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
+    return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily)
 
 @app.route('/leaderboard')
 def leaderboard():
-    scores_daily = Scorecard.query.filter(Scorecard.type == 1).order_by(Scorecard.score.desc())
-    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).order_by(Scorecard.score.desc())
+    scores_daily = Scorecard.query.filter(Scorecard.type == 1).order_by(Scorecard.score.desc()).limit(10)
+    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).limit(10)
     return render_template('leaderboard_page.html', user=current_user, score_freeplay = scores_freeplay, score_daily = scores_daily)
 
 @app.route('/register', methods=['GET', 'POST'])
