@@ -1,1 +1,1 @@
-from cartographers.app import app, routes, models
+from cartographers import app, routes, models
