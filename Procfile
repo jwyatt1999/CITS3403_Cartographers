@@ -1,1 +1,1 @@
-web: flask run; gunicorn run_cartographers:app
+web: flask run; gunicorn app:app

@@ -1,1 +1,1 @@
-FLASK_APP=run_cartographers.py
+FLASK_APP=app.py
