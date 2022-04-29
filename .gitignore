@@ -6,3 +6,10 @@
 /cartographers/Include/site/python3.1.0/greenlet/greenlet.h
 /pyvenv.cfg
 /cartographers/pyvenv.cfg
+
+/__pycache__
+/Include
+/Lib
+/Scripts
+/Old
+/Include/site/python3.1.0/greenlet/greenlet.h
