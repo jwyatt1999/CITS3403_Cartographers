@@ -8,7 +8,7 @@ from datetime import datetime
 
 @app.route("/")
 def main_page():
-    return render_template("/Templates/index.html", user=current_user)
+    return render_template("index.html", user=current_user)
 
 @app.route("/game/<type>", methods=['GET', 'POST'])
 @login_required
