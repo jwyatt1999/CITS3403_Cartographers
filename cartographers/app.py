@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
-import models, routes
+from cartographers import models, routes
 
 # Used to initalize database
 db.create_all()
