@@ -90,6 +90,14 @@ document.onkeydown = function(e) {
 };
 
 /**
+ * When the game page has finished loading, start the game!
+ * @param {*} event 
+ */
+window.onload = (event) => {
+    startGame();
+};
+
+/**
  * The function called when the player presses the "Move Left" button.
  */
 function buttonMoveLeft() {
@@ -214,19 +222,17 @@ function mulberry32(a) {
 /**
  * Starts a new game by initialising and rendering the game board, player points, score cards, 
  * and explore deck, and revealing the top card of the explore deck to the player.
- * @param {*} isDaily A boolean that indicates if the game is a daily game or not. This determines the seed used.
+ * The pathname determines if the game is started with the daily seed or a random freeplay seed.
  */
-function startGame(isDaily) {
+function startGame() {
     //Initialize the date for the purpose of setting the pseudo-random number generator's seed.
     let currentDate = new Date();
 
     //Set the seed for the pseudo-random number generator to the current time (milliseconds since Jan 1, 1970).
     let seed = xmur3(currentDate.getTime().toString());
 
-    console.log(seed());
-
     //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
-    if (isDaily) {
+    if (window.location.pathname == "/game/daily") {
         let serverDate = $.ajax({
             url:"/get_date",
             type:"GET"
@@ -238,7 +244,7 @@ function startGame(isDaily) {
     rand = mulberry32(seed());
    
     document.getElementById("gameContents").style.display = 'block';
-    document.getElementById("startButtons").hidden = true;
+    document.getElementById("startButton").hidden = true;
     document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
@@ -928,7 +934,7 @@ function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        document.getElementById("startButtons").hidden = false;
+        document.getElementById("startButton").hidden = false;
         const s = JSON.stringify(playerPoints);
         
         $.ajax({
