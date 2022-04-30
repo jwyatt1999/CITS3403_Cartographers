@@ -2,15 +2,15 @@
 
 {% block content %}
 
+<div class="container-fluid"> 
     <div class = "row">
-
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="col-xs-12">
             <h1 class="rule_header">Rules Page</h1>
             <p class="rule_paragraph">Rules go here!</p>
             <!--Source: https://www.pngitem.com/middle/bmohxh_scroll-vector-png-dead-crow-a-samad-said/-->
-            <img src ="./images/scroll_credits.png" class="rule_scroll">
+            <img src ="{{url_for('static', filename = 'images/scroll_credits.png')}}" class="rules_scroll" alt="Image of an open scroll">
         </div>
-
     </div>
+</div>
 
 {% endblock %}
