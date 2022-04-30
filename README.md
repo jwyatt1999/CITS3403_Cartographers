@@ -5,11 +5,12 @@ CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 https://afternoon-castle-17520.herokuapp.com/
 
 ## Steps to Deploy:
-1. Checkout main and pull all changes
-2. Open Git Bash and `cd` your way to your local CITS3403_Cartographers files
-3. Use `git push heroku main`
-4. Use `heroku ps:scale web=1`, it should say "Scaling dynos... done, now running web at 1:Free"
-5. Use `heroku open` and confirm the website is running, if it is broken then use `heroku logs` and figure out what caused the crash
+1. Before starting, ensure you have the Heroku CLI installed, available here: https://cli-assets.heroku.com/heroku-x64.exe
+2. Checkout main and pull all changes
+3. Open Git Bash and `cd` your way to your local CITS3403_Cartographers files
+4. Use `git push heroku main`
+5. Use `heroku ps:scale web=1`, it should say "Scaling dynos... done, now running web at 1:Free"
+6. Use `heroku open` and confirm the website is running, if it is broken then use `heroku logs` and figure out what caused the crash
 
 # Rough Timeline:
 
