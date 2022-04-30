@@ -4,7 +4,7 @@ CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 # Link to Deployed Website:
 https://afternoon-castle-17520.herokuapp.com/
 
-## Steps to Deploy:
+## Steps to Deploy (you must have the Heroku CLI installed, available here: https://cli-assets.heroku.com/heroku-x64.exe):
 1. Checkout main and pull all changes
 2. Open Git Bash and `cd` your way to your local CITS3403_Cartographers files
 3. Use `git push heroku main`
