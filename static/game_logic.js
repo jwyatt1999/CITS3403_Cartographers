@@ -104,7 +104,7 @@ window.onload = (event) => {
  * The function called when the player presses the "Move Left" button.
  */
 function buttonMoveLeft() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[1]--;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -115,7 +115,7 @@ function buttonMoveLeft() {
  * The function called when the player presses the "Move Right" button.
  */
 function buttonMoveRight() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[1]++;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -126,7 +126,7 @@ function buttonMoveRight() {
  * The function called when the player presses the "Move Up" button.
  */
 function buttonMoveUp() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[0]--;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -137,7 +137,7 @@ function buttonMoveUp() {
  * The function called when the player presses the "Move Down" button.
  */
 function buttonMoveDown() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[0]++;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -148,7 +148,7 @@ function buttonMoveDown() {
  * The function called when the player presses the "Rotate" button.
  */
 function buttonRotate() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         rotatePiece(currentPiece);
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -159,7 +159,7 @@ function buttonRotate() {
  * The function called when the player presses the "Flip" button.
  */
 function buttonFlip() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         flipPiece(currentPiece);
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -170,7 +170,7 @@ function buttonFlip() {
  * The function called when the player presses the "Swap Type" button.
  */
 function buttonSwapType() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         swapPieceType(currentPiece);
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -181,7 +181,7 @@ function buttonSwapType() {
  * The function called when the player presses the "Place Piece" button.
  */
 function buttonPlacePiece() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         if (successfullyPlacedPiece(currentPiece)) {
             checkIfSeasonOver();
         }
