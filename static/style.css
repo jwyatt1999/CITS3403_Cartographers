@@ -23,7 +23,7 @@ body {
 
 }
 
-.credits_paragraph, .rule_paragraph, .credits_header, .rule_header {
+.credits_paragraph, .rules_paragraph, .credits_header, .rules_header {
     text-align: center;
     position: relative;
     top: 25%;
