@@ -139,7 +139,7 @@ td {
     background-color: white; /* Set a background color */
     color: black; /* Text color */
     cursor: pointer; /* Add a mouse pointer on hover */
-    width: 150px; /* Ensure all buttons are same width */
+    width: 160px; /* Ensure all buttons are same width */
     height: 60px; /* Ensure all buttons are same height */
     padding: 15px; /* Some padding */
     border-radius: 10px; /* Rounded corners */
