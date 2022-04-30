@@ -55,7 +55,7 @@ var rand;
  * @param {*} e The key that was pressed.
  */
 document.onkeydown = function(e) {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         switch (e.key) {
             case "ArrowLeft":
                 currentPiece.location[1]--;
@@ -84,8 +84,11 @@ document.onkeydown = function(e) {
                 }
                 break;
         }
-        checkCurrentPieceLegallyPlaced();
-        renderPiece(currentPiece);
+        //If 3 seasons have been scored then the game is over and we don't need to call these functions
+        if (seasonsScored < 3) {
+            checkCurrentPieceLegallyPlaced();
+            renderPiece(currentPiece);
+        }
     }
 };
 
