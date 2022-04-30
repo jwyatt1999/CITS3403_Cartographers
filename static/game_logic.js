@@ -55,7 +55,7 @@ var rand;
  * @param {*} e The key that was pressed.
  */
 document.onkeydown = function(e) {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         switch (e.key) {
             case "ArrowLeft":
                 currentPiece.location[1]--;
@@ -84,16 +84,27 @@ document.onkeydown = function(e) {
                 }
                 break;
         }
-        checkCurrentPieceLegallyPlaced();
-        renderPiece(currentPiece);
+        //If 3 seasons have been scored then the game is over and we don't need to call these functions
+        if (seasonsScored < 3) {
+            checkCurrentPieceLegallyPlaced();
+            renderPiece(currentPiece);
+        }
     }
+};
+
+/**
+ * When the game page has finished loading, start the game!
+ * @param {*} event 
+ */
+window.onload = (event) => {
+    startGame();
 };
 
 /**
  * The function called when the player presses the "Move Left" button.
  */
 function buttonMoveLeft() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[1]--;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -104,7 +115,7 @@ function buttonMoveLeft() {
  * The function called when the player presses the "Move Right" button.
  */
 function buttonMoveRight() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[1]++;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -115,7 +126,7 @@ function buttonMoveRight() {
  * The function called when the player presses the "Move Up" button.
  */
 function buttonMoveUp() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[0]--;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -126,7 +137,7 @@ function buttonMoveUp() {
  * The function called when the player presses the "Move Down" button.
  */
 function buttonMoveDown() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         currentPiece.location[0]++;
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -137,7 +148,7 @@ function buttonMoveDown() {
  * The function called when the player presses the "Rotate" button.
  */
 function buttonRotate() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         rotatePiece(currentPiece);
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -148,7 +159,7 @@ function buttonRotate() {
  * The function called when the player presses the "Flip" button.
  */
 function buttonFlip() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         flipPiece(currentPiece);
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -159,7 +170,7 @@ function buttonFlip() {
  * The function called when the player presses the "Swap Type" button.
  */
 function buttonSwapType() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         swapPieceType(currentPiece);
         checkCurrentPieceLegallyPlaced();
         renderPiece(currentPiece);
@@ -170,7 +181,7 @@ function buttonSwapType() {
  * The function called when the player presses the "Place Piece" button.
  */
 function buttonPlacePiece() {
-    if (currentPiece.toString() != "") {
+    if (typeof currentPiece != 'undefined' && currentPiece.toString() != "") {
         if (successfullyPlacedPiece(currentPiece)) {
             checkIfSeasonOver();
         }
@@ -214,19 +225,17 @@ function mulberry32(a) {
 /**
  * Starts a new game by initialising and rendering the game board, player points, score cards, 
  * and explore deck, and revealing the top card of the explore deck to the player.
- * @param {*} isDaily A boolean that indicates if the game is a daily game or not. This determines the seed used.
+ * The pathname determines if the game is started with the daily seed or a random freeplay seed.
  */
-function startGame(isDaily) {
+function startGame() {
     //Initialize the date for the purpose of setting the pseudo-random number generator's seed.
     let currentDate = new Date();
 
     //Set the seed for the pseudo-random number generator to the current time (milliseconds since Jan 1, 1970).
     let seed = xmur3(currentDate.getTime().toString());
 
-    console.log(seed());
-
     //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
-    if (isDaily) {
+    if (window.location.pathname == "/game/daily") {
         let serverDate = $.ajax({
             url:"/get_date",
             type:"GET"
@@ -238,7 +247,7 @@ function startGame(isDaily) {
     rand = mulberry32(seed());
    
     document.getElementById("gameContents").style.display = 'block';
-    document.getElementById("startButtons").hidden = true;
+    document.getElementById("startButton").hidden = true;
     document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
@@ -928,7 +937,7 @@ function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        document.getElementById("startButtons").hidden = false;
+        document.getElementById("startButton").hidden = false;
         const s = JSON.stringify(playerPoints);
         
         $.ajax({
