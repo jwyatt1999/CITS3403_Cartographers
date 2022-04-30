@@ -41,10 +41,10 @@
             </button>
 
 
-            <!--Menu that contains links to Information, Rules, Leaderboard and Login/Logout Button-->
+            <!--Menu that contains links to Credits, Rules, Leaderboard and Login/Logout Button-->
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="{{url_for('information')}}">Information</a>
+                    <a class="nav-link" href="{{url_for('credits')}}">Credits</a>
                     <a class="nav-link" href="{{url_for('rules')}}">Rules</a>
                     <a class="nav-link" href="{{url_for('leaderboard')}}">Leaderboard</a>
                     {% if user.is_authenticated %}

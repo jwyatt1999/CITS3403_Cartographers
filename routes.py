@@ -34,9 +34,9 @@ def game(type):
 def rules():
     return render_template("rules_page.html", user=current_user)
 
-@app.route("/information")
-def information():
-    return render_template("information_page.html", user=current_user)
+@app.route("/credits")
+def credits():
+    return render_template("credits_page.html", user=current_user)
 
 @app.route('/user/<username>',methods=['GET', 'POST'])
 @login_required

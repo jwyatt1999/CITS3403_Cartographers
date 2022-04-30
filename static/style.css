@@ -23,7 +23,7 @@ body {
 
 }
 
-.info_paragraph, .rule_paragraph, .info_header, .rule_header {
+.credits_paragraph, .rule_paragraph, .credits_header, .rule_header {
     text-align: center;
     position: relative;
     top: 100%;
@@ -84,7 +84,7 @@ body {
     font-size: xx-large;
  }
 
- .information_scroll, .rule_scroll {
+ .credits_scroll, .rule_scroll {
     padding: 0;
     display: block;
     margin: 0 auto;
