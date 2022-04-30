@@ -1,6 +1,16 @@
 # CITS3403_Cartographers
 CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 
+# Link to Deployed Website:
+https://afternoon-castle-17520.herokuapp.com/
+
+## Steps to Deploy:
+1. Checkout main and pull all changes
+2. Open Git Bash and `cd` your way to your local CITS3403_Cartographers files
+3. Use `git push heroku main`
+4. Use `heroku ps:scale web=1`, it should say "Scaling dynos... done, now running web at 1:Free"
+5. Use `heroku open` and confirm the website is running, if it is broken then use `heroku logs` and figure out what caused the crash
+
 # Rough Timeline:
 
 **Weeks 5 to 7 (28/03 - 17/04)**: Sprint 1 (3 weeks, Get prototype up and deployed online that has all functionality except account creation and login - Spend few days testing to identify bugs and ways to improve)
