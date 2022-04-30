@@ -125,10 +125,10 @@ td {
   }
 
  .scorecards_header, .point_table{
-    background-color: gray;
-    color: royalblue;
+    background-color: royalblue;
+    color: white;
     font-weight: bold;
-    width: 480px;
+    width: 80%;
 }
 
 .interactiveButton {
