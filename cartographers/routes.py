@@ -55,7 +55,7 @@ def leaderboard():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('game'))
+        return redirect(url_for('main_page'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user1 = User(username=form.username.data, email=form.email.data)
@@ -92,16 +92,6 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-#Listens for final score when user completes a game and passes it into the database
-@app.route('/add_score', methods=['POST'])
-@login_required
-def add_score():
-    output = int(request.get_json())
-    user = current_user
-    new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelist_freeplay.id)
-    db.session.add(new_scorecard)
-    db.session.commit()
-    return ""
 
 @app.route('/get_date', methods=['GET'])
 @login_required
