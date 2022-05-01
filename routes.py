@@ -10,33 +10,32 @@ from datetime import datetime
 def main_page():
     return render_template("index.html", user=current_user)
 
-@app.route("/game/<type>", methods=['GET', 'POST']) 
+@app.route("/game/<type>", methods=['GET', 'POST'])
 @login_required
 def game(type):
     if request.method == 'GET':
         return render_template("game_page.html", user=current_user)
-    
     if request.method == 'POST':
         output = int(request.get_json())
         user = current_user
         if type == 'daily':
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type = 1)
+            scorelist_daily = Scorelist.query.filter(user_id = user.id).filter(type_of_game = 1)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=scorelist_daily.id)
             db.session.add(new_scorecard)
             db.session.commit()
-            return ""
         elif type == 'freeplay':
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type = 2)
+            scorelist_freeplay = Scorelist.query.filter(user_id = user.id).filter(type_of_game = 2)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=scorelist_freeplay.id, type = 2)
             db.session.add(new_scorecard)
             db.session.commit()
-            return ""
 
 @app.route("/rules")
 def rules():
     return render_template("rules_page.html", user=current_user)
 
-@app.route("/information")
-def information():
-    return render_template("information_page.html", user=current_user)
+@app.route("/credits")
+def credits():
+    return render_template("credits_page.html", user=current_user)
 
 @app.route('/user/<username>',methods=['GET', 'POST'])
 @login_required
@@ -62,8 +61,10 @@ def register():
         user1.set_password(form.password.data)
         db.session.add(user1)
         db.session.commit()
-        scorelist1 = Scorelist(user_id = user1.id)
+        scorelist1 = Scorelist(user_id = user1.id, type_of_game = 1)
+        scorelist2 = Scorelist(user_id = user1.id, type_of_game = 2)
         db.session.add(scorelist1)
+        db.session.add(scorelist2)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))

@@ -1,5 +1,5 @@
 from distutils.log import info
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from flask_sqlalchemy import SQLAlchemy
@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
-import routes, models
+import models, routes
 
 # Used to initalize database
 db.create_all()
