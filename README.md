@@ -2,7 +2,8 @@
 CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
 
 # Link to Deployed Website:
-https://afternoon-castle-17520.herokuapp.com/
+
+<a href="https://afternoon-castle-17520.herokuapp.com/" target="_blank">https://afternoon-castle-17520.herokuapp.com/</a>
 
 ## Steps to Deploy:
 1. Before starting, ensure you have the Heroku CLI installed, available here: https://cli-assets.heroku.com/heroku-x64.exe
