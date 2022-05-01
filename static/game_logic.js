@@ -97,7 +97,9 @@ document.onkeydown = function(e) {
  * @param {*} event 
  */
 window.onload = (event) => {
-    startGame();
+    if (window.location.pathname == "/game/daily" || window.location.pathname == "/game/freeplay") {
+        startGame();
+    } 
 };
 
 /**
