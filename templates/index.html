@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class = "row">
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 hero-text">
+            <h1 class="hero-title">Cartographers</h1>
+            <br>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a class="btn btn-primary btn_daily" href="{{url_for('game', type = 'daily')}}" role="button">Daily</a>
+                <a class="btn btn-primary btn_freeplay" href="{{url_for('game', type = 'freeplay')}}" role="button">Freeplay</a>
+            </div>
+            <br>
+            <div class="btn-group col-6 mx-auto">
+                <a href="./game" class="btn btn-primary btn_sec" aria-current="page">Tutorial</a>
+                <a href="{{url_for('rules')}}" class="btn btn-primary btn_sec">Rules</a>
+                <a href="{{url_for('leaderboard')}}" class="btn btn-primary btn_sec">Leaderboard</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

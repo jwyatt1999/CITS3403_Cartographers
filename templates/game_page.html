@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <br><br><br>
+
+    <div class="container">
+        <div class="center" id="startButton" hidden="true">
+            <a class="interactiveButton btn btn-primary btn_start" href="{{url_for('game', type = 'freeplay')}}" role="button" style="top:50%;left:50%;transform:translate(-50%,-50%);width:300px;">Start New Freeplay Game!</a>
+        </div>
+    </div>
+
+    <div id="gameContents" style="display:none;">
+        <div class="gameplayButtons">
+            <button onclick="buttonMoveLeft()"   class="interactiveButton" style="left:30px;bottom:120px;">Move Left (&#8592;)</button> 
+            <button onclick="buttonMoveRight()"  class="interactiveButton" style="left:210px;bottom:120px;">Move Right (&#8594;)</button> 
+            <button onclick="buttonMoveUp()"     class="interactiveButton" style="left:120px;bottom:210px;">Move Up (&#8593;)</button> 
+            <button onclick="buttonMoveDown()"   class="interactiveButton" style="left:120px;bottom:30px;">Move Down (&#8595;)</button> 
+            <button onclick="buttonRotate()"     class="interactiveButton" style="right:210px;bottom:120px;">Rotate (r)</button> 
+            <button onclick="buttonFlip()"       class="interactiveButton" style="right:120px;bottom:210px;">Flip (f)</button> 
+            <button onclick="buttonSwapType()"   class="interactiveButton" style="right:120px;bottom:30px;">Swap Type (t)</button> 
+            <button onclick="buttonPlacePiece()" class="interactiveButton" style="right:30px;bottom:120px;">Place Piece (&#9166;)</button>
+        </div>
+        <div class="container scorecards_header">
+            <div class="row justify-content-md-center" style="text-align:center;color:white">
+                <div class="col col-md-3" id="scoreCard1">scoreCard1</div>
+                <div class="col col-md-3" id="scoreCard2">scoreCard2</div>
+                <div class="col col-md-3" id="scoreCard3">scoreCard3</div>
+                <div class="col col-md-3" id="scoreCard4">scoreCard4</div>
+            </div>
+            <div class="row justify-content-md-center" style="text-align:center;color:white">
+                <div class="col col-md-3" id="scoreCardDescription1">scoreCardDescription1</div>
+                <div class="col col-md-3" id="scoreCardDescription2">scoreCardDescription2</div>
+                <div class="col col-md-3" id="scoreCardDescription3">scoreCardDescription3</div>
+                <div class="col col-md-3" id="scoreCardDescription4">scoreCardDescription4</div>
+            </div>
+            <div class="row justify-content-md-center" style="text-align:center">
+                <div class="col col-md-3" id="cardsRemaining1"></div>
+                <div class="col col-md-3" id="cardsRemaining2"></div>
+                <div class="col col-md-6" id="cardsRemaining3"></div>
+            </div>
+        </div>
+        <br>
+        <table class="board" style="margin-left:auto;margin-right:auto;">
+            <tr id="boardRow0">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow1">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow2">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow3">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow4">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow5">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow6">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+            <tr id="boardRow7">
+                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            </tr>
+        </table>
+        <br>
+        <div class="container">
+            <div class="center">
+                <table class="point_table" id="points_table">
+                    <tr>
+                        <td id="playerPoints">Points: 0</td>
+                        <td id="playerCoins">Coins: 0</td>
+                        <td id="pieceCoin">You will gain a coin from this piece:</td>
+                    </tr>
+                </table>
+            </div>
+        </div>  
+    </div>
+
+    <br>
+
+    <div>
+        <p id="gameOver" style="text-align:center"></p>
+    </div> 
+    
+{% endblock %}
