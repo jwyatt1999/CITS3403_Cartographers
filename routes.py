@@ -19,13 +19,11 @@ def game(type):
         output = int(request.get_json())
         user = current_user
         if type == 'daily':
-            scorelist_daily = Scorelist.query.filter(user_id = user.id).filter(type_of_game = 1)
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=scorelist_daily.id)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type=1)
             db.session.add(new_scorecard)
             db.session.commit()
         elif type == 'freeplay':
-            scorelist_freeplay = Scorelist.query.filter(user_id = user.id).filter(type_of_game = 2)
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=scorelist_freeplay.id, type = 2)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type = 2)
             db.session.add(new_scorecard)
             db.session.commit()
 
@@ -54,21 +52,20 @@ def leaderboard():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('main_page'))
+        return redirect(url_for('game'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user1 = User(username=form.username.data, email=form.email.data)
         user1.set_password(form.password.data)
         db.session.add(user1)
         db.session.commit()
-        scorelist1 = Scorelist(user_id = user1.id, type_of_game = 1)
-        scorelist2 = Scorelist(user_id = user1.id, type_of_game = 2)
+        scorelist1 = Scorelist(user_id = user1.id)
         db.session.add(scorelist1)
-        db.session.add(scorelist2)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register_page.html', title='Register', form=form, user=current_user)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
