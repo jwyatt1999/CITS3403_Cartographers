@@ -29,6 +29,9 @@
             {% for score in score_daily %}
                 <li class="list-group-item">{{ score }}</li>
             {% endfor %}
+            <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <li class="list-group-item">{{ score_daily.first() }}</li>
         </div>
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <h1>Freeplay Highscores</h1>
@@ -38,6 +41,9 @@
             {% for score in score_freeplay %}
                 <li class="list-group-item">{{ score }}</li>
             {% endfor %}
+            <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <li class="list-group-item">{{ score_freeplay.first() }}</li>
         </div>
     </div>
 
