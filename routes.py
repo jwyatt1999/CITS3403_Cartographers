@@ -5,6 +5,7 @@ from models import User, Scorelist, Scorecard
 from werkzeug.urls import url_parse
 from forms import RegistrationForm, LoginForm
 from datetime import datetime
+from sqlalchemy import func
 
 @app.route("/")
 def main_page():
@@ -35,15 +36,25 @@ def rules():
 def credits():
     return render_template("credits_page.html", user=current_user)
 
-@app.route('/user/<username>',methods=['GET', 'POST'])
+@app.route('/user/<username>', methods=['GET', 'POST'])
 @login_required
 def user(username):
     user = current_user
+    total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()
+    total_games = Scorecard.query.filter(Scorecard.uname == user.username).count()
+
+    fp_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()
+    fp_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).count()
+    
+    dy_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()
+    dy_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).count()
+    
     scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
     scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
-    return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily)
+    return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, total_avg=total_avg, total_games=total_games, 
+    fp_avg=fp_avg, fp_games=fp_games, dy_avg=dy_avg, dy_games=dy_games)
 
-@app.route('/leaderboard')
+@app.route('/leaderboard', methods=['GET', 'POST'])
 def leaderboard():
     user = current_user
     scores_daily = Scorecard.query.filter(Scorecard.type == 1).order_by(Scorecard.score.desc()).limit(10)

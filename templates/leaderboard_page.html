@@ -19,7 +19,11 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <input id='leaderboard_daily_date' type="date" value="2022-05-01">
+            <button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
             <h1>Daily Highscores</h1>
+            <label for="selection">Select date:</label>
+            <input type="date" value="2022-05-01">
             {% for score in score_daily %}
                 <li class="list-group-item">{{ score }}</li>
             {% endfor %}
@@ -29,6 +33,9 @@
             {% for score in score_freeplay %}
                 <li class="list-group-item">{{ score }}</li>
             {% endfor %}
+            <br>
+            <h3>Your highest attempt:</h3>
+            <li>{{ freeplay_highscore }}</li>
         </div>
     </div>
 
