@@ -72,7 +72,7 @@ body {
     background: transparent;
 }
 
-.nav-link, .nav-item {
+.nav-link, .nav-item, .profile-text, .leaderboard-text {
     color: whitesmoke !important;
     font-weight: bold;
     font-size: large;
@@ -88,6 +88,10 @@ body {
     border-color: black;
     border-width: 2px;
     text-align: center;
+ }
+
+ .list-group-item {
+     width: max-content;
  }
 
  .credits_scroll, .rules_scroll {

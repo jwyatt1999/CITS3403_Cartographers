@@ -2,14 +2,15 @@
 
 {% block content %}
     
-    <div class="container-fluid">
+    <div class="container-fluid profile-text">
         <h1>Welcome back {{user.username}}!</h1>
-    </div>
-    <div>
+        <br>
         <h3>Your Recent Scores Are:</h3>
-        {% for score in user.scorelists.scorecards %}
-            <li class="list-group-item">{{ score }}</li>
-        {% endfor %}
+        <ul>
+            {% for score in user.scorelists.scorecards %}
+                <li class="list-group-item">{{ score }}</li>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}
