@@ -84,6 +84,12 @@ body {
     font-size: xx-large;
  }
 
+ .navbar-toggler {
+    border-color: black;
+    border-width: 2px;
+    text-align: center;
+ }
+
  .credits_scroll, .rules_scroll {
     padding: 0;
     display: block;
