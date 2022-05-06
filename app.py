@@ -1,3 +1,4 @@
+from os import environ
 from distutils.log import info
 from flask import Flask, render_template, request, url_for
 from flask_wtf import FlaskForm
@@ -7,7 +8,10 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///myDB.db'
+uri = environ.get('DATABASE_URL') or 'sqlite:///myDB.db'
+if uri and uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 

@@ -240,9 +240,10 @@ function startGame() {
     if (window.location.pathname == "/game/daily") {
         let serverDate = $.ajax({
             url:"/get_date",
-            type:"GET"
+            type:"GET",
+            async:false
         });
-        seed = xmur3(serverDate.toString());
+        seed = xmur3(serverDate.responseText.toString());
     }
 
     //Initialize the pseudo-random number generator with the given seed.
