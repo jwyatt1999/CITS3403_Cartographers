@@ -7,7 +7,7 @@ body {
     opacity: 1;
 }
 
-h1 {
+.scores {
     color: white;
 }
 
@@ -153,7 +153,12 @@ td {
 .interactiveButton:hover {
     background-color: red;
 }
-
-.tab-pane {
-    background-color: green;
+.list-group-item {
+    color: white;
+    background: rgba(255,255,255,0.3);
 }
+
+#myTab li.active a {
+    border-bottom-color: transparent;background-color:blue;
+}
+

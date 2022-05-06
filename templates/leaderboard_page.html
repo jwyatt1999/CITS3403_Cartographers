@@ -9,33 +9,34 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Daily</button>
+        <button class="nav-link active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Freeplay</button>
+        <button class="nav-link" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
         </li>
     </ul>
     
     <!-- Tab panes -->
     <div class="tab-content">
-        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <input id='leaderboard_daily_date' type="date" value="2022-05-01">
-            <button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
+        <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
             <h1>Daily Highscores</h1>
             <label for="selection">Select date:</label>
-            <input type="date" value="2022-05-01">
+            <input id='leaderboard_daily_date' type="date" value="2022-05-01">
+            <button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
             {% for score in score_daily %}
                 <li class="list-group-item">{{ score }}</li>
             {% endfor %}
+            <h3>Your highest attempt:</h3>
+            <li>{{ dy_highscore }}</li>
         </div>
-        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
             <h1>Freeplay Highscores</h1>
             {% for score in score_freeplay %}
                 <li class="list-group-item">{{ score }}</li>
             {% endfor %}
             <br>
             <h3>Your highest attempt:</h3>
-            <li>{{ freeplay_highscore }}</li>
+            <li>{{ fp_highscore }}</li>
         </div>
     </div>
 
