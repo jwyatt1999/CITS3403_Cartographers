@@ -43,34 +43,35 @@ def user(username):
     total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()
     total_games = Scorecard.query.filter(Scorecard.uname == user.username).count()
 
-    fp_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()
-    fp_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).count()
+    freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()
+    freeplay_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).count()
     
-    dy_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()
-    dy_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).count()
+    daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()
+    daily_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).count()
 
     scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
     scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
     return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, total_avg=total_avg, total_games=total_games, 
-    fp_avg=fp_avg, fp_games=fp_games, dy_avg=dy_avg, dy_games=dy_games)
+    freeplay_avg=freeplay_avg, freeplay_games=freeplay_games, daily_avg=daily_avg, daily_games=daily_games)
 
 @app.route('/leaderboard')
+@login_required
 def leaderboard():
     user = current_user
     scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).limit(10)
     scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).order_by(Scorecard.score.desc()).limit(10)
-    fp_highscore = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
-    dy_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
+    freeplay_highscore = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
+    daily_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
     
-    return render_template('leaderboard_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, fp_highscore=fp_highscore, dy_highscore=dy_highscore)
+    return render_template('leaderboard_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, freeplay_highscore=freeplay_highscore, daiy_highscore=daily_highscore)
 
 @app.route('/update_daily', methods = ['POST'])
 def update_daily():
     user = current_user
     date_string = request.get_json()
-    dy_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.fromisoformat(date_string).date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
+    daily_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.fromisoformat(date_string).date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
     scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.fromisoformat(date_string).date()).order_by(Scorecard.score.desc()).limit(10)
-    return render_template('leaderboard_daily.html', score_daily=scores_daily, dy_highscore=dy_highscore)
+    return render_template('leaderboard_daily.html', score_daily=scores_daily, daily_highscore=daily_highscore)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -88,7 +89,6 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register_page.html', title='Register', form=form, user=current_user)
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

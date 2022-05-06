@@ -23,27 +23,39 @@
     <div class="tab-content scores">
         <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
             <h1 class="scores">Daily Highscores</h1>
-            <li>Total number of dailies completed: {{ dy_games }}</li>
-            <li>Your daily average points: {{ dy_avg[0][0] }}</li>
+            <ul>
+                <li>Total number of dailies completed: {{ daily_games }}</li>
+                <li>Your daily average points: {{ daily_avg[0][0] }}</li>
+            </ul>
             <br>
-            {% for score in score_daily %}
-                <li class="list-group-item">{{ score }}</li>
-            {% endfor %}
+            <ul>
+                {% for score in score_daily %}
+                    <li class="list-group-item">{{ score }}</li>
+                {% endfor %}
+            </ul>
             <br>
             <h3>The highest score you achieved in this mode:</h3>
-            <li class="list-group-item">{{ score_daily.first() }}</li>
+            <ul>
+                <li class="list-group-item">{{ score_daily.first() }}</li>
+            </ul>
         </div>
         <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
             <h1>Freeplay Highscores</h1>
-            <li>Total number of freeplay games played: {{ fp_games }}</li>
-            <li>Your freeplay average points: {{ fp_avg[0][0] }}</li>
+            <ul>
+                <li>Total number of freeplay games played: {{ freeplay_games }}</li>
+                <li>Your freeplay average points: {{ freeplay_avg[0][0] }}</li>
+            </ul>
             <br>
-            {% for score in score_freeplay %}
-                <li class="list-group-item">{{ score }}</li>
-            {% endfor %}
+            <ul>
+                {% for score in score_freeplay %}
+                    <li class="list-group-item">{{ score }}</li>
+                {% endfor %}
+            </ul>
             <br>
             <h3>The highest score you achieved in this mode:</h3>
-            <li class="list-group-item">{{ score_freeplay.first() }}</li>
+            <ul>
+                <li class="list-group-item">{{ score_freeplay.first() }}</li>
+            </ul>
         </div>
     </div>
 
