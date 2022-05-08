@@ -7,6 +7,10 @@ body {
     opacity: 1;
 }
 
+.scores {
+    color: white;
+}
+
 /* CSS for index.html */
 .hero-text{
     text-align: center;
@@ -38,7 +42,7 @@ body {
     opacity: 0.8;
     border-color: whitesmoke;
     border-width: 5px;
-    color: royalblue;
+    color: white;
     font-weight: bold;
     text-shadow: 2px 2px blue;
     font-size: 50px;
@@ -50,7 +54,7 @@ body {
     background-color: goldenrod;
     border-color: whitesmoke;
     border-width: 5px;
-    color: royalblue;
+    color: white;
     font-weight: bold;
     font-size: 30px;
     font-size: 2vw;
@@ -61,7 +65,7 @@ body {
     background-color: goldenrod;
     border-color: whitesmoke;
     border-width: 5px;
-    color: royalblue;
+    color: white;
     font-weight: bold;
     font-size: 25px;
     font-size: 1.25vw;
@@ -149,3 +153,12 @@ td {
 .interactiveButton:hover {
     background-color: red;
 }
+.list-group-item {
+    color: white;
+    background: rgba(255,255,255,0.3);
+}
+
+#myTab li.active a {
+    border-bottom-color: transparent;background-color:blue;
+}
+
