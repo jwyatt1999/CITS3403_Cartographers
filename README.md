@@ -40,6 +40,9 @@ https://afternoon-castle-17520.herokuapp.com/
 # Sprint 1 Retrospective and Sprint 2 Kick-Off Notes:
 - https://docs.google.com/document/d/1RUKDAd9BfHIhNcFmOqSdoINlhxawhGFtcPW6xkHBycw/edit?usp=sharing
 
+# Sprint 2 Retrospective and Sprint 3 Kick-Off Notes:
+- https://docs.google.com/document/d/1MSLXoXMzvl6Qz383UGGa_419USWzmgMK3BLdQko4w4I/edit?usp=sharing
+
 # Development Agreement
 1. We will stick to the HTML/CSS style guidelines here: https://teaching.csse.uwa.edu.au/units/CITS3403/laboratories/htmlcssguide.html
 2. We will each work on branches off of main (could be separate, though we could work on the same branch if necessary). We can merge when it seems appropriate via pull request but our code must be code reviewed before it is merged - this will be an opportunity for learning and catching mistakes 
