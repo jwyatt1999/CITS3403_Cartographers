@@ -5,6 +5,7 @@ from models import User, Scorelist, Scorecard
 from werkzeug.urls import url_parse
 from forms import RegistrationForm, LoginForm
 from datetime import datetime
+from sqlalchemy import func
 
 @app.route("/")
 def main_page():
@@ -15,7 +16,6 @@ def main_page():
 def game(type):
     if request.method == 'GET':
         return render_template("game_page.html", user=current_user)
-
     if request.method == 'POST':
         output = int(request.get_json())
         user = current_user
@@ -24,7 +24,7 @@ def game(type):
             db.session.add(new_scorecard)
             db.session.commit()
         elif type == 'freeplay':
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type=2)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type = 2)
             db.session.add(new_scorecard)
             db.session.commit()
 
@@ -36,16 +36,42 @@ def rules():
 def credits():
     return render_template("credits_page.html", user=current_user)
 
-@app.route('/user/<username>',methods=['GET', 'POST'])
+@app.route('/user/<username>', methods=['GET', 'POST'])
 @login_required
 def user(username):
     user = current_user
-    return render_template('profile_page.html', user=user)
+    total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()
+    total_games = Scorecard.query.filter(Scorecard.uname == user.username).count()
+
+    freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()
+    freeplay_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).count()
+    
+    daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()
+    daily_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).count()
+
+    scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
+    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
+    return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, total_avg=total_avg, total_games=total_games, 
+    freeplay_avg=freeplay_avg, freeplay_games=freeplay_games, daily_avg=daily_avg, daily_games=daily_games)
 
 @app.route('/leaderboard')
+@login_required
 def leaderboard():
-    scores_global = Scorecard.query.order_by(Scorecard.score.desc())
-    return render_template('leaderboard_page.html', user=current_user, score_global=scores_global)
+    user = current_user
+    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).limit(10)
+    scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).order_by(Scorecard.score.desc()).limit(10)
+    freeplay_highscore = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
+    daily_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
+    
+    return render_template('leaderboard_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, freeplay_highscore=freeplay_highscore, daiy_highscore=daily_highscore)
+
+@app.route('/update_daily', methods = ['POST'])
+def update_daily():
+    user = current_user
+    date_string = request.get_json()
+    daily_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.fromisoformat(date_string).date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
+    scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.fromisoformat(date_string).date()).order_by(Scorecard.score.desc()).limit(10)
+    return render_template('leaderboard_daily.html', score_daily=scores_daily, daily_highscore=daily_highscore)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -84,16 +110,6 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-#Listens for final score when user completes a game and passes it into the database
-@app.route('/add_score', methods=['POST'])
-@login_required
-def add_score():
-    output = int(request.get_json())
-    user = current_user
-    new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelist_freeplay.id)
-    db.session.add(new_scorecard)
-    db.session.commit()
-    return ""
 
 @app.route('/get_date', methods=['GET'])
 @login_required

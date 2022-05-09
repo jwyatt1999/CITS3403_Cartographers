@@ -4,6 +4,7 @@ from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from datetime import datetime
  
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,7 +30,7 @@ class Scorecard(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer, index = True, unique=False)
     uname = db.Column(db.String(64), index=True, unique=False)
-    date = db.Column(db.Date(), default=func.now())
+    date = db.Column(db.Date(), default=datetime.now().date())
     type = db.Column(db.Integer, index = True)
     scorelist_id = db.Column(db.Integer, db.ForeignKey('scorelist.id'))
 

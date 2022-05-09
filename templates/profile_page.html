@@ -2,15 +2,60 @@
 
 {% block content %}
     
-    <div class="container-fluid profile-text">
+    <div class="container-fluid">
         <h1>Welcome back {{user.username}}!</h1>
-        <br>
-        <h3>Your Recent Scores Are:</h3>
-        <ul>
-            {% for score in user.scorelists.scorecards %}
-                <li class="list-group-item">{{ score }}</li>
-            {% endfor %}
-        </ul>
+        <p>You can view your own scores below:</p>
+        <li>Total number of games played: {{ total_games }}</li>
+        <li>Your average points: {{ total_avg[0][0] }}</li>
+
+
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
+        </li>
+        <li class="nav-item" role="presentation">
+        <button class="nav-link" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
+        </li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content scores">
+        <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
+            <h1 class="scores">Daily Highscores</h1>
+            <ul>
+                <li>Total number of dailies completed: {{ daily_games }}</li>
+                <li>Your daily average points: {{ daily_avg[0][0] }}</li>
+            </ul>
+            <br>
+            <ul>
+                {% for score in score_daily %}
+                    <li class="list-group-item">{{ score }}</li>
+                {% endfor %}
+            </ul>
+            <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <ul>
+                <li class="list-group-item">{{ score_daily.first() }}</li>
+            </ul>
+    <div>
+        <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
+            <h1>Freeplay Highscores</h1>
+            <ul>
+                <li>Total number of freeplay games played: {{ freeplay_games }}</li>
+                <li>Your freeplay average points: {{ freeplay_avg[0][0] }}</li>
+            </ul>
+            <br>
+            <ul>
+                {% for score in score_freeplay %}
+            <li class="list-group-item">{{ score }}</li>
+        {% endfor %}
+            </ul>
+            <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <ul>
+                <li class="list-group-item">{{ score_freeplay.first() }}</li>
+            </ul>
+        </div>
     </div>
 
 {% endblock %}
