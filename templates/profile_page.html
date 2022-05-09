@@ -28,16 +28,18 @@
                 <li>Your daily average points: {{ daily_avg[0][0] }}</li>
             </ul>
             <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <ul>
+                <li class="list-group-item">{{ daily_highscore }}</li>
+            </ul>
+            <br>
+            <h3>Your Recent Daily Scores:</h3>
             <ul>
                 {% for score in score_daily %}
                     <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>
-            <h3>The highest score you achieved in this mode:</h3>
-            <ul>
-                <li class="list-group-item">{{ score_daily.first() }}</li>
-            </ul>
         </div>
         <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
             <h1>Freeplay Highscores</h1>
@@ -46,16 +48,18 @@
                 <li>Your freeplay average points: {{ freeplay_avg[0][0] }}</li>
             </ul>
             <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <ul>
+                <li class="list-group-item">{{ freeplay_highscore }}</li>
+            </ul>
+            <br>
+            <h3>Your Recent Freeplay Scores:</h3>
             <ul>
                 {% for score in score_freeplay %}
                     <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>
-            <h3>The highest score you achieved in this mode:</h3>
-            <ul>
-                <li class="list-group-item">{{ score_freeplay.first() }}</li>
-            </ul>
         </div>
     </div>
 
