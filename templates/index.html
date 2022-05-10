@@ -8,13 +8,13 @@
             <h1 class="hero-title">Cartographers</h1>
             <br>
             <div class="d-grid gap-2 col-xs-12">
-                <a class="btn btn-primary btn_daily mx-auto w-100" style="max-width:960px;" href="{{url_for('game', type = 'daily')}}" role="button">Daily</a>
-                <a class="btn btn-primary btn_freeplay mx-auto w-100" style="max-width:960px;" href="{{url_for('game', type = 'freeplay')}}" role="button">Freeplay</a>
+                <a class="btn btn-primary btn_daily mx-auto w-100" href="{{url_for('game', type = 'daily')}}" role="button">Daily</a>
+                <a class="btn btn-primary btn_freeplay mx-auto w-100" href="{{url_for('game', type = 'freeplay')}}" role="button">Freeplay</a>
             </div>
             <br>
             <div class="gap-2 d-block col-xs-12">
-                <a class="btn btn-primary btn_sec" style="width:49.5%;max-width:480px;" href="{{url_for('rules')}}" >Rules</a>
-                <a class="btn btn-primary btn_sec" style="width:49.5%;max-width:480px;" href="{{url_for('leaderboard')}}" >Leaderboard</a>
+                <a class="btn btn-primary btn_sec" href="{{url_for('rules')}}" >Rules</a>
+                <a class="btn btn-primary btn_sec" href="{{url_for('leaderboard')}}" >Leaderboard</a>
             </div>
         </div>
     </div>
