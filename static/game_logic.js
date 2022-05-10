@@ -366,7 +366,7 @@ function initializeGameBoard() {
 
 /**
  * Renders the given game board on the game_page. The board is stored in a html table on the game_page.
- * The style ensures the cells of the table are fully coloured.
+ * The style ensures the cells of the table are fully coloured and have an icon if necessary.
  * @param {*} board The board to render
  */
 function renderBoard(board) {
@@ -381,31 +381,31 @@ function renderBoard(board) {
                     colourBoard += "<td style=\"color:white;background-color:white;\">0</td>";
                     break;
                 case MOUNTAIN:
-                    colourBoard += "<td style=\"color:brown;background-color:brown;\">1</td>";
+                    colourBoard += "<td style=\"color:brown;background-color:brown;outline:solid black thin;\"><img src='/static/images/MountainIcon.png' alt='mountain'></td>";
                     break;
                 case BLOCKED:
-                    colourBoard += "<td style=\"color:black;background-color:black;\">2</td>";
+                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\">2</td>";
                     break;
                 case FARM:
-                    colourBoard += "<td style=\"color:yellow;background-color:yellow;\">3</td>";
+                    colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\"><img src='/static/images/FarmIcon.png' alt='farm'></td>";
                     break;
                 case FOREST:
-                    colourBoard += "<td style=\"color:green;background-color:green;\">4</td>";
+                    colourBoard += "<td style=\"color:green;background-color:green;outline:solid black thin;\"><img src='/static/images/ForestIcon.png' alt='forest'></td>";
                     break;
                 case VILLAGE:
-                    colourBoard += "<td style=\"color:red;background-color:red;\">5</td>";
+                    colourBoard += "<td style=\"color:red;background-color:red;outline:solid black thin;\"><img src='/static/images/VillageIcon.png' alt='village'></td>";
                     break;
                 case RIVER:
-                    colourBoard += "<td style=\"color:blue;background-color:blue;\">6</td>";
+                    colourBoard += "<td style=\"color:blue;background-color:blue;outline:solid black thin;\"><img src='/static/images/RiverIcon.png' alt='river'></td>";
                     break;
                 case ENEMY:
-                    colourBoard += "<td style=\"color:purple;background-color:purple;\">7</td>";
+                    colourBoard += "<td style=\"color:purple;background-color:purple;outline:solid black thin;\"><img src='/static/images/EnemyIcon.png' alt='enemy'></td>";
                     break;
                 case OVERLAP:
-                    colourBoard += "<td style=\"color:orange;background-color:orange;\">8</td>";
+                    colourBoard += "<td style=\"color:orange;background-color:orange;outline:solid black thin;\"><img src='/static/images/OverlapIcon.png' alt='overlap'></td>";
                     break;
                 case MOUNTAIN_CLAIMED:
-                    colourBoard += "<td style=\"color:gray;background-color:gray;\">9</td>";
+                    colourBoard += "<td style=\"color:gray;background-color:gray;outline:solid black thin;\"><img src='/static/images/MountainClaimedIcon.png' alt='claimed mountain'></td>";
                     break;
             }
         }

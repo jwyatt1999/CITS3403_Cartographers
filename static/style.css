@@ -37,6 +37,10 @@ body {
     color: royalblue;
 }
 
+.board {
+    text-align:center;
+}
+
 .btn_daily {
     background-color: goldenrod;
     opacity: 0.8;
