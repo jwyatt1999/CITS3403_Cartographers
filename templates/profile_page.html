@@ -2,12 +2,13 @@
 
 {% block content %}
     
-    <div class="container-fluid">
+    <div class="container-fluid scores">
         <h1>Welcome back {{user.username}}!</h1>
         <p>You can view your own scores below:</p>
         <li>Total number of games played: {{ total_games }}</li>
         <li>Your average points: {{ total_avg[0][0] }}</li>
 
+    </div>
 
     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -27,17 +28,19 @@
                 <li>Your daily average points: {{ daily_avg[0][0] }}</li>
             </ul>
             <br>
+            <h3>The highest score you achieved in this mode:</h3>
+            <ul>
+                <li class="list-group-item">{{ daily_highscore }}</li>
+            </ul>
+            <br>
+            <h3>Your Recent Daily Scores:</h3>
             <ul>
                 {% for score in score_daily %}
                     <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>
-            <h3>The highest score you achieved in this mode:</h3>
-            <ul>
-                <li class="list-group-item">{{ score_daily.first() }}</li>
-            </ul>
-    <div>
+        </div>
         <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
             <h1>Freeplay Highscores</h1>
             <ul>
@@ -45,16 +48,18 @@
                 <li>Your freeplay average points: {{ freeplay_avg[0][0] }}</li>
             </ul>
             <br>
-            <ul>
-                {% for score in score_freeplay %}
-            <li class="list-group-item">{{ score }}</li>
-        {% endfor %}
-            </ul>
-            <br>
             <h3>The highest score you achieved in this mode:</h3>
             <ul>
-                <li class="list-group-item">{{ score_freeplay.first() }}</li>
+                <li class="list-group-item">{{ freeplay_highscore }}</li>
             </ul>
+            <br>
+            <h3>Your Recent Freeplay Scores:</h3>
+            <ul>
+                {% for score in score_freeplay %}
+                    <li class="list-group-item">{{ score }}</li>
+                {% endfor %}
+            </ul>
+            <br>
         </div>
     </div>
 
