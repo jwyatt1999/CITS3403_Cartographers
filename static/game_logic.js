@@ -939,8 +939,8 @@ function losePointsFromEnemySpaces() {
 function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
-        document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
-        document.getElementById("startButton").hidden = false;
+        document.getElementById("gameOver").innerHTML = "Your final score was: " + playerPoints + ". Great Job!";
+        //document.getElementById("startButton").hidden = false;
         const s = JSON.stringify(playerPoints);
         var pathname = window.location.pathname;
         $.ajax({
@@ -949,6 +949,9 @@ function checkIfGameOver() {
             contentType:"application/json",
             data: JSON.stringify(s)
         });
+
+        $("#gameOverModal").modal("toggle");
+
     } else {
         initializeExploreDeck();
         determineNumberOfCardsThisSeason();
@@ -957,6 +960,17 @@ function checkIfGameOver() {
         renderPiece(currentPiece);
     }
 }
+
+function tweetIt () {
+    var phrase = "I just scored " + playerPoints.toString() + " in Cartographers! Come join me at:";
+    var tweetUrl = 'https://twitter.com/share?text=' +
+      encodeURIComponent(phrase) +
+      '.' +
+      '&url=' +
+      'https://afternoon-castle-17520.herokuapp.com/';
+      
+    window.open(tweetUrl);
+  }
 
 /**
  * Perform a Fisher-Yates shuffle on the given array, which randomizes the order of all elements in the array.

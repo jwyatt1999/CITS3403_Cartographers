@@ -120,9 +120,8 @@ td {
     background-color: goldenrod;
     border-color: whitesmoke;
     border-width: 5px;
-    color: royalblue;
+    color: white;
     font-weight: bold;
-    font-size: 30px;
     font-size: 2vw;
 }
 
@@ -139,6 +138,7 @@ td {
     width: 80%;
 }
 
+/*Delete this*/
 .interactiveButton {
     position: fixed; /* Fixed/sticky position */
     z-index: 99; /* Make sure it does not overlap */
