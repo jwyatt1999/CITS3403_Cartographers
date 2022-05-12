@@ -707,7 +707,7 @@ function renderPiece(piece) {
         }
     }
     renderBoard(tempBoard);
-    document.getElementById("pieceCoin").innerHTML = "You will gain a coin from this piece: " + piece.coin;
+    document.getElementById("pieceCoin").innerHTML = "You will gain a coin: " + piece.coin;
 }
 
 /**

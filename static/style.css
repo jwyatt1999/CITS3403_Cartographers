@@ -120,8 +120,11 @@ table {
 }
 
 td {
-    height: 60px;
-    width: 60px;
+    height: 11vw;
+    width: 11vw;
+    max-height: 60px; 
+    max-width: 60px;
+    display: inline-table;
 }
 
 .btn_start {
@@ -141,11 +144,36 @@ td {
     align-items: center;
   }
 
- .scorecards_header, .point_table{
+ .scorecards_header {
     background-color: royalblue;
     color: white;
     font-weight: bold;
-    width: 80%;
+    width: 100%;
+}
+
+.points_container {
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    line-height: 60px;
+    display: inline-flex;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+.scorecard {
+    min-width: 300px;
+    display: inline-block;
+}
+
+.scorecard_text, .points_text {
+    padding: 0px;
+    margin: 0px;
+}
+
+.scorecard_description {
+    min-height: 100px;
 }
 
 .interactiveButton {
