@@ -182,14 +182,15 @@ td {
     z-index: 99; /* Make sure it does not overlap */
     border: 2px solid black; /* Add borders */
     outline: none; /* Remove outline */
-    background-color: white; /* Set a background color */
-    color: black; /* Text color */
+    background-color: transparent; /* Set a background color */
+    color: white; /* Text color */
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
     cursor: pointer; /* Add a mouse pointer on hover */
-    width: 160px; /* Ensure all buttons are same width */
-    height: 60px; /* Ensure all buttons are same height */
-    padding: 15px; /* Some padding */
+    width: 8vw; /* Ensure all buttons are same width */
+    height: 6vh; /* Ensure all buttons are same height */
+    min-height: 30px;
     border-radius: 10px; /* Rounded corners */
-    font-size: 18px; /* Increase font size */
+    font-size: 1.8vh; /* Increase font size */
 }
 
 .interactiveButton:hover {
