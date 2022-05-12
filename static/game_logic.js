@@ -965,7 +965,7 @@ function tweetIt () {
     var phrase = "I just scored " + playerPoints.toString() + " in Cartographers! Come join me at:";
     var tweetUrl = 'https://twitter.com/share?text=' +
       encodeURIComponent(phrase) +
-      '.' +
+      ' ' +
       '&url=' +
       'https://afternoon-castle-17520.herokuapp.com/';
       
