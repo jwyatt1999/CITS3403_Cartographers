@@ -170,6 +170,7 @@ td {
 .scorecard_text, .points_text {
     padding: 0px;
     margin: 0px;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
 .scorecard_description {
