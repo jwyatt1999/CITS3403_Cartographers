@@ -83,6 +83,14 @@ body {
     color: whitesmoke !important;
     font-weight: bold;
     font-size: large;
+    z-index: 90;
+    width: fit-content;
+ }
+
+ .nav-link-profile {
+    position: fixed;
+    right: 2vw;
+    top: 2vh;
  }
 
  .navbar-brand {
@@ -92,8 +100,6 @@ body {
  }
 
  .navbar-toggler {
-    border-color: black;
-    border-width: 2px;
     text-align: center;
  }
 
