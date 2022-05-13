@@ -251,7 +251,6 @@ function startGame() {
    
     document.getElementById("gameContents").style.display = 'block';
     document.getElementById("startButton").hidden = true;
-    document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
         [0,0,0,0,0,0,0,0],
@@ -939,7 +938,6 @@ function losePointsFromEnemySpaces() {
 function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
-        document.getElementById("gameOver").innerHTML = "Game Over! Your final score was: " + playerPoints + ". Great Job!";
         document.getElementById("startButton").hidden = false;
         const s = JSON.stringify(playerPoints);
         var pathname = window.location.pathname;
