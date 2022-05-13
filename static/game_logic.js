@@ -962,33 +962,6 @@ function checkIfGameOver() {
     }
 }
 
-document.getElementById('facebookbtn').onclick = function() {
-    FB.ui({
-      display: 'popup',
-      method: 'share',
-      href: 'https://developers.facebook.com/docs/',
-      quote: 'Come join me!',
-    }, function(response){});
-  }
-
-function tweetIt () {
-    var phrase = "I just scored " + playerPoints.toString() + " in Cartographers! Come join me at:";
-    var tweetUrl = 'https://twitter.com/share?text=' +
-      encodeURIComponent(phrase) +
-      ' ' +
-      '&url=' +
-      'https://afternoon-castle-17520.herokuapp.com/';
-      
-    window.open(tweetUrl);
-  }
-
-function facebookIt() {
-
-    var phrase = "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=" + "I just scored " + playerPoints.toString() + " in Cartographers! Come join me at:";
-    document.getElementById("sharelink").href = phrase;
-
-}
-
 /**
  * Perform a Fisher-Yates shuffle on the given array, which randomizes the order of all elements in the array.
  * @param {*} array The array to be shuffled
