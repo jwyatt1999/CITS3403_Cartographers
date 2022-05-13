@@ -939,7 +939,6 @@ function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
         document.getElementById("gameOver").innerHTML = "Your final score was: " + playerPoints + ". Great Job!";
-        //document.getElementById("startButton").hidden = false;
         const s = JSON.stringify(playerPoints);
         var pathname = window.location.pathname;
         facebookIt();
