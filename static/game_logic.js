@@ -251,7 +251,6 @@ function startGame() {
    
     document.getElementById("gameContents").style.display = 'block';
     document.getElementById("startButton").hidden = true;
-    document.getElementById("gameOver").innerHTML = "";
 
     gameBoard = [
         [0,0,0,0,0,0,0,0],
@@ -707,7 +706,7 @@ function renderPiece(piece) {
         }
     }
     renderBoard(tempBoard);
-    document.getElementById("pieceCoin").innerHTML = "You will gain a coin from this piece: " + piece.coin;
+    document.getElementById("pieceCoin").innerHTML = "You will gain a coin: " + piece.coin;
 }
 
 /**
