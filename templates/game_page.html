@@ -82,11 +82,6 @@
     </div>
 
     <br> 
-    
-    <!-- Button trigger modal
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gameOverModal">
-        Launch demo modal
-    </button> -->
   
     <!-- Modal -->
     <div class="modal fade" id="gameOverModal" tabindex="-1" aria-labelledby="gameOverModalLabel" aria-hidden="true">
@@ -105,14 +100,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" onclick="tweetIt()" class="btn btn-primary">Tweet</button>
-                <button type="button" id="facebookbtn" class="btn btn-primary">Facebook</button>
+                <button type="button" id="facebookbtn" class="btn btn-primary">
+                    <div class="fb-share-button" data-href="https://afternoon-castle-17520.herokuapp.com/" data-layout="button_count" data-size="small">
+                        <a target="_blank" id="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=come join me" class="fb-xfbml-parse-ignore">Facebook</a>
+                    </div>
+                </button>
             </div>
         </div>
         </div>
-    </div>
-
-    <div class="fb-share-button" data-href="https://afternoon-castle-17520.herokuapp.com/" data-layout="button_count" data-size="small">
-        <a target="_blank" id="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=come join me" class="fb-xfbml-parse-ignore">Share</a>
     </div>
 
 {% endblock %}
