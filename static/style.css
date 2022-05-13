@@ -79,12 +79,21 @@ body {
     background: transparent;
 }
 
-.nav-link, .nav-item, .profile-text, .leaderboard-text {
+.nav-link, .nav-item {
     color: whitesmoke !important;
     font-weight: bold;
     font-size: large;
-    z-index: 90;
+    z-index: 1;
     width: fit-content;
+ }
+
+ .profile-text, .leaderboard-text {
+     color: whitesmoke;
+     font-size: large;
+ }
+
+ .profile-page-button, .leaderboard-page-button {
+     color: black !important;
  }
 
  .nav-link-profile {
