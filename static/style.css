@@ -74,7 +74,7 @@ body {
     font-weight: bold;
     font-size: 25px;
     font-size: 3vh;
-    width: 49.5%; /* Slightly less than 50% to prevent splitting onto 2 lines */
+    width: 49%; /* Slightly less than 50% to prevent splitting onto 2 lines */
     max-width: 480px;
 }
 
