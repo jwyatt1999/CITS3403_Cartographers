@@ -29,14 +29,14 @@
             </ul>
             <br>
             <h3>The highest score you achieved in this mode:</h3>
-            <ul class="list-group-item">
-                <li>{{ daily_highscore }}</li>
+            <ul>
+                <li class="list-group-item">{{ daily_highscore }}</li>
             </ul>
             <br>
             <h3>Your Recent Daily Scores:</h3>
-            <ul class="list-group-item">
+            <ul>
                 {% for score in score_daily %}
-                    <li>{{ score }}</li>
+                    <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -49,14 +49,14 @@
             </ul>
             <br>
             <h3>The highest score you achieved in this mode:</h3>
-            <ul class="list-group-item">
-                <li>{{ freeplay_highscore }}</li>
+            <ul>
+                <li class="list-group-item">{{ freeplay_highscore }}</li>
             </ul>
             <br>
             <h3>Your Recent Freeplay Scores:</h3>
-            <ul class="list-group-item">
+            <ul>
                 {% for score in score_freeplay %}
-                    <li>{{ score }}</li>
+                    <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>

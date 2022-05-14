@@ -3,9 +3,9 @@
 <input id='leaderboard_daily_date' type="date" value="2022-05-01">
 <button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
 <br>
-<ul class="list-group-item">
+<ul>
 {% for score in score_daily %}
-    <li>{{ score }}</li>
+    <li class="list-group-item">{{ score }}</li>
 {% endfor %}
 </ul>
 <br>
