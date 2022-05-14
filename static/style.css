@@ -7,7 +7,7 @@ body {
     opacity: 1;
 }
 
-.scores {
+.scores, #sharelink {
     color: white;
 }
 
@@ -151,9 +151,8 @@ td {
     background-color: goldenrod;
     border-color: whitesmoke;
     border-width: 5px;
-    color: royalblue;
+    color: white;
     font-weight: bold;
-    font-size: 30px;
     font-size: 2vw;
 }
 

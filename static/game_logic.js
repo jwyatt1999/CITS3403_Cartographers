@@ -938,15 +938,19 @@ function losePointsFromEnemySpaces() {
 function checkIfGameOver() {
     if (seasonsScored == 3) {
         currentPiece = "";
-        document.getElementById("startButton").hidden = false;
+        document.getElementById("gameOver").innerHTML = "Your final score was: " + playerPoints + ". Great Job!";
         const s = JSON.stringify(playerPoints);
         var pathname = window.location.pathname;
+        facebookIt();
         $.ajax({
             url:pathname,
             type:"POST",
             contentType:"application/json",
             data: JSON.stringify(s)
         });
+
+        $("#gameOverModal").modal("toggle");
+
     } else {
         initializeExploreDeck();
         determineNumberOfCardsThisSeason();
