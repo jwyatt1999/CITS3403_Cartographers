@@ -138,7 +138,7 @@ table {
     border: 2px solid black;
 }
 
-td {
+td, .gameboard_icon {
     height: 11vw;
     width: 11vw;
     max-height: 60px; 
