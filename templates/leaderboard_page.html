@@ -23,9 +23,9 @@
             <label for="selection">Select date:</label>
             <input id='leaderboard_daily_date' type="date" value="2022-05-01">
             <button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
-            <ul>
+            <ul class="list-group-item">
                 {% for score in score_daily %}
-                    <li class="list-group-item">{{ score }}</li>
+                    <li>{{ score }}</li>
                 {% endfor %}
             </ul>
             <h3>Your highest attempt:</h3>
@@ -35,9 +35,9 @@
         </div>
         <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
             <h1>Freeplay Highscores</h1>
-            <ul>
+            <ul class="list-group-item">
                 {% for score in score_freeplay %}
-                    <li class="list-group-item">{{ score }}</li>
+                    <li>{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>
