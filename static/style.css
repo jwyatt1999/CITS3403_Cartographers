@@ -23,8 +23,7 @@ body {
 
 .hero-title {
     font-size: 8rem;
-    font-size: 8vw;
-
+    font-size: 8vh;
 }
 
 .credits_paragraph, .rules_paragraph, .credits_header, .rules_header {
@@ -50,7 +49,8 @@ body {
     font-weight: bold;
     text-shadow: 2px 2px blue;
     font-size: 50px;
-    font-size: 3.5vw;
+    font-size: 8vh;
+    max-width: 960px;
 }
 
 .btn_freeplay {
@@ -61,7 +61,8 @@ body {
     color: white;
     font-weight: bold;
     font-size: 30px;
-    font-size: 2vw;
+    font-size: 6vh;
+    max-width: 960px;
 }
 
 .btn_sec {
@@ -72,7 +73,9 @@ body {
     color: white;
     font-weight: bold;
     font-size: 25px;
-    font-size: 1.25vw;
+    font-size: 3vh;
+    width: 49.5%; /* Slightly less than 50% to prevent splitting onto 2 lines */
+    max-width: 480px;
 }
 
 /* CSS for base.html */
@@ -84,12 +87,37 @@ body {
     color: whitesmoke !important;
     font-weight: bold;
     font-size: large;
+    z-index: 1;
+    width: fit-content;
+ }
+
+ .profile-text, .leaderboard-text {
+     color: whitesmoke;
+     font-size: large;
+ }
+
+ .profile-page-button, .leaderboard-page-button {
+     color: black !important;
+ }
+
+ .nav-link-profile {
+    position: fixed;
+    right: 2vw;
+    top: 2vh;
  }
 
  .navbar-brand {
     color: whitesmoke !important;
     font-weight: bold;
     font-size: xx-large;
+ }
+
+ .navbar-toggler {
+    text-align: center;
+ }
+
+ .list-group-item {
+     width: max-content;
  }
 
  .credits_scroll, .rules_scroll {
@@ -111,8 +139,11 @@ table {
 }
 
 td {
-    height: 60px;
-    width: 60px;
+    height: 11vw;
+    width: 11vw;
+    max-height: 60px; 
+    max-width: 60px;
+    display: inline-table;
 }
 
 .btn_start {
@@ -132,11 +163,37 @@ td {
     align-items: center;
   }
 
- .scorecards_header, .point_table{
+ .scorecards_header {
     background-color: royalblue;
     color: white;
     font-weight: bold;
-    width: 80%;
+    width: 100%;
+}
+
+.points_container {
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    line-height: 60px;
+    display: inline-flex;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+.scorecard {
+    min-width: 300px;
+    display: inline-block;
+}
+
+.scorecard_text, .points_text {
+    padding: 0px;
+    margin: 0px;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.scorecard_description {
+    min-height: 100px;
 }
 
 .interactiveButton {
@@ -144,14 +201,15 @@ td {
     z-index: 99; /* Make sure it does not overlap */
     border: 2px solid black; /* Add borders */
     outline: none; /* Remove outline */
-    background-color: white; /* Set a background color */
-    color: black; /* Text color */
+    background-color: transparent; /* Set a background color */
+    color: white; /* Text color */
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
     cursor: pointer; /* Add a mouse pointer on hover */
-    width: 160px; /* Ensure all buttons are same width */
-    height: 60px; /* Ensure all buttons are same height */
-    padding: 15px; /* Some padding */
+    width: 8vw; /* Ensure all buttons are same width */
+    height: 6vh; /* Ensure all buttons are same height */
+    min-height: 30px;
     border-radius: 10px; /* Rounded corners */
-    font-size: 18px; /* Increase font size */
+    font-size: 1.8vh; /* Increase font size */
 }
 
 .interactiveButton:hover {

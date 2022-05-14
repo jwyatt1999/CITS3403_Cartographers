@@ -2,22 +2,22 @@
 
 {% block content %}
     
-    <div class="container-fluid">
+    <div class="container-fluid leaderboard-text">
         <h1>Global Ranking</h1>
     </div>
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
+        <button class="nav-link leaderboard-page-button active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
+        <button class="nav-link leaderboard-page-button" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
         </li>
     </ul>
     
     <!-- Tab panes -->
-    <div class="tab-content">
+    <div class="tab-content leaderboard-text">
         <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
             <h1>Daily Highscores</h1>
             <label for="selection">Select date:</label>

@@ -2,7 +2,7 @@
 
 {% block content %}
     
-    <div class="container-fluid scores">
+    <div class="container-fluid scores profile-text">
         <h1>Welcome back {{user.username}}!</h1>
         <p>You can view your own scores below:</p>
         <li>Total number of games played: {{ total_games }}</li>
@@ -12,15 +12,15 @@
 
     <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
+        <button class="nav-link profile-page-button active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
         </li>
         <li class="nav-item" role="presentation">
-        <button class="nav-link" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
+        <button class="nav-link profile-page-button" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
         </li>
     </ul>
     
     <!-- Tab panes -->
-    <div class="tab-content scores">
+    <div class="tab-content scores profile-text">
         <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
             <h1 class="scores">Daily Highscores</h1>
             <ul>
