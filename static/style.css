@@ -210,6 +210,7 @@ td, .gameboard_icon {
     min-height: 30px;
     border-radius: 10px; /* Rounded corners */
     font-size: 1.8vh; /* Increase font size */
+    touch-action: manipulation;
 }
 
 .interactiveButton:hover {
