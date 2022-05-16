@@ -25,6 +25,13 @@ class User(UserMixin, db.Model):
     @login.user_loader
     def load_user(id):
         return User.query.get(int(id))
+    
+    def daily_scorecards(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 1).order_by(Scorecard.date.desc())
+    
+    def freeplay_scorecards(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.date.desc())
+
 
 class Scorecard(db.Model):
     id = db.Column(db.Integer, primary_key=True)

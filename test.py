@@ -20,13 +20,33 @@ class UserModelCase(unittest.TestCase):
         self.assertTrue(u.check_password('Pass1'))
     
     def test_add_scorelist(self):
-       u1 = User(username='JooKai', email='joo@gmail.com')
-       u2 = User(username='Josh', email='josh@gmail.com')
-       db.session.add(u1)
-       db.session.add(u2)
-       db.session.commit()
-       self.assertEqual(u1.scorelists.all(), [])
-       self.assertEqual(u1.scorelists.all(), []) 
+        u1 = User(username='JooKai', email='joo@gmail.com')
+        u2 = User(username='Josh', email='josh@gmail.com')
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+
+        s1 = Scorelist(user_id = u1.id)
+        s2 = Scorelist(user_id = u2.id)
+        db.session.add(s1)
+        db.session.add(s2)
+        db.session.commit()
+
+        self.assertEqual(u1.scorelists, s1)
+        self.assertEqual(u2.scorelists, s2)
+
+    def test_add_scorecards(self):
+        u1 = User(username='JooKai', email='joo@gmail.com')
+        u2 = User(username='Josh', email='josh@gmail.com')
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()
+
+        s1 = Scorelist(user_id = u1.id)
+        s2 = Scorelist(user_id = u2.id)
+        db.session.add(s1)
+        db.session.add(s2)
+        db.session.commit()
     
 if __name__ == '__main__':
     unittest.main(verbosity=2)

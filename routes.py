@@ -40,21 +40,11 @@ def credits():
 @login_required
 def user(username):
     user = current_user
-    total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()
-    total_games = user.scorelists.scorecards.count()
-
-    freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()
-    freeplay_games = user.scorelists.scorecards.filter(Scorecard.type == 2).count()
-    freeplay_highscore = user.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).first()
-
-    daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()
-    daily_games = user.scorelists.scorecards.filter(Scorecard.type == 1).count()
-    daily_highscore = user.scorelists.scorecards.filter(Scorecard.type == 1).order_by(Scorecard.score.desc()).first()
-
-    scores_daily = user.scorelists.scorecards.filter(Scorecard.type == 1).order_by(Scorecard.date.desc())
-    scores_freeplay = user.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.date.desc())
-    return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, total_avg=total_avg, total_games=total_games, 
-    freeplay_avg=freeplay_avg, freeplay_games=freeplay_games, daily_avg=daily_avg, daily_games=daily_games, freeplay_highscore=freeplay_highscore, daily_highscore=daily_highscore)
+    total_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0])
+    freeplay_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0])
+    daily_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0])
+    
+    return render_template('profile_page.html', user=user, total_avg=total_avg, freeplay_avg=freeplay_avg, daily_avg=daily_avg)
 
 @app.route('/leaderboard')
 @login_required
