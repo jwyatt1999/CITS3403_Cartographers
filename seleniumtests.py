@@ -14,6 +14,7 @@ class SystemTest(unittest.TestCase):
         else:
             app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'
             db.create_all()
+            #make this a LARGE test database
             u = User(username='test', email='test@gmail.com')
             u.set_password('testPass')
             db.session.add(u)
