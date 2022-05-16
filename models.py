@@ -43,7 +43,7 @@ class Scorecard(db.Model):
 
     def __repr__(self):
         return "{} scored {} points on {}".format(self.uname, self.score, self.date)
-
+    
 
 class Scorelist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
