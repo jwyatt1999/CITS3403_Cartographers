@@ -36,8 +36,8 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u2.scorelists, s2)
 
     def test_add_scorecards(self):
-        u1 = User(username='JooKai', email='joo@gmail.com')
-        u2 = User(username='Josh', email='josh@gmail.com')
+        u1 = User(username='user1', email='test1@gmail.com')
+        u2 = User(username='user2', email='test2@gmail.com')
         db.session.add(u1)
         db.session.add(u2)
         db.session.commit()
@@ -56,11 +56,11 @@ class UserModelCase(unittest.TestCase):
         c6 =  Scorecard(score=30, uname=u1.username, scorelist_id=u1.scorelists.id, type=2)
 
         c7 =  Scorecard(score=5, uname=u2.username, scorelist_id=u2.scorelists.id, type=1)
-        c8 =  Scorecard(score=10, uname=u2.username, scorelist_id=u2.scorelists.id, type=1)
+        c8 =  Scorecard(score=20, uname=u2.username, scorelist_id=u2.scorelists.id, type=1)
         c9 =  Scorecard(score=15, uname=u2.username, scorelist_id=u2.scorelists.id, type=1)
         c10 = Scorecard(score=20, uname=u2.username, scorelist_id=u2.scorelists.id, type=2)
         c11 = Scorecard(score=25, uname=u2.username, scorelist_id=u2.scorelists.id, type=2)
-        c12 = Scorecard(score=30, uname=u2.username, scorelist_id=u2.scorelists.id, type=2)
+        c12 = Scorecard(score=45, uname=u2.username, scorelist_id=u2.scorelists.id, type=2)
         
         db.session.add(c1)
         db.session.add(c2)
@@ -84,6 +84,12 @@ class UserModelCase(unittest.TestCase):
 
         self.assertEqual(u2.daily_scorecards().all(), [c7,c8,c9])
         self.assertEqual(u2.freeplay_scorecards().all(), [c10,c11,c12])
+
+        self.assertEqual(u1.daily_highscore().score, 15)
+        self.assertEqual(u1.freeplay_highscore().score, 30)
+
+        self.assertEqual(u2.daily_highscore().score, 20)
+        self.assertEqual(u2.freeplay_highscore().score, 45)
 
     
 if __name__ == '__main__':

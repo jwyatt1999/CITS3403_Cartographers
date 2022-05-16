@@ -31,7 +31,12 @@ class User(UserMixin, db.Model):
     
     def freeplay_scorecards(self):
         return self.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.date.desc())
+    
+    def daily_highscore(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 1).order_by(Scorecard.score.desc()).first()
 
+    def freeplay_highscore(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).first()
 
 class Scorecard(db.Model):
     id = db.Column(db.Integer, primary_key=True)

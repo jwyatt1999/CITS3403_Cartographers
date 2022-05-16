@@ -40,9 +40,9 @@ def credits():
 @login_required
 def user(username):
     user = current_user
-    total_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0])
-    freeplay_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0])
-    daily_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0])
+    total_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0],2)
+    freeplay_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0],2)
+    daily_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0],2)
     
     return render_template('profile_page.html', user=user, total_avg=total_avg, freeplay_avg=freeplay_avg, daily_avg=daily_avg)
 

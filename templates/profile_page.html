@@ -30,7 +30,7 @@
             <br>
             <h3>The highest score you achieved in this mode:</h3>
             <ul>
-                <li class="list-group-item">{{ user.daily_scorecards().first() }}</li>
+                <li class="list-group-item">{{ user.daily_highscore() }}</li>
             </ul>
             <br>
             <h3>Your Recent Daily Scores:</h3>
@@ -50,7 +50,7 @@
             <br>
             <h3>The highest score you achieved in this mode:</h3>
             <ul>
-                <li class="list-group-item">{{ user.freeplay_scorecards().first() }}</li>
+                <li class="list-group-item">{{ user.freeplay_highscore() }}</li>
             </ul>
             <br>
             <h3>Your Recent Freeplay Scores:</h3>
