@@ -599,7 +599,7 @@ function checkCurrentPieceCanBePlaced() {
         //cannot use altShape or defaultShape so player can only place a 1x1 square which never grants a coin
         currentPiece.shape = [[0,0]];
         if (currentPiece.alt == "shape") {
-            currentPiece.altShape = [[0,0]];
+            currentPiece.altShape = currentPiece.shape;
         }
         currentPiece.coin = false;
     }
