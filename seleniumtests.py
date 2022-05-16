@@ -15,10 +15,9 @@ class SystemTest(unittest.TestCase):
         else:
             app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'
             db.create_all()
-            u1 = User(id=1, username='test1', email='test1@gmail.com')
-            u2 = User(id=2, username='test2', email='test2@gmail.com')
-            db.session.add(u1)
-            db.session.add(u2)
+            u = User(username='test', email='test@gmail.com')
+            u.set_password('testPass')
+            db.session.add(u)
             db.session.commit()
             self.driver.maximize_window()
             self.driver.get('http://localhost:5000/')
@@ -29,11 +28,27 @@ class SystemTest(unittest.TestCase):
             db.session.remove()
             db.drop_all()
 
-    def test_registration(self):
-    
-    def test_login(self):
+    def test_registrationAndLogin(self):
+        #start at main page
+        #if there is a button that says 'Logout' then press that button
+        #press button that says 'Login'
+        #press button that says 'Click to Register!'
+        #fill in username, email, password, repeat password, then click button that says 'Register'
+        #enter the username and password we used to register and click the button that says 'Sign In'
+        #if there is a button that says 'Logout' then we pass, if not then registration/login failed
 
-    def test_daily(self):
+    def test_game(self):
+        #start at main page
+        #if there is a button that says 'Logout' then press that button
+        #press button that says 'Login'
+        #enter the username 'test' and password 'testPass' and click the button that says 'Sign In'
+        #press hidden button to go to /game/test (which has a set seed)
+        #confirm scorecards are correct
+        #move and change the season 1 pieces using on-screen buttons, check the points match up with the expected points, if not then something failed
+            #make sure to 
+        #move and change the season 2 and 3 pieces using arrow keys and letters, check the points match up with the expected points at the end of each season, if not then something failed
+        #
+
 
     def test_leaderboard(self):
 

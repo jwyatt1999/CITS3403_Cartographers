@@ -586,12 +586,22 @@ function checkCurrentPieceCanBePlaced() {
         }
     }
     if (!ableToBePlaced_default && ableToBePlaced_alt) {
+        //can only use altShape, which always grants a coin
         currentPiece.shape = currentPiece.altShape;
+        currentPiece.coin = true;
     } else if (ableToBePlaced_default && !ableToBePlaced_alt) {
-        if (currentPiece.alt == "shape") {currentPiece.altShape = currentPiece.shape;}
+        if (currentPiece.alt == "shape") {
+            //can only use defaultShape, which never grants a coin
+            currentPiece.altShape = currentPiece.shape;
+            currentPiece.coin = false;
+        }
     } else if (!ableToBePlaced_default && !ableToBePlaced_alt) {
+        //cannot use altShape or defaultShape so player can only place a 1x1 square which never grants a coin
         currentPiece.shape = [[0,0]];
-        if (currentPiece.alt == "shape") {currentPiece.altShape = [[0,0]];}
+        if (currentPiece.alt == "shape") {
+            currentPiece.altShape = [[0,0]];
+        }
+        currentPiece.coin = false;
     }
 }
 
@@ -755,11 +765,15 @@ function flipPiece(piece) {
  */
 function swapPieceType(piece) {
     if (piece.alt == "shape") {
-        let temp = piece.altShape;
-        piece.altShape = piece.shape;
-        piece.shape = temp;
-        //Only pieces that change shape can grant coins. Only their starting alternative shape grants a coin.
-        piece.coin = !piece.coin;
+        //If shape and altShape are the same then the ability for the piece to grant a coin has been determined in 
+        //checkCurrentPieceCanBePlaced(), and shouldn't be changed
+        if (piece.shape != piece.altShape) {
+            let temp = piece.altShape;
+            piece.altShape = piece.shape;
+            piece.shape = temp;
+            //Only pieces that change shape can grant coins. Only their starting alternative shape grants a coin.
+            piece.coin = !piece.coin;
+        }
     } else if (piece.alt == "type") {
         let temp = piece.altType;
         piece.altType = piece.type;
