@@ -5,8 +5,8 @@
     <div class="container-fluid scores profile-text">
         <h1>Welcome back {{user.username}}!</h1>
         <p>You can view your own scores below:</p>
-        <li>Total number of games played: {{ total_games }}</li>
-        <li>Your average points: {{ total_avg[0][0] }}</li>
+        <li>Total number of games played: {{ user.scorelists.scorecards.count() }}</li>
+        <li>Your average points: {{ total_avg }}</li>
 
     </div>
 
@@ -24,18 +24,18 @@
         <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
             <h1 class="scores">Daily Highscores</h1>
             <ul>
-                <li>Total number of dailies completed: {{ daily_games }}</li>
-                <li>Your daily average points: {{ daily_avg[0][0] }}</li>
+                <li>Total number of dailies completed: {{ user.daily_scorecards().count() }}</li>
+                <li>Your daily average points: {{ daily_avg }}</li>
             </ul>
             <br>
             <h3>The highest score you achieved in this mode:</h3>
             <ul>
-                <li class="list-group-item">{{ daily_highscore }}</li>
+                <li class="list-group-item">{{ user.daily_highscore() }}</li>
             </ul>
             <br>
             <h3>Your Recent Daily Scores:</h3>
             <ul>
-                {% for score in score_daily %}
+                {% for score in user.daily_scorecards() %}
                     <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
@@ -44,18 +44,18 @@
         <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
             <h1>Freeplay Highscores</h1>
             <ul>
-                <li>Total number of freeplay games played: {{ freeplay_games }}</li>
-                <li>Your freeplay average points: {{ freeplay_avg[0][0] }}</li>
+                <li>Total number of freeplay games played: {{ user.freeplay_scorecards().count() }}</li>
+                <li>Your freeplay average points: {{ freeplay_avg }}</li>
             </ul>
             <br>
             <h3>The highest score you achieved in this mode:</h3>
             <ul>
-                <li class="list-group-item">{{ freeplay_highscore }}</li>
+                <li class="list-group-item">{{ user.freeplay_highscore() }}</li>
             </ul>
             <br>
             <h3>Your Recent Freeplay Scores:</h3>
             <ul>
-                {% for score in score_freeplay %}
+                {% for score in user.freeplay_scorecards() %}
                     <li class="list-group-item">{{ score }}</li>
                 {% endfor %}
             </ul>
