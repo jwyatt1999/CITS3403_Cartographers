@@ -97,7 +97,7 @@ document.onkeydown = function(e) {
  * @param {*} event 
  */
 window.onload = (event) => {
-    if (window.location.pathname == "/game/daily" || window.location.pathname == "/game/freeplay") {
+    if (window.location.pathname == "/game/daily" || window.location.pathname == "/game/freeplay" || window.location.pathname == "/game/test") {
         startGame();
     } 
 };
@@ -244,6 +244,10 @@ function startGame() {
             async:false
         });
         seed = xmur3(serverDate.responseText.toString());
+    }
+
+    if (window.location.pathname == "/game/test") {
+        seed = xmur3("testSeed");
     }
 
     //Initialize the pseudo-random number generator with the given seed.

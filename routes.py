@@ -24,7 +24,7 @@ def game(type):
             db.session.add(new_scorecard)
             db.session.commit()
         elif type == 'freeplay':
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type = 2)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type=2)
             db.session.add(new_scorecard)
             db.session.commit()
 
