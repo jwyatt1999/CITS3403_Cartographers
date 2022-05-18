@@ -196,7 +196,10 @@ class SystemTest(unittest.TestCase):
         #Navigate to profile page
         self.driver.get('http://127.0.0.1:5000/user/test1')
         self.driver.implicitly_wait(5)
-        
+        #Check overall total and average are correct
+        overall_total = self.driver.find_element_by_id('profile_overallTotal').text()
+        self.assertEqual(overall_total, "1")
+
 
         #ensure daily button is selected and shows results I would expect from what I have set for this user
         #click freeplay button and ensure it shows results I would expect from what I have set for this user
