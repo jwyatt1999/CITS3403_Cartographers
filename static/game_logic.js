@@ -384,10 +384,10 @@ function renderBoard(board) {
                     colourBoard += "<td style=\"color:white;background-color:white;\">0</td>";
                     break;
                 case MOUNTAIN:
-                    colourBoard += "<td style=\"color:brown;background-color:brown;outline:solid black thin;\"><img src='/static/images/MountainIcon.png' alt='mountain' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:brown;background-color:brown;outline:solid black thin;\" name=\"mountain\"><img src='/static/images/MountainIcon.png' alt='mountain' class='gameboard_icon'></td>";
                     break;
                 case BLOCKED:
-                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\">2</td>";
+                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\" name=\"blocked\">2</td>";
                     break;
                 case FARM:
                     colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\"><img src='/static/images/FarmIcon.png' alt='farm' class='gameboard_icon'></td>";
@@ -405,7 +405,7 @@ function renderBoard(board) {
                     colourBoard += "<td style=\"color:purple;background-color:purple;outline:solid black thin;\"><img src='/static/images/EnemyIcon.png' alt='enemy' class='gameboard_icon'></td>";
                     break;
                 case OVERLAP:
-                    colourBoard += "<td style=\"color:orange;background-color:orange;outline:solid black thin;\"><img src='/static/images/OverlapIcon.png' alt='overlap' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:orange;background-color:orange;outline:solid black thin;\" name=\"overlap\"><img src='/static/images/OverlapIcon.png' alt='overlap' class='gameboard_icon'></td>";
                     break;
                 case MOUNTAIN_CLAIMED:
                     colourBoard += "<td style=\"color:gray;background-color:gray;outline:solid black thin;\"><img src='/static/images/MountainClaimedIcon.png' alt='claimed mountain' class='gameboard_icon'></td>";
