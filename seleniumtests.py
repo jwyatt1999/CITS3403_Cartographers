@@ -87,38 +87,6 @@ class SystemTest(unittest.TestCase):
             db.session.commit()
             db.session.remove()
 
-    #Test that registration functionality works as expected
-    def test_registration(self):
-        #Register new user
-        self.driver.get('http://127.0.0.1:5000/register')
-        self.driver.implicitly_wait(5)
-        username_form = self.driver.find_element_by_id('username')
-        username_form.send_keys('newTestUser')
-        email_form = self.driver.find_element_by_id('email')
-        email_form.send_keys('testEmail@test.com')  
-        password_form = self.driver.find_element_by_id('password')
-        password_form.send_keys('testPassword')  
-        password2_form = self.driver.find_element_by_id('password2')
-        password2_form.send_keys('testPassword') 
-        self.driver.implicitly_wait(5)
-        register_button = self.driver.find_element_by_id('submit')
-        register_button.click()
-        self.driver.implicitly_wait(5)
-        #Check that we have been returned to the login page
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/login")
-        #Attempt to log in with our registered details
-        username_form = self.driver.find_element_by_id('usernameForm')
-        username_form.send_keys('newTestUser')   
-        password_form = self.driver.find_element_by_id('passwordForm')
-        password_form.send_keys('testPassword')
-        self.driver.implicitly_wait(5)
-        sign_in_button = self.driver.find_element_by_id('signInButton')
-        sign_in_button.click()
-        self.driver.implicitly_wait(5)
-        #Check that we are logged in
-        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/")
-        return
-
     #...
     def test_gameFunction(self):
         #start at main page
@@ -135,7 +103,7 @@ class SystemTest(unittest.TestCase):
             #test placing pieces in illegal places (trying to move it off the board, placing it over other pieces, trying to rotate it off the board)
         #ensure a button is shown that says 'start new freeplay game'
         self.assertEqual(Scorelist.query.count(), 3)
-
+    
     #Test that the random initial gameboard has the correct features 
     def test_gameGeneration(self):       
         #Login
@@ -177,9 +145,9 @@ class SystemTest(unittest.TestCase):
         scorecard4_type = scorecard4.get_attribute("style")[12:16]
         self.assertEqual(scorecard4_type, "grey")
         return
-        
-    #Test that the leaderboard shows scores from all users and the profile page shows score for the signed in user
-    def test_leaderboardAndProfile(self):
+
+    #Test that the leaderboard page shows scores from all users in the database
+    def test_leaderboardPage(self):
         #Login
         self.driver.get('http://127.0.0.1:5000/login')
         self.driver.implicitly_wait(5)
@@ -193,20 +161,28 @@ class SystemTest(unittest.TestCase):
         self.driver.implicitly_wait(5)
         #Check that we are logged in
         self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/")
-        #Navigate to profile page
-        self.driver.get('http://127.0.0.1:5000/user/test1')
+        #Navigate to leaderboard page
+        self.driver.get('http://127.0.0.1:5000/leaderboard')
         self.driver.implicitly_wait(5)
-        #Check overall total and average are correct
-        overall_total = self.driver.find_element_by_id('profile_overallTotal').text()
-        self.assertEqual(overall_total, "1")
-
-
-        #ensure daily button is selected and shows results I would expect from what I have set for this user
-        #click freeplay button and ensure it shows results I would expect from what I have set for this user
-        #click leaderboard button
-        #ensure daily button is selected and shows results I would expect from what I have set for this user and the other user
-        #clock freeplay button and ensure it shows results I would expect from what I have set for this user and the other user
-        self.assertEqual(Scorecard.query.count(), 18)
+        #Check daily scores and this user's highest daily attempt
+        daily_highestScore = self.driver.find_elements_by_name('dailyScore')[0].text
+        daily_scoreCount = len(self.driver.find_elements_by_name('dailyScore'))
+        daily_myHighestAttempt = self.driver.find_element_by_id('leaderboard_dailyHighscore').text
+        self.assertEqual(daily_highestScore, "test3 scored 40 points on 2022-05-18")
+        self.assertEqual(daily_scoreCount, 9)
+        self.assertEqual(daily_myHighestAttempt, "test1 scored 15 points on 2022-05-18")
+        #Click on the freeplay tab to display the leaderboard's freeplay scores
+        freeplay_tab = self.driver.find_element_by_id('freeplay-tab')
+        freeplay_tab.click()
+        self.driver.implicitly_wait(5)
+        #Check freeplay scores and this user's highest freeplay attempt
+        freeplay_highestScore = self.driver.find_elements_by_name('freeplayScore')[0].text
+        freeplay_scoreCount = len(self.driver.find_elements_by_name('freeplayScore'))
+        freeplay_myHighestAttempt = self.driver.find_element_by_id('leaderboard_freeplayHighscore').text
+        self.assertEqual(freeplay_highestScore, "test3 scored 50 points on 2022-05-18")
+        self.assertEqual(freeplay_scoreCount, 9)
+        self.assertEqual(freeplay_myHighestAttempt, "test1 scored 30 points on 2022-05-18")
+        return
 
     #Test that the login and logout functionality works as expected
     def test_loginAndLogout(self):
@@ -235,6 +211,85 @@ class SystemTest(unittest.TestCase):
         self.driver.implicitly_wait(5)
         #Check that we have been prevented from accessing the leaderboard
         self.assertNotEqual(self.driver.current_url, "http://127.0.0.1:5000/leaderboard")
+        return
+
+    #Test that the profile page shows scores and aggregate results for the signed in user
+    def test_profilePage(self):
+        #Login
+        self.driver.get('http://127.0.0.1:5000/login')
+        self.driver.implicitly_wait(5)
+        username_form = self.driver.find_element_by_id('usernameForm')
+        username_form.send_keys('test1')   
+        password_form = self.driver.find_element_by_id('passwordForm')
+        password_form.send_keys('testPass1')
+        self.driver.implicitly_wait(5)
+        sign_in_button = self.driver.find_element_by_id('signInButton')
+        sign_in_button.click()
+        self.driver.implicitly_wait(5)
+        #Check that we are logged in
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/")
+        #Navigate to profile page
+        self.driver.get('http://127.0.0.1:5000/user/test1')
+        self.driver.implicitly_wait(5)
+        #Check overall total and average are correct
+        overall_total = self.driver.find_element_by_id('profile_overallTotal').text
+        overall_avg = self.driver.find_element_by_id('profile_overallAvg').text
+        self.assertEqual(overall_total, "Total number of games played: 6")
+        self.assertEqual(overall_avg, "Your average points: 17.50")
+        #Check daily total, average, highscore, and score count
+        daily_total = self.driver.find_element_by_id('profile_dailyTotal').text
+        daily_avg = self.driver.find_element_by_id('profile_dailyAvg').text
+        daily_highscore = self.driver.find_element_by_id('profile_dailyHighscore').text
+        daily_scoreCount = len(self.driver.find_elements_by_name('dailyScore'))
+        self.assertEqual(daily_total, "Total number of dailies completed: 3")
+        self.assertEqual(daily_avg, "Your daily average points: 10.00")
+        self.assertEqual(daily_highscore, "test1 scored 15 points on 2022-05-18")
+        self.assertEqual(daily_scoreCount, 3)
+        #Click on the freeplay tab to display the user's freeplay scores
+        freeplay_tab = self.driver.find_element_by_id('freeplay-tab')
+        freeplay_tab.click()
+        self.driver.implicitly_wait(5)
+        #Check freeplay total, average, highscore, and score count
+        freeplay_total = self.driver.find_element_by_id('profile_freeplayTotal').text
+        freeplay_avg = self.driver.find_element_by_id('profile_freeplayAvg').text
+        freeplay_highscore = self.driver.find_element_by_id('profile_freeplayHighscore').text
+        freeplay_scoreCount = len(self.driver.find_elements_by_name('freeplayScore'))
+        self.assertEqual(freeplay_total, "Total number of freeplay games played: 3")
+        self.assertEqual(freeplay_avg, "Your freeplay average points: 25.00")
+        self.assertEqual(freeplay_highscore, "test1 scored 30 points on 2022-05-18")
+        self.assertEqual(freeplay_scoreCount, 3)
+        return
+
+    #Test that registration functionality works as expected
+    def test_registration(self):
+        #Register new user
+        self.driver.get('http://127.0.0.1:5000/register')
+        self.driver.implicitly_wait(5)
+        username_form = self.driver.find_element_by_id('username')
+        username_form.send_keys('newTestUser')
+        email_form = self.driver.find_element_by_id('email')
+        email_form.send_keys('testEmail@test.com')  
+        password_form = self.driver.find_element_by_id('password')
+        password_form.send_keys('testPassword')  
+        password2_form = self.driver.find_element_by_id('password2')
+        password2_form.send_keys('testPassword') 
+        self.driver.implicitly_wait(5)
+        register_button = self.driver.find_element_by_id('submit')
+        register_button.click()
+        self.driver.implicitly_wait(5)
+        #Check that we have been returned to the login page
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/login")
+        #Attempt to log in with our registered details
+        username_form = self.driver.find_element_by_id('usernameForm')
+        username_form.send_keys('newTestUser')   
+        password_form = self.driver.find_element_by_id('passwordForm')
+        password_form.send_keys('testPassword')
+        self.driver.implicitly_wait(5)
+        sign_in_button = self.driver.find_element_by_id('signInButton')
+        sign_in_button.click()
+        self.driver.implicitly_wait(5)
+        #Check that we are logged in
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/")
         return
 
 if __name__=='__main__':

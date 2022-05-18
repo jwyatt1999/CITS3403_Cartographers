@@ -93,12 +93,20 @@ document.onkeydown = function(e) {
 };
 
 /**
- * When the game page has finished loading, start the game!
+ * Onload handler for game page and leaderboard page.
+ * Game page: When the game page has finished loading, start the game!
+ * Leaderboard page: When the leaderboard page has finished loading, initialize the date form with the current date
  * @param {*} event 
  */
 window.onload = (event) => {
     if (window.location.pathname == "/game/daily" || window.location.pathname == "/game/freeplay" || window.location.pathname == "/game/test") {
         startGame();
+    } 
+    else if (window.location.pathname == "/leaderboard") {
+        let date = getDate();
+        let rearrangedDate = date.slice(6,10) + '-' + date.slice(3,5) + '-' + date.slice(0,2)
+        document.getElementById("leaderboard_daily_date").value = rearrangedDate;
+        postDate()
     } 
 };
 
@@ -238,12 +246,8 @@ function startGame() {
 
     //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
     if (window.location.pathname == "/game/daily") {
-        let serverDate = $.ajax({
-            url:"/get_date",
-            type:"GET",
-            async:false
-        });
-        seed = xmur3(serverDate.responseText.toString());
+        let serverDate = getDate();
+        seed = xmur3(serverDate);
     }
 
     if (window.location.pathname == "/game/test") {
@@ -990,4 +994,17 @@ function shuffle (array) {
         [array[currentIndex], array[randomIndex]] = [array[randomIndex],array[currentIndex]];
     }
     return array;
+}
+
+/**
+ * Query the server to get the local date
+ * @returns The date as a string in the format dd/mm/yyyy
+ */
+function getDate() {
+    let date = $.ajax({
+        url:"/get_date",
+        type:"GET",
+        async:false
+    });
+    return date.responseText.toString();
 }
