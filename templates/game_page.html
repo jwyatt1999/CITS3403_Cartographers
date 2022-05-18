@@ -12,14 +12,14 @@
 
     <div id="gameContents" style="display:none;">
         <div class="gameplayButtons">
-            <button onclick="buttonMoveLeft()"   class="interactiveButton" style="left:1.5vw;bottom:27vh;">&#8592;</button> 
-            <button onclick="buttonMoveRight()"  class="interactiveButton" style="left:10.5vw;bottom:27vh;">&#8594;</button> 
-            <button onclick="buttonMoveUp()"     class="interactiveButton" style="left:6vw;bottom:36vh;">&#8593;</button> 
-            <button onclick="buttonMoveDown()"   class="interactiveButton" style="left:6vw;bottom:18vh;">&#8595;</button> 
-            <button onclick="buttonRotate()"     class="interactiveButton" style="right:10.5vw;bottom:27vh;">Rotate (r)</button> 
-            <button onclick="buttonFlip()"       class="interactiveButton" style="right:6vw;bottom:36vh;">Flip (f)</button> 
-            <button onclick="buttonSwapType()"   class="interactiveButton" style="right:6vw;bottom:18vh;">Swap (t)</button> 
-            <button onclick="buttonPlacePiece()" class="interactiveButton" style="right:1.5vw;bottom:27vh;">Place (&#9166;)</button>
+            <button onclick="buttonMoveLeft()"   class="interactiveButton" id="leftButton" style="left:1.5vw;bottom:27vh;">&#8592;</button> 
+            <button onclick="buttonMoveRight()"  class="interactiveButton" id="rightButton" style="left:10.5vw;bottom:27vh;">&#8594;</button> 
+            <button onclick="buttonMoveUp()"     class="interactiveButton" id="upButton" style="left:6vw;bottom:36vh;">&#8593;</button> 
+            <button onclick="buttonMoveDown()"   class="interactiveButton" id="downButton" style="left:6vw;bottom:18vh;">&#8595;</button> 
+            <button onclick="buttonRotate()"     class="interactiveButton" id="rotateButton" style="right:10.5vw;bottom:27vh;">Rotate (r)</button> 
+            <button onclick="buttonFlip()"       class="interactiveButton" id="flipButton" style="right:6vw;bottom:36vh;">Flip (f)</button> 
+            <button onclick="buttonSwapType()"   class="interactiveButton" id="swapButton" style="right:6vw;bottom:18vh;">Swap (t)</button> 
+            <button onclick="buttonPlacePiece()" class="interactiveButton" id="placeButton" style="right:1.5vw;bottom:27vh;">Place (&#9166;)</button>
         </div>
         <div class="container scorecards_header">
             <div class="row flex-nowrap" style="text-align:center; color:white; overflow-x:auto;" >

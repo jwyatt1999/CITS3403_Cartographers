@@ -251,7 +251,8 @@ function startGame() {
     }
 
     if (window.location.pathname == "/game/test") {
-        seed = xmur3("testSeed");
+        //This seed is set for the purposes of testing. Games completed on this pathname don't have a score posted.
+        seed = xmur3("testseed");
     }
 
     //Initialize the pseudo-random number generator with the given seed.
@@ -394,25 +395,25 @@ function renderBoard(board) {
                     colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\" name=\"blocked\">2</td>";
                     break;
                 case FARM:
-                    colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\"><img src='/static/images/FarmIcon.png' alt='farm' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\" name=\"farm\"><img src='/static/images/FarmIcon.png' alt='farm' class='gameboard_icon'></td>";
                     break;
                 case FOREST:
-                    colourBoard += "<td style=\"color:green;background-color:green;outline:solid black thin;\"><img src='/static/images/ForestIcon.png' alt='forest' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:green;background-color:green;outline:solid black thin;\" name=\"forest\"><img src='/static/images/ForestIcon.png' alt='forest' class='gameboard_icon'></td>";
                     break;
                 case VILLAGE:
-                    colourBoard += "<td style=\"color:red;background-color:red;outline:solid black thin;\"><img src='/static/images/VillageIcon.png' alt='village' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:red;background-color:red;outline:solid black thin;\" name=\"village\"><img src='/static/images/VillageIcon.png' alt='village' class='gameboard_icon'></td>";
                     break;
                 case RIVER:
-                    colourBoard += "<td style=\"color:blue;background-color:blue;outline:solid black thin;\"><img src='/static/images/RiverIcon.png' alt='river' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:blue;background-color:blue;outline:solid black thin;\" name=\"river\"><img src='/static/images/RiverIcon.png' alt='river' class='gameboard_icon'></td>";
                     break;
                 case ENEMY:
-                    colourBoard += "<td style=\"color:purple;background-color:purple;outline:solid black thin;\"><img src='/static/images/EnemyIcon.png' alt='enemy' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:purple;background-color:purple;outline:solid black thin;\" name=\"enemy\"><img src='/static/images/EnemyIcon.png' alt='enemy' class='gameboard_icon'></td>";
                     break;
                 case OVERLAP:
                     colourBoard += "<td style=\"color:orange;background-color:orange;outline:solid black thin;\" name=\"overlap\"><img src='/static/images/OverlapIcon.png' alt='overlap' class='gameboard_icon'></td>";
                     break;
                 case MOUNTAIN_CLAIMED:
-                    colourBoard += "<td style=\"color:gray;background-color:gray;outline:solid black thin;\"><img src='/static/images/MountainClaimedIcon.png' alt='claimed mountain' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:gray;background-color:gray;outline:solid black thin;\" name=\"claimed_mountain\"><img src='/static/images/MountainClaimedIcon.png' alt='claimed mountain' class='gameboard_icon'></td>";
                     break;
             }
         }
@@ -970,9 +971,7 @@ function checkIfGameOver() {
             contentType:"application/json",
             data: JSON.stringify(s)
         });
-
         $("#gameOverModal").modal("toggle");
-
     } else {
         initializeExploreDeck();
         determineNumberOfCardsThisSeason();

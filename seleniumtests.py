@@ -87,22 +87,194 @@ class SystemTest(unittest.TestCase):
             db.session.commit()
             db.session.remove()
 
-    #...
+    #Test that the various game functions work as expected
     def test_gameFunction(self):
-        #start at main page
-        #if there is a button that says 'Logout' then press that button
-        #press button that says 'Login'
-        #enter the username 'test' and password 'testPass' and click the button that says 'Sign In'
-        #navigate to /game/test (which has a set seed)
-        #confirm scorecards are correct
-        #move and change the season 1 pieces using on-screen buttons, check the points match up with the expected points, if not then something failed
-            #test surrounding mountains and gaining a coin
-            #test gaining coins from pieces
-            #test losing points from enemies
-        #move and change the season 2 and 3 pieces using arrow keys and letters, check the points match up with the expected points at the end of each season, if not then something failed
-            #test placing pieces in illegal places (trying to move it off the board, placing it over other pieces, trying to rotate it off the board)
-        #ensure a button is shown that says 'start new freeplay game'
-        self.assertEqual(Scorelist.query.count(), 3)
+        #Login
+        self.driver.get('http://127.0.0.1:5000/login')
+        self.driver.implicitly_wait(5)
+        username_form = self.driver.find_element_by_id('usernameForm')
+        username_form.send_keys('test1')   
+        password_form = self.driver.find_element_by_id('passwordForm')
+        password_form.send_keys('testPass1')
+        self.driver.implicitly_wait(5)
+        sign_in_button = self.driver.find_element_by_id('signInButton')
+        sign_in_button.click()
+        self.driver.implicitly_wait(5)
+        #Check that we are logged in
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/")
+        #Go to test game page
+        self.driver.get('http://127.0.0.1:5000/game/test')
+        self.driver.implicitly_wait(5)
+        #Confirm scorecards match expected scorecards given the set seed
+        scorecard1 = self.driver.find_element_by_id('scoreCard1').text
+        scorecard2 = self.driver.find_element_by_id('scoreCard2').text
+        scorecard3 = self.driver.find_element_by_id('scoreCard3').text
+        scorecard4 = self.driver.find_element_by_id('scoreCard4').text
+        self.assertEqual(scorecard1, "Wildholds")
+        self.assertEqual(scorecard2, "Faunlost Thicket")
+        self.assertEqual(scorecard3, "Mages Valley")
+        self.assertEqual(scorecard4, "Borderlands")
+        leftButton = self.driver.find_element_by_id('leftButton')
+        rightButton = self.driver.find_element_by_id('rightButton')
+        upButton = self.driver.find_element_by_id('upButton')
+        downButton = self.driver.find_element_by_id('downButton')
+        rotateButton = self.driver.find_element_by_id('rotateButton')
+        flipButton = self.driver.find_element_by_id('flipButton')
+        swapButton = self.driver.find_element_by_id('swapButton')
+        placeButton = self.driver.find_element_by_id('placeButton')
+        #Confirm this season has 4 cards
+        cards = self.driver.find_element_by_id('cardsRemaining1').text
+        self.assertEqual(cards, "Cards remaining: 4")
+        #Season 1 - Piece 1
+        rotateButton.click()
+        leftButton.click()
+        upButton.click()
+        placeButton.click()
+        #Season 1 - Piece 2
+        flipButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        upButton.click()
+        upButton.click()
+        placeButton.click()
+        #One of the mountains has been fully surrounded so there should be a claimed mountain on the gameboard
+        claimedMountains = len(self.driver.find_elements_by_name('claimed_mountain'))
+        self.assertTrue(claimedMountains == 1)
+        #Claiming the mountain should have granted the player a coin
+        coins = self.driver.find_element_by_id('playerCoins').text
+        self.assertEqual(coins, "Coins: 1")
+        #Season 1 - Piece 3
+        swapButton.click()
+        downButton.click()
+        placeButton.click()
+        #This piece should have granted us a coin since we swapped it's type (and it's alt property was 'shape')
+        coins = self.driver.find_element_by_id('playerCoins').text
+        self.assertEqual(coins, "Coins: 2")
+        #Season 1 - Piece 4
+        swapButton.click()
+        downButton.click()
+        downButton.click()
+        leftButton.click()
+        leftButton.click()
+        placeButton.click()
+        #We should have scored 8 points from the Wildholds scorecard and 2 points from our coins
+        points = self.driver.find_element_by_id('playerPoints').text
+        self.assertEqual(points, "Points: 10")
+        #Confirm this season has 5 cards
+        cards = self.driver.find_element_by_id('cardsRemaining2').text
+        self.assertEqual(cards, "Cards remaining: 5")
+        #Season 2 - Piece 1
+        #Attempt to place the piece in an illegal position 
+        placeButton.click()
+        #Confirm the piece was not placed and there are still 5 cards remaining this season
+        cards = self.driver.find_element_by_id('cardsRemaining2').text
+        self.assertEqual(cards, "Cards remaining: 5")
+        rightButton.click()
+        rightButton.click()
+        placeButton.click()
+        #Season 2 - Piece 2
+        #Attempt to move the piece off the bottom of the board
+        downButton.click()
+        downButton.click()
+        downButton.click()
+        downButton.click()
+        downButton.click()
+        downButton.click()
+        #Verify that the piece (which is the only farm square) is still located on the board
+        farms = len(self.driver.find_elements_by_name('farm'))
+        self.assertTrue(farms == 1)
+        placeButton.click()
+        #Season 2 - Piece 3
+        downButton.click()
+        downButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        placeButton.click()
+        #Season 2 - Piece 4
+        upButton.click()
+        upButton.click()
+        upButton.click()
+        rightButton.click()
+        placeButton.click()
+        #Season 2 - Piece 5
+        rightButton.click()
+        rightButton.click()
+        rightButton.click()
+        upButton.click()
+        upButton.click()
+        upButton.click()
+        upButton.click()
+        #Attempt to rotate the piece off of the board (since this piece is a long line with the pivot at one end)
+        rotateButton.click()
+        rotateButton.click()
+        #Verify that the piece has been translated back onto the board until it is entirely on the board
+        rivers = len(self.driver.find_elements_by_name('river'))
+        self.assertTrue(rivers == 12)
+        placeButton.click()
+        #We should have scored 6 points from the Faunlost Thicket scorecard and 2 points from our coins
+        points = self.driver.find_element_by_id('playerPoints').text
+        self.assertEqual(points, "Points: 18")
+        #Confirm this season has 3 cards
+        cards = self.driver.find_element_by_id('cardsRemaining3').text
+        self.assertEqual(cards, "Cards remaining: 3")
+        #Season 3 - Piece 1
+        #Attempt to place the piece (twice) in an illegal position 
+        placeButton.click()
+        placeButton.click()
+        #Confirm the piece was not placed and there are still 3 cards remaining this season
+        cards = self.driver.find_element_by_id('cardsRemaining3').text
+        self.assertEqual(cards, "Cards remaining: 3")
+        rotateButton.click()
+        downButton.click()
+        downButton.click()
+        downButton.click()
+        rightButton.click()
+        rightButton.click()
+        swapButton.click()
+        placeButton.click()
+        #This piece should have granted us a coin since we swapped it's type (and it's alt property was 'shape')
+        coins = self.driver.find_element_by_id('playerCoins').text
+        self.assertEqual(coins, "Coins: 3")
+        #Season 3 - Piece 2
+        rightButton.click()
+        rightButton.click()
+        upButton.click()
+        upButton.click()
+        placeButton.click()
+        #The second mountain has been fully surrounded so there should be 2 claimed mountains on the gameboard
+        claimedMountains = len(self.driver.find_elements_by_name('claimed_mountain'))
+        self.assertTrue(claimedMountains == 2)
+        #Claiming the mountain should have granted the player a coin
+        coins = self.driver.find_element_by_id('playerCoins').text
+        self.assertEqual(coins, "Coins: 4")
+        #Season 3 - Piece 3
+        #Attempt to move the piece off the left-side of the board
+        rotateButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        leftButton.click()
+        #Verify that the piece is still located on the board
+        forests = len(self.driver.find_elements_by_name('forest'))
+        self.assertTrue(forests == 15)
+        placeButton.click()
+        #We should have scored 6 points from the Mages Valley scorecard, 12 points from the Borderlands scorecard, and 4 points from our coins
+        points = self.driver.find_element_by_id('playerPoints').text
+        self.assertEqual(points, "Points: 40")
+        #Confirm that the game over modal has appeared with a button to start a new freeplay game. Confirm the button works
+        freeplayGameButton = self.driver.find_element_by_link_text('Start New Freeplay Game!')
+        freeplayGameButton.click()
+        self.driver.implicitly_wait(5)
+        #Confirm we have been redirected to freeplay game
+        self.assertEqual(self.driver.current_url, "http://127.0.0.1:5000/game/freeplay")
+        return
     
     #Test that the random initial gameboard has the correct features 
     def test_gameGeneration(self):       
