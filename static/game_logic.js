@@ -103,9 +103,7 @@ window.onload = (event) => {
         startGame();
     } 
     else if (window.location.pathname == "/leaderboard") {
-        let date = getDate();
-        let rearrangedDate = date.slice(6,10) + '-' + date.slice(3,5) + '-' + date.slice(0,2)
-        document.getElementById("leaderboard_daily_date").value = rearrangedDate;
+        document.getElementById("leaderboard_daily_date").value = getDate();
         postDate()
     } 
 };

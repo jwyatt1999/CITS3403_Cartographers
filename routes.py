@@ -115,4 +115,4 @@ def logout():
 @login_required
 def get_date():
     currentDate = datetime.now()
-    return currentDate.strftime("%d/%m/%Y")
+    return currentDate.strftime("%Y-%m-%d")
