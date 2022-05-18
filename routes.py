@@ -40,21 +40,11 @@ def credits():
 @login_required
 def user(username):
     user = current_user
-    total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()
-    total_games = Scorecard.query.filter(Scorecard.uname == user.username).count()
-
-    freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()
-    freeplay_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).count()
-    freeplay_highscore = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
-
-    daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()
-    daily_games = Scorecard.query.filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).count()
-    daily_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
-
-    scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
-    scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.scorelist_id == user.scorelists.id).order_by(Scorecard.date.desc())
-    return render_template('profile_page.html', user=user, score_freeplay = scores_freeplay, score_daily = scores_daily, total_avg=total_avg, total_games=total_games, 
-    freeplay_avg=freeplay_avg, freeplay_games=freeplay_games, daily_avg=daily_avg, daily_games=daily_games, freeplay_highscore=freeplay_highscore, daily_highscore=daily_highscore)
+    total_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0],2)
+    freeplay_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0],2)
+    daily_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0],2)
+    
+    return render_template('profile_page.html', user=user, total_avg=total_avg, freeplay_avg=freeplay_avg, daily_avg=daily_avg)
 
 @app.route('/leaderboard')
 @login_required

@@ -25,6 +25,18 @@ class User(UserMixin, db.Model):
     @login.user_loader
     def load_user(id):
         return User.query.get(int(id))
+    
+    def daily_scorecards(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 1).order_by(Scorecard.date.desc())
+    
+    def freeplay_scorecards(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.date.desc())
+    
+    def daily_highscore(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 1).order_by(Scorecard.score.desc()).first()
+
+    def freeplay_highscore(self):
+        return self.scorelists.scorecards.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).first()
 
 class Scorecard(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,13 +48,9 @@ class Scorecard(db.Model):
 
     def __repr__(self):
         return "{} scored {} points on {}".format(self.uname, self.score, self.date)
-
+    
 
 class Scorelist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     scorecards = db.relationship('Scorecard', backref='scorelist', lazy='dynamic')
-
-
-
-
