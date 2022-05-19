@@ -992,16 +992,3 @@ function shuffle (array) {
     }
     return array;
 }
-
-/**
- * Query the server to get the local date
- * @returns The date as a string in the format dd/mm/yyyy
- */
-function getDate() {
-    let date = $.ajax({
-        url:"/get_date",
-        type:"GET",
-        async:false
-    });
-    return date.responseText.toString();
-}

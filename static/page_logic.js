@@ -17,6 +17,10 @@ function postDate(){
     document.getElementById("leaderboard_daily_date").value = date;
 }
 
+/**
+ * Query the server to get the local date
+ * @returns The date as a string in the format dd/mm/yyyy
+ */
 function getDate() {
     let date = $.ajax({
         url:"/get_date",

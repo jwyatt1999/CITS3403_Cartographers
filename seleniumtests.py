@@ -50,9 +50,15 @@ class SystemTest(unittest.TestCase):
             s3_1 =  Scorecard(score=10, uname=u3.username, scorelist_id=u3.scorelists.id, type=1)
             s3_2 =  Scorecard(score=10, uname=u3.username, scorelist_id=u3.scorelists.id, type=1)
             s3_3 =  Scorecard(score=40, uname=u3.username, scorelist_id=u3.scorelists.id, type=1)
-            s3_4 = Scorecard(score=25, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
-            s3_5 = Scorecard(score=30, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
-            s3_6 = Scorecard(score=50, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
+            s3_4 =  Scorecard(score=20, uname=u3.username, scorelist_id=u3.scorelists.id, type=1)
+            s3_5 =  Scorecard(score=30, uname=u3.username, scorelist_id=u3.scorelists.id, type=1)
+            s3_6 =  Scorecard(score=45, uname=u3.username, scorelist_id=u3.scorelists.id, type=1)
+            s3_7 =  Scorecard(score=10, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
+            s3_8 =  Scorecard(score=10, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
+            s3_9 =  Scorecard(score=40, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
+            s3_10 =  Scorecard(score=20, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
+            s3_11 =  Scorecard(score=30, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
+            s3_12 =  Scorecard(score=45, uname=u3.username, scorelist_id=u3.scorelists.id, type=2)
             db.session.add(s1_1)
             db.session.add(s1_2)
             db.session.add(s1_3)
@@ -71,6 +77,12 @@ class SystemTest(unittest.TestCase):
             db.session.add(s3_4)
             db.session.add(s3_5)
             db.session.add(s3_6)
+            db.session.add(s3_7)
+            db.session.add(s3_8)
+            db.session.add(s3_9)
+            db.session.add(s3_10)
+            db.session.add(s3_11)
+            db.session.add(s3_12)
             db.session.commit()
             self.driver.maximize_window()
             self.driver.get('http://127.0.0.1:5000/')
@@ -337,8 +349,9 @@ class SystemTest(unittest.TestCase):
         daily_highestScore = self.driver.find_elements_by_name('dailyScore')[0].text[0:25]
         daily_scoreCount = len(self.driver.find_elements_by_name('dailyScore'))
         daily_myHighestAttempt = self.driver.find_element_by_id('leaderboard_dailyHighscore').text[0:25]
-        self.assertEqual(daily_highestScore, "test3 scored 40 points on")
-        self.assertEqual(daily_scoreCount, 9)
+        self.assertEqual(daily_highestScore, "test3 scored 45 points on")
+        #Despite 12 daily scores existing in the database, only the top 10 should be displayed on the page
+        self.assertEqual(daily_scoreCount, 10)
         self.assertEqual(daily_myHighestAttempt, "test1 scored 15 points on")
         #Click on the freeplay tab to display the leaderboard's freeplay scores
         freeplay_tab = self.driver.find_element_by_id('freeplay-tab')
@@ -348,8 +361,9 @@ class SystemTest(unittest.TestCase):
         freeplay_highestScore = self.driver.find_elements_by_name('freeplayScore')[0].text[0:25]
         freeplay_scoreCount = len(self.driver.find_elements_by_name('freeplayScore'))
         freeplay_myHighestAttempt = self.driver.find_element_by_id('leaderboard_freeplayHighscore').text[0:25]
-        self.assertEqual(freeplay_highestScore, "test3 scored 50 points on")
-        self.assertEqual(freeplay_scoreCount, 9)
+        self.assertEqual(freeplay_highestScore, "test2 scored 45 points on")
+        #Despite 12 freeplay scores existing in the database, only the top 10 should be displayed on the page
+        self.assertEqual(freeplay_scoreCount, 10)
         self.assertEqual(freeplay_myHighestAttempt, "test1 scored 30 points on")
         return
 
