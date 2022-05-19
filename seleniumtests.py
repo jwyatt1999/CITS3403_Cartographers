@@ -336,24 +336,24 @@ class SystemTest(unittest.TestCase):
         #Navigate to leaderboard page
         self.driver.get('http://127.0.0.1:5000/leaderboard')
         self.driver.implicitly_wait(5)
-        #Check daily scores and this user's highest daily attempt
-        daily_highestScore = self.driver.find_elements_by_name('dailyScore')[0].text
+        #Check daily scores and this user's highest daily attempt. Only use first 25 characters because next characters are the date (which will vary)
+        daily_highestScore = self.driver.find_elements_by_name('dailyScore')[0].text[0:25]
         daily_scoreCount = len(self.driver.find_elements_by_name('dailyScore'))
-        daily_myHighestAttempt = self.driver.find_element_by_id('leaderboard_dailyHighscore').text
-        self.assertEqual(daily_highestScore, "test3 scored 40 points on 2022-05-18")
+        daily_myHighestAttempt = self.driver.find_element_by_id('leaderboard_dailyHighscore').text[0:25]
+        self.assertEqual(daily_highestScore, "test3 scored 40 points on")
         self.assertEqual(daily_scoreCount, 9)
-        self.assertEqual(daily_myHighestAttempt, "test1 scored 15 points on 2022-05-18")
+        self.assertEqual(daily_myHighestAttempt, "test1 scored 15 points on")
         #Click on the freeplay tab to display the leaderboard's freeplay scores
         freeplay_tab = self.driver.find_element_by_id('freeplay-tab')
         freeplay_tab.click()
         self.driver.implicitly_wait(5)
-        #Check freeplay scores and this user's highest freeplay attempt
-        freeplay_highestScore = self.driver.find_elements_by_name('freeplayScore')[0].text
+        #Check freeplay scores and this user's highest freeplay attempt. Only use first 25 characters because next characters are the date (which will vary)
+        freeplay_highestScore = self.driver.find_elements_by_name('freeplayScore')[0].text[0:25]
         freeplay_scoreCount = len(self.driver.find_elements_by_name('freeplayScore'))
-        freeplay_myHighestAttempt = self.driver.find_element_by_id('leaderboard_freeplayHighscore').text
-        self.assertEqual(freeplay_highestScore, "test3 scored 50 points on 2022-05-18")
+        freeplay_myHighestAttempt = self.driver.find_element_by_id('leaderboard_freeplayHighscore').text[0:25]
+        self.assertEqual(freeplay_highestScore, "test3 scored 50 points on")
         self.assertEqual(freeplay_scoreCount, 9)
-        self.assertEqual(freeplay_myHighestAttempt, "test1 scored 30 points on 2022-05-18")
+        self.assertEqual(freeplay_myHighestAttempt, "test1 scored 30 points on")
         return
 
     #Test that the login and logout functionality works as expected
@@ -411,11 +411,12 @@ class SystemTest(unittest.TestCase):
         #Check daily total, average, highscore, and score count
         daily_total = self.driver.find_element_by_id('profile_dailyTotal').text
         daily_avg = self.driver.find_element_by_id('profile_dailyAvg').text
-        daily_highscore = self.driver.find_element_by_id('profile_dailyHighscore').text
+        #Only use first 25 characters because next characters are the date (which will vary)
+        daily_highscore = self.driver.find_element_by_id('profile_dailyHighscore').text[0:25]
         daily_scoreCount = len(self.driver.find_elements_by_name('dailyScore'))
         self.assertEqual(daily_total, "Total number of dailies completed: 3")
         self.assertEqual(daily_avg, "Your daily average points: 10.00")
-        self.assertEqual(daily_highscore, "test1 scored 15 points on 2022-05-18")
+        self.assertEqual(daily_highscore, "test1 scored 15 points on")
         self.assertEqual(daily_scoreCount, 3)
         #Click on the freeplay tab to display the user's freeplay scores
         freeplay_tab = self.driver.find_element_by_id('freeplay-tab')
@@ -424,11 +425,12 @@ class SystemTest(unittest.TestCase):
         #Check freeplay total, average, highscore, and score count
         freeplay_total = self.driver.find_element_by_id('profile_freeplayTotal').text
         freeplay_avg = self.driver.find_element_by_id('profile_freeplayAvg').text
-        freeplay_highscore = self.driver.find_element_by_id('profile_freeplayHighscore').text
+        #Only use first 25 characters because next characters are the date (which will vary)
+        freeplay_highscore = self.driver.find_element_by_id('profile_freeplayHighscore').text[0:25]
         freeplay_scoreCount = len(self.driver.find_elements_by_name('freeplayScore'))
         self.assertEqual(freeplay_total, "Total number of freeplay games played: 3")
         self.assertEqual(freeplay_avg, "Your freeplay average points: 25.00")
-        self.assertEqual(freeplay_highscore, "test1 scored 30 points on 2022-05-18")
+        self.assertEqual(freeplay_highscore, "test1 scored 30 points on")
         self.assertEqual(freeplay_scoreCount, 3)
         return
 
