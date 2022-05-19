@@ -24,7 +24,7 @@ def game(type):
             db.session.add(new_scorecard)
             db.session.commit()
         elif type == 'freeplay':
-            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type = 2)
+            new_scorecard = Scorecard(score=output, uname=user.username, scorelist_id=user.scorelists.id, type=2)
             db.session.add(new_scorecard)
             db.session.commit()
 
@@ -40,10 +40,18 @@ def credits():
 @login_required
 def user(username):
     user = current_user
-    total_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0],2)
-    freeplay_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0],2)
-    daily_avg = round(Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0],2)
-    
+    total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0]
+    if total_avg == None:
+        total_avg = 0.00
+    total_avg = "{:.2f}".format(total_avg)
+    freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0]
+    if freeplay_avg == None:
+        freeplay_avg = 0.00
+    freeplay_avg = "{:.2f}".format(freeplay_avg)
+    daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0]
+    if daily_avg == None:
+        daily_avg = 0.00
+    daily_avg = "{:.2f}".format(daily_avg)
     return render_template('profile_page.html', user=user, total_avg=total_avg, freeplay_avg=freeplay_avg, daily_avg=daily_avg)
 
 @app.route('/leaderboard')
@@ -107,4 +115,4 @@ def logout():
 @login_required
 def get_date():
     currentDate = datetime.now()
-    return currentDate.strftime("%d/%m/%Y")
+    return currentDate.strftime("%Y-%m-%d")

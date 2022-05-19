@@ -93,12 +93,18 @@ document.onkeydown = function(e) {
 };
 
 /**
- * When the game page has finished loading, start the game!
+ * Onload handler for game page and leaderboard page.
+ * Game page: When the game page has finished loading, start the game!
+ * Leaderboard page: When the leaderboard page has finished loading, initialize the date form with the current date
  * @param {*} event 
  */
 window.onload = (event) => {
-    if (window.location.pathname == "/game/daily" || window.location.pathname == "/game/freeplay") {
+    if (window.location.pathname == "/game/daily" || window.location.pathname == "/game/freeplay" || window.location.pathname == "/game/test") {
         startGame();
+    } 
+    else if (window.location.pathname == "/leaderboard") {
+        document.getElementById("leaderboard_daily_date").value = getDate();
+        postDate()
     } 
 };
 
@@ -238,12 +244,13 @@ function startGame() {
 
     //If this is a daily game, overwrite the seed for the pseudo-random number generator with the current date (from the server).
     if (window.location.pathname == "/game/daily") {
-        let serverDate = $.ajax({
-            url:"/get_date",
-            type:"GET",
-            async:false
-        });
-        seed = xmur3(serverDate.responseText.toString());
+        let serverDate = getDate();
+        seed = xmur3(serverDate);
+    }
+
+    if (window.location.pathname == "/game/test") {
+        //This seed is set for the purposes of testing. Games completed on this pathname don't have a score posted.
+        seed = xmur3("testseed");
     }
 
     //Initialize the pseudo-random number generator with the given seed.
@@ -380,31 +387,31 @@ function renderBoard(board) {
                     colourBoard += "<td style=\"color:white;background-color:white;\">0</td>";
                     break;
                 case MOUNTAIN:
-                    colourBoard += "<td style=\"color:brown;background-color:brown;outline:solid black thin;\"><img src='/static/images/MountainIcon.png' alt='mountain' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:brown;background-color:brown;outline:solid black thin;\" name=\"mountain\"><img src='/static/images/MountainIcon.png' alt='mountain' class='gameboard_icon'></td>";
                     break;
                 case BLOCKED:
-                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\">2</td>";
+                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\" name=\"blocked\">2</td>";
                     break;
                 case FARM:
-                    colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\"><img src='/static/images/FarmIcon.png' alt='farm' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\" name=\"farm\"><img src='/static/images/FarmIcon.png' alt='farm' class='gameboard_icon'></td>";
                     break;
                 case FOREST:
-                    colourBoard += "<td style=\"color:green;background-color:green;outline:solid black thin;\"><img src='/static/images/ForestIcon.png' alt='forest' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:green;background-color:green;outline:solid black thin;\" name=\"forest\"><img src='/static/images/ForestIcon.png' alt='forest' class='gameboard_icon'></td>";
                     break;
                 case VILLAGE:
-                    colourBoard += "<td style=\"color:red;background-color:red;outline:solid black thin;\"><img src='/static/images/VillageIcon.png' alt='village' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:red;background-color:red;outline:solid black thin;\" name=\"village\"><img src='/static/images/VillageIcon.png' alt='village' class='gameboard_icon'></td>";
                     break;
                 case RIVER:
-                    colourBoard += "<td style=\"color:blue;background-color:blue;outline:solid black thin;\"><img src='/static/images/RiverIcon.png' alt='river' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:blue;background-color:blue;outline:solid black thin;\" name=\"river\"><img src='/static/images/RiverIcon.png' alt='river' class='gameboard_icon'></td>";
                     break;
                 case ENEMY:
-                    colourBoard += "<td style=\"color:purple;background-color:purple;outline:solid black thin;\"><img src='/static/images/EnemyIcon.png' alt='enemy' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:purple;background-color:purple;outline:solid black thin;\" name=\"enemy\"><img src='/static/images/EnemyIcon.png' alt='enemy' class='gameboard_icon'></td>";
                     break;
                 case OVERLAP:
-                    colourBoard += "<td style=\"color:orange;background-color:orange;outline:solid black thin;\"><img src='/static/images/OverlapIcon.png' alt='overlap' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:orange;background-color:orange;outline:solid black thin;\" name=\"overlap\"><img src='/static/images/OverlapIcon.png' alt='overlap' class='gameboard_icon'></td>";
                     break;
                 case MOUNTAIN_CLAIMED:
-                    colourBoard += "<td style=\"color:gray;background-color:gray;outline:solid black thin;\"><img src='/static/images/MountainClaimedIcon.png' alt='claimed mountain' class='gameboard_icon'></td>";
+                    colourBoard += "<td style=\"color:gray;background-color:gray;outline:solid black thin;\" name=\"claimed_mountain\"><img src='/static/images/MountainClaimedIcon.png' alt='claimed mountain' class='gameboard_icon'></td>";
                     break;
             }
         }
@@ -586,12 +593,22 @@ function checkCurrentPieceCanBePlaced() {
         }
     }
     if (!ableToBePlaced_default && ableToBePlaced_alt) {
+        //can only use altShape, which always grants a coin
         currentPiece.shape = currentPiece.altShape;
+        currentPiece.coin = true;
     } else if (ableToBePlaced_default && !ableToBePlaced_alt) {
-        if (currentPiece.alt == "shape") {currentPiece.altShape = currentPiece.shape;}
+        if (currentPiece.alt == "shape") {
+            //can only use defaultShape, which never grants a coin
+            currentPiece.altShape = currentPiece.shape;
+            currentPiece.coin = false;
+        }
     } else if (!ableToBePlaced_default && !ableToBePlaced_alt) {
+        //cannot use altShape or defaultShape so player can only place a 1x1 square which never grants a coin
         currentPiece.shape = [[0,0]];
-        if (currentPiece.alt == "shape") {currentPiece.altShape = [[0,0]];}
+        if (currentPiece.alt == "shape") {
+            currentPiece.altShape = currentPiece.shape;
+        }
+        currentPiece.coin = false;
     }
 }
 
@@ -755,11 +772,15 @@ function flipPiece(piece) {
  */
 function swapPieceType(piece) {
     if (piece.alt == "shape") {
-        let temp = piece.altShape;
-        piece.altShape = piece.shape;
-        piece.shape = temp;
-        //Only pieces that change shape can grant coins. Only their starting alternative shape grants a coin.
-        piece.coin = !piece.coin;
+        //If shape and altShape are the same then the ability for the piece to grant a coin has been determined in 
+        //checkCurrentPieceCanBePlaced(), and shouldn't be changed
+        if (piece.shape != piece.altShape) {
+            let temp = piece.altShape;
+            piece.altShape = piece.shape;
+            piece.shape = temp;
+            //Only pieces that change shape can grant coins. Only their starting alternative shape grants a coin.
+            piece.coin = !piece.coin;
+        }
     } else if (piece.alt == "type") {
         let temp = piece.altType;
         piece.altType = piece.type;
@@ -948,9 +969,7 @@ function checkIfGameOver() {
             contentType:"application/json",
             data: JSON.stringify(s)
         });
-
         $("#gameOverModal").modal("toggle");
-
     } else {
         initializeExploreDeck();
         determineNumberOfCardsThisSeason();
@@ -972,4 +991,17 @@ function shuffle (array) {
         [array[currentIndex], array[randomIndex]] = [array[randomIndex],array[currentIndex]];
     }
     return array;
+}
+
+/**
+ * Query the server to get the local date
+ * @returns The date as a string in the format dd/mm/yyyy
+ */
+function getDate() {
+    let date = $.ajax({
+        url:"/get_date",
+        type:"GET",
+        async:false
+    });
+    return date.responseText.toString();
 }
