@@ -14,7 +14,10 @@ Users are encouraged to achieve the highest score they can to place on the leade
 
 **Design**
 
-The game component of the application was based on the board game "Cartographers: A Roll Player Tale", with some simplifications. 
+The game component of the application was based on the board game "Cartographers: A Roll Player Tale", with some simplifications.
+
+There are two game modes: daily and freeplay. Daily mode uses a set seed that changes daily, this allows users to compare their performance to
+others on a level field. Freeplay mode uses a randomised seed and is designed for users to try achieve their personal highscore.
 
 The architecture was designed to be as shallow as possible so that it is easy to navigate from one page to any other page in just a few button clicks.
 
