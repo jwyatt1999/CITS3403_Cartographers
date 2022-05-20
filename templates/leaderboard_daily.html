@@ -1,11 +1,11 @@
 <h1>Daily Highscores</h1>
-<label for="selection">Select date:</label>
-<input id='leaderboard_daily_date' type="date" value="2022-05-01">
-<button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
+<input type="date" id='leaderboard_daily_date' value="2022-05-01">
+<label for="leaderboard_daily_date">Select date:</label>
+<button id ="submit_btn" type="button" onclick="postDate()">Submit</button>
 <br>
 <ul>
 {% for score in score_daily %}
-    <li class="list-group-item" name="dailyScore">{{ score }}</li>
+    <li class="list-group-item leaderboard-text dailyScore">{{ score }}</li>
 {% endfor %}
 </ul>
 <br>
