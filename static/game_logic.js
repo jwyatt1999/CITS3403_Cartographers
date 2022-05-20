@@ -104,7 +104,7 @@ window.onload = (event) => {
     } 
     else if (window.location.pathname == "/leaderboard") {
         document.getElementById("leaderboard_daily_date").value = getDate();
-        postDate()
+        postDate();
     } 
 };
 
@@ -480,7 +480,7 @@ function determineNumberOfCardsThisSeason() {
 }
 
 /**
- * Create the set of ambush cards by adding the base 4 pre-determined (for now) cards and shuffling.
+ * Create the set of ambush cards by adding the 4 base cards and shuffling.
  */
 function initializeAmbushCards() {
     ambushCards = [];
@@ -492,7 +492,7 @@ function initializeAmbushCards() {
 }
 
 /**
- * Create the explore deck by adding the base 10 pre-determined (for now) cards and shuffling.
+ * Create the explore deck by adding the 10 base cards and shuffling.
  */
 function initializeExploreDeck() {
     exploreDeck = [];
@@ -624,7 +624,7 @@ function checkCurrentPieceLegallyPlaced() {
             let y_coord_block = currentPiece.shape[blockNumber][0] + currentPiece.location[0];
             if (x_coord_block < 0) {
                 currentPiece.location[1]++;
-                //The for loop is broken after each translation to prevent the block being moved back (eg.) 3 spaces
+                //The for loop is broken after each translation to prevent the block being moved back (for example) 3 spaces
                 //if it had 3 blocks out of bounds but the piece would be within the bounds after 1 translation.
                 continue;
             }
@@ -690,7 +690,7 @@ function placeAmbushCard () {
 }
 
 /**
- * Renders the location of the given piece on the current game board without altering the current game board.
+ * Renders the location of the given piece on the current game board without altering the current (stored) game board.
  * @param {*} piece The piece to render
  */
 function renderPiece(piece) {
@@ -766,7 +766,7 @@ function flipPiece(piece) {
 }
 
 /**
- * Swaps the piece type, which either means the shape of the piece is changed or the type of block it places.
+ * Swaps the piece type, which either means the shape of the piece is changed or it's terrain type is changed.
  * @param {*} piece The piece which will have it's type swapped
  */
 function swapPieceType(piece) {
@@ -786,7 +786,7 @@ function swapPieceType(piece) {
         piece.type = temp;
     } else if (piece.alt == "rift") {
         let temp = piece.altType;
-        //For rift pieces, the type moves through FARM (3), FOREST (4), VILLAGE (5), and RIVER (6), then repeats
+        //For rift pieces, the type moves through FARM (3), FOREST (4), VILLAGE (5), and RIVER (6), then cycles
         piece.altType = (piece.altType - 2) % 4 + 3;
         piece.type = temp;
     }
