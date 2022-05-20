@@ -257,7 +257,6 @@ function startGame() {
     rand = mulberry32(seed());
    
     document.getElementById("gameContents").style.display = 'block';
-    document.getElementById("startButton").hidden = true;
 
     gameBoard = [
         [0,0,0,0,0,0,0,0],

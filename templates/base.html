@@ -32,7 +32,7 @@
 
             <div class="d-lg-flex">
                     <!--Cartographers branding and initials on top left of page-->
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand nav-home" href="/">
                     <!--Source: https://www.pinterest.es/pin/296463587957508615/-->
                     <img src="{{url_for('static', filename = 'images/scroll_icon_mainpage.png')}}" alt="scroll" width="45" height="45" class="d-inline-block align-text-top">
                     Home
@@ -46,17 +46,16 @@
                 <!--Menu that contains links to Credits, Rules, Leaderboard and Login/Logout Button-->
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="{{url_for('credits')}}">Credits</a>
-                        <a class="nav-link" href="{{url_for('rules')}}">Rules</a>
-                        <a class="nav-link" href="{{url_for('leaderboard')}}">Leaderboard</a>
+                        <a class="nav-link nav-credits" href="{{url_for('credits')}}">Credits</a>
+                        <a class="nav-link nav-rules" href="{{url_for('rules')}}">Rules</a>
+                        <a class="nav-link nav-leaderboard" href="{{url_for('leaderboard')}}">Leaderboard</a>
                         {% if user.is_authenticated %}
-                        <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+                        <a class="nav-link nav-logout" href="{{url_for('logout')}}">Logout</a>
                         {% else %}
-                        <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                        <a class="nav-link nav-login" href="{{url_for('login')}}">Login</a>
                         {% endif %}
                     </div>
                 </div>
-
             </div>
             
             <!--Profile Button-->
@@ -74,7 +73,7 @@
 
     <!--Main Area-->
 
-	<!--Bg image source: https://pngtree.com/freebackground/vintage-paper-background-with-old-map-and-compas_1365792.html-->
+	<!--Bg image source: https://wallpaperaccess.com/parchment -->
     <section class="bgimage" id="main">
 		<div class="container-fluid">
             {% block content %}
