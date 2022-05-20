@@ -1,101 +1,143 @@
 # CITS3403_Cartographers
-CITS3403 Project - Josh Wyatt (jwyatt, 22601159) &amp; Joo Kai Tay (Bsubs)
+CITS3403 Project - Josh Wyatt (@jwyatt1999, 22601159) &amp; Joo Kai Tay (@Bsubs, 22489437)
 
-# Link to Deployed Website:
+## Link to Deployed Website
 https://afternoon-castle-17520.herokuapp.com/
 
-## Steps to Deploy:
-1. Before starting, ensure you have the Heroku CLI installed, available here: https://cli-assets.heroku.com/heroku-x64.exe
-2. Checkout main and pull all changes
-3. Open Git Bash and `cd` your way to your local CITS3403_Cartographers files
-4. Use `git push heroku main`
-5. Use `heroku ps:scale web=1`, it should say "Scaling dynos... done, now running web at 1:Free"
-6. Use `heroku open` and confirm the website is running, if it is broken then use `heroku logs` and figure out what caused the crash
+## Purpose and Design of the Application
 
-# Rough Timeline:
+**Purpose**
 
-**Weeks 5 to 7 (28/03 - 17/04)**: Sprint 1 (3 weeks, Get prototype up and deployed online that has all functionality except account creation and login - Spend few days testing to identify bugs and ways to improve)
+The purpose of the application is to provide a daily puzzle that challenges users to think and plan strategically.
 
-**Weeks 8 to 10 (18/04 - 08/05)**: Sprint 2 (3 weeks, CONFIRM WHAT ELSE WE MUST DO TO MEET THE MINIMUM REQUIREMENTS FOR THE PROJECT, Iterate on prototype and add user creation and login functionality and any other functionality we wish to add, add unit tests - Spend few days testing to identify bugs and ways to improve)
+Users are encouraged to achieve the highest score they can to place on the leaderboard, which all registered users can see.
 
-**Weeks 11 to 12 (09/05-22/05)**: Sprint 3 (2 weeks, Iterate on prototype and clean up any bugs - This process will involve lots of testing, Update readme to meet the requirements specified on the project page)
+**Design**
 
-**Week 13 (23/05): Project Due 12pm**
+The game component of the application was based on the board game "Cartographers: A Roll Player Tale", with some simplifications.
 
-# Start-of-Sprint Steps:
-1. Remember to consider big picture / goal
-2. Reflect on progress so far, estimates for remaining work, and decide if we should keep or drop any user stories that weren’t completed in the previous sprint
-3. Decide on user stories for the current sprint (achievable goals written from the perspective of the user, not too large so that we can test sooner rather than later) and decide on their relative priorities
-4. Decide on acceptance criteria for the user stories and estimate the time required to implement (specific, broken down into actionable tasks that culminate to satisfy a user story)
-5. Decide what acceptance criteria we will work towards between this meeting and the next meeting
+There are two game modes: daily and freeplay. Daily mode uses a set seed that changes daily, this allows users to compare their performance to
+others on a level field. Freeplay mode uses a randomised seed and is designed for users to try achieve their personal highscore.
 
-# Meeting-During-Sprint Steps:
-1. Discuss progress on assigned acceptance criteria, any blockers, and what acceptance criteria we will each progress next
-2. Re-evaluate estimates as necessary and decide if we should keep or drop acceptance criteria that we don’t think are achievable
+The architecture was designed to be as shallow as possible so that it is easy to navigate from one page to any other page in just a few button clicks.
 
-# End-of-Sprint Steps (Same time as Start-of-Sprint Steps for Sprint 2 and 3):
-1. Review everything we completed this sprint
-2. Discuss what went well this sprint, what went poorly, and how we can improve processes to ensure this project is a success
+## Architecture of the Application
 
-# Sprint 1 Retrospective and Sprint 2 Kick-Off Notes:
+- The website has a central home page. From this page:
+ - Users that are not logged in can access the credits, login, and rules pages
+ - Users that are logged in can access the credits, game, leaderboard, profile, and rules pages, and the logout button
+- There is a navbar that is present on all pages:
+ - Users that are not logged in can use this to access the credits, home, login, and rules pages
+ - Users that are logged in can use this to access the credits, home, leaderboard, profile, and rules pages, and the logout button
+- The login page can be used to access the registration page
+- The credits, game, leaderboard, profile, and rules pages only have access to other pages via the navbar
+
+**Summary of required pages**
+- The rules page is responsible for promoting the theme and purpose to the users, and explaining the rules.
+- The game page is responsible for presenting the game and has two modes: freeplay and daily.
+- The leaderboard page shows aggregate results from all users.
+- The profile page shows aggregate results and usage statistics for the logged in user.
+
+## How to Launch the Application Locally
+
+**If virtual environment has NOT been set up for the project**
+
+1. Open your preferred command line tool and navigate to the base project folder
+2. Enter the command `python -m venv venv` to create a new virtual environment
+3. Enter the comamnd `python venv\Scripts\activate` to activate the virtual environment
+4. Enter the command `pip install -r requirements.txt` to install the website's requirements
+5. Enter the command `python -m flask run` to run the application locally
+
+**If virtual environment has been set up for the project**
+
+1. Open your preferred command line tool and navigate to the base project folder
+2. Enter the command `python -m flask run` to run the application locally
+
+**The application will be run on your localhost: http://127.0.0.1:5000/**
+
+## Unit Tests and How to Run Them
+
+**Database tests**
+
+- Information
+ - Code is located in test.py
+ - These tests do not need the website to be running locally to pass
+ - Primarily uses the unittester module for testing
+- Test cases
+ - Test password hashing
+ - Test adding scorelist to user in database
+ - Test adding scorecard to user's scorelist in database
+
+**System tests**
+
+- Information
+ - These are located in systemtest.py
+ - These tests DO need the website to be running locally to pass
+ - Primarily uses the selenium webdriver module for testing
+ - The tests expect chromedriver.exe v101.0.4951.41 to be located in the base project folder
+- Test cases
+ - Test that the various game functions work as expected
+ - Test that the random initial gameboard has the correct features 
+ - Test that the leaderboard page shows scores from all users in the database
+ - Test that the login and logout functionality works as expected
+ - Test that the profile page shows scores and aggregate results for the signed in user
+ - Test that registration functionality works as expected
+
+### How to run tests (Assuming virtual environment has been set up for the project)
+
+**Database tests**
+
+1. Open your preferred command line tool and navigate to the base project folder
+2. Enter the command `python -W ignore -m test` to run the tests
+
+**System tests**
+
+1. Go to https://chromedriver.chromium.org/downloads and download ChromeDriver 101.0.4951.41
+2. Extract chromedriver.exe from the zip file and place it into the base project folder
+3. Open your preferred command line tool and navigate to the base project folder
+4. Enter the command `python -m flask run` to run the website locally
+5. Open a new window of your preferred command line tool and navigate to the base project folder
+6. In the new window, enter the command `python -W ignore -m systemtest` to run the tests
+
+## Agile Development of the Application
+
+**Sprint 0: Weeks 2 to 4 (07/03 - 27/03)**
+
+- Plan website design and produce mock-ups
+ - Design research: https://docs.google.com/document/d/1QrGW9SO62FUvuBtXbQnhL7UxGan68RmVWrHDDjv6CFE/edit?usp=sharing
+ - Mock-ups: https://docs.google.com/document/d/1zg2zjm-CSWDYzQOq5uddbx25X5SDjSpgAvXawfRdiZA/edit?usp=sharing
+- Get barebones prototype of the game that can be run locally
+ - Prototype design: https://docs.google.com/document/d/155k1VanFCSsB78VyaC0BJStdflELVEW_yfY04m7-SEA/edit?usp=sharing 
+
+**Sprint 1: Weeks 5 to 7 (28/03 - 17/04)**
+
+- Implement account creation, login and logout functionality, and score storing
+- Implement majority of website pages
+- Iterate upon game prototype to include all planned features
+
+**Sprint 1 Retrospective and Sprint 2 Kick-Off Notes**
+
 - https://docs.google.com/document/d/1RUKDAd9BfHIhNcFmOqSdoINlhxawhGFtcPW6xkHBycw/edit?usp=sharing
 
-# Sprint 2 Retrospective and Sprint 3 Kick-Off Notes:
+**Sprint 2: Weeks 8 to 10 (18/04 - 08/05)**
+
+- Deploy website to Heroku
+- Implement profile and leaderboard pages
+- Get game into playtesting
+- Improve website's rendering on mobile
+
+**Sprint 2 Retrospective and Sprint 3 Kick-Off Notes**
+
 - https://docs.google.com/document/d/1MSLXoXMzvl6Qz383UGGa_419USWzmgMK3BLdQko4w4I/edit?usp=sharing
 
-# Development Agreement
-1. We will stick to the HTML/CSS style guidelines here: https://teaching.csse.uwa.edu.au/units/CITS3403/laboratories/htmlcssguide.html
-2. We will each work on branches off of main (could be separate, though we could work on the same branch if necessary). We can merge when it seems appropriate via pull request but our code must be code reviewed before it is merged - this will be an opportunity for learning and catching mistakes 
-3. We will have meetings once a week to ensure we don’t stay blocked on tasks and ensure we are doing continual work
+**Sprint 3: Weeks 11 to 12 (09/05 - 22/05)**
 
-# CITS3403 Unit Page
-https://teaching.csse.uwa.edu.au/units/CITS3403/
+- Implement database and system tests
+- Implement score sharing on social media
+- Implement best suggestions from playtesters
 
-# CITS3403 Project Marking Criteria
-https://teaching.csse.uwa.edu.au/units/CITS3403/projects/Project2Criterion.pdf
+**Project Due: Week 13 (23/05 12pm)**
 
-# Criteria
-1. Online daily “puzzle” (puzzle is defined pretty loosely, eg. guess the sound or guess the grocery from its carbon footprint are example ideas provided by the unit coordinator)
-> 1. Short daily exercise
-> 2. Users receive a score / rank / feedback
-> 3. Users can track progress / statistics in a separate view and compare to friends and general population
-> 4. **Engaging**, so that it looks good and users want to play it daily
-> 5. **Challenging**, so the user feels a sense of achievement
-> 6. **Intuitive**, so that it is easy for a user to access
-> 7. **Effective**, so that it promotes a positive message or modifies users behavior in a positive way
-2. Users can share their performance via social media
-3. The website can function on PC, tablet, and mobile devices
+## References
 
-# Marked On
-1. HTML (10%) - Valid code, Wide range of elements, Excellent navigation
-2. CSS (10%) - Valid, Maintainable code, Wide range of custom selectors and classes, Reactive to device
-3. JS (15%) - Valid, Well formatted code, Includes validation and DOM manipulation / AJAX
-4. Style (10%) - Well considered distinctive style, Uses coherent images and fonts
-5. Content (5%) - Excellent and engaging choice of material and mechanism, Application has value
-6. Flask Code (10%) - Well formatted, commented and organised code, No errors and nontrivial elements
-7. Data Models (10%) - Well considered database schema, Good authentication, Maintainable model, Some evidence of DB migration
-8. Testing (10%) - Comprehensive unit tests, Large test database, User tests with good coverage
-9. Design (10%) - Complex engaging mechanism, Fully implemented
-10. Collaboration (10%) - Comprehensive git logs, Shows persistent contributions, branching, merging, and migrations, Shared contribution to demonstration
-
-# Cartographers Rules
-https://www.thunderworksgames.com/uploads/1/1/6/3/11638029/cartographers_rulebook_website.pdf
-
-# Google Doc with Information on Cartographers
-https://docs.google.com/document/d/155k1VanFCSsB78VyaC0BJStdflELVEW_yfY04m7-SEA/edit?usp=sharing
-
-# Google Doc with Mock-ups
-https://docs.google.com/document/d/1zg2zjm-CSWDYzQOq5uddbx25X5SDjSpgAvXawfRdiZA/edit
-
-
-# Google Doc with Research Findings
-https://docs.google.com/document/d/1QrGW9SO62FUvuBtXbQnhL7UxGan68RmVWrHDDjv6CFE/edit
-
-
-# HTML & CSS Validator
-
-https://validator.w3.org/
-
-# JS Validator
-
-https://beautifytools.com/javascript-validator.php
+- Cartographers (board game) rules: https://www.thunderworksgames.com/uploads/1/1/6/3/11638029/cartographers_rulebook_website.pdf
