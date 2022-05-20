@@ -24,11 +24,11 @@ The architecture was designed to be as shallow as possible so that it is easy to
 ## Architecture of the Application
 
 - The website has a central home page. From this page:
- - Users that are not logged in can access the credits, login, and rules pages
- - Users that are logged in can access the credits, game, leaderboard, profile, and rules pages, and the logout button
+  - Users that are not logged in can access the credits, login, and rules pages
+  - Users that are logged in can access the credits, game, leaderboard, profile, and rules pages, and the logout button
 - There is a navbar that is present on all pages:
- - Users that are not logged in can use this to access the credits, home, login, and rules pages
- - Users that are logged in can use this to access the credits, home, leaderboard, profile, and rules pages, and the logout button
+  - Users that are not logged in can use this to access the credits, home, login, and rules pages
+  - Users that are logged in can use this to access the credits, home, leaderboard, profile, and rules pages, and the logout button
 - The login page can be used to access the registration page
 - The credits, game, leaderboard, profile, and rules pages only have access to other pages via the navbar
 
@@ -60,28 +60,28 @@ The architecture was designed to be as shallow as possible so that it is easy to
 **Database tests**
 
 - Information
- - Code is located in test.py
- - These tests do not need the website to be running locally to pass
- - Primarily uses the unittester module for testing
+  - Code is located in test.py
+  - These tests do not need the website to be running locally to pass
+  - Primarily uses the unittester module for testing
 - Test cases
- - Test password hashing
- - Test adding scorelist to user in database
- - Test adding scorecard to user's scorelist in database
+  - Test password hashing
+  - Test adding scorelist to user in database
+  - Test adding scorecard to user's scorelist in database
 
 **System tests**
 
 - Information
- - These are located in systemtest.py
- - These tests DO need the website to be running locally to pass
- - Primarily uses the selenium webdriver module for testing
- - The tests expect chromedriver.exe v101.0.4951.41 to be located in the base project folder
+  - These are located in systemtest.py
+  - These tests DO need the website to be running locally to pass
+  - Primarily uses the selenium webdriver module for testing
+  - The tests expect chromedriver.exe v101.0.4951.41 to be located in the base project folder
 - Test cases
- - Test that the various game functions work as expected
- - Test that the random initial gameboard has the correct features 
- - Test that the leaderboard page shows scores from all users in the database
- - Test that the login and logout functionality works as expected
- - Test that the profile page shows scores and aggregate results for the signed in user
- - Test that registration functionality works as expected
+  - Test that the various game functions work as expected
+  - Test that the random initial gameboard has the correct features 
+  - Test that the leaderboard page shows scores from all users in the database
+  - Test that the login and logout functionality works as expected
+  - Test that the profile page shows scores and aggregate results for the signed in user
+  - Test that registration functionality works as expected
 
 ### How to run tests (Assuming virtual environment has been set up for the project)
 
@@ -104,10 +104,10 @@ The architecture was designed to be as shallow as possible so that it is easy to
 **Sprint 0: Weeks 2 to 4 (07/03 - 27/03)**
 
 - Plan website design and produce mock-ups
- - Design research: https://docs.google.com/document/d/1QrGW9SO62FUvuBtXbQnhL7UxGan68RmVWrHDDjv6CFE/edit?usp=sharing
- - Mock-ups: https://docs.google.com/document/d/1zg2zjm-CSWDYzQOq5uddbx25X5SDjSpgAvXawfRdiZA/edit?usp=sharing
+  - Design research: https://docs.google.com/document/d/1QrGW9SO62FUvuBtXbQnhL7UxGan68RmVWrHDDjv6CFE/edit?usp=sharing
+  - Mock-ups: https://docs.google.com/document/d/1zg2zjm-CSWDYzQOq5uddbx25X5SDjSpgAvXawfRdiZA/edit?usp=sharing
 - Get barebones prototype of the game that can be run locally
- - Prototype design: https://docs.google.com/document/d/155k1VanFCSsB78VyaC0BJStdflELVEW_yfY04m7-SEA/edit?usp=sharing 
+  - Prototype design: https://docs.google.com/document/d/155k1VanFCSsB78VyaC0BJStdflELVEW_yfY04m7-SEA/edit?usp=sharing 
 
 **Sprint 1: Weeks 5 to 7 (28/03 - 17/04)**
 
