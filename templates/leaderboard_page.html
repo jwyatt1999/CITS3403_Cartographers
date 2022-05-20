@@ -23,6 +23,7 @@
             <label for="selection">Select date:</label>
             <input id='leaderboard_daily_date' type="date" value="2022-05-01">
             <button id = "submit_btn" type="button" onclick="postDate()">Submit</button>
+            <br>
             <ul>
                 {% for score in score_daily %}
                     <li class="list-group-item leaderboard-text" name="dailyScore">{{ score }}</li>
