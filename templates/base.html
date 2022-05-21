@@ -31,12 +31,12 @@
             <div class="d-lg-flex">
                 <a class="navbar-brand nav-home" href="/">
                     <!-- Source: https://www.pinterest.es/pin/296463587957508615/ -->
-                    <img src="{{url_for('static', filename = 'images/scroll_icon_mainpage.png')}}" alt="scroll" width="45" height="45" class="d-inline-block align-text-top">
+                    <img src="{{url_for('static', filename = 'images/scroll_icon_mainpage.png')}}" class="d-inline-block align-text-top" alt="scroll" width="45" height="45">
                     Home
                 </a>
                 <!-- Code to make navbar responsive on mobile devices -->
                 <button class="navbar-toggler navbar-brand" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"><img src="{{url_for('static', filename = 'images/NavbarToggler.png')}}" alt="navbar toggler" width="40" height="40"></span>
+                    <img src="{{url_for('static', filename = 'images/NavbarToggler.png')}}" class="navbar-toggler-icon" alt="navbar toggler" width="40" height="40">
                 </button>
                 <!-- Menu that contains links to Credits, Rules, Leaderboard and Login/Logout Buttons -->
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -55,11 +55,11 @@
             <!-- Profile Button -->
             {% if user.is_authenticated %}
             <a class="nav-link nav-link-profile" href="{{url_for('user', username = current_user.username)}}">
-                <img src="{{url_for('static', filename = 'images/1_ksb_64_generated.jpg')}}" alt="profile icon" width="30" height="24" class="d-inline-block align-text-top">
+                <img src="{{url_for('static', filename = 'images/1_ksb_64_generated.jpg')}}" class="d-inline-block align-text-top" alt="profile icon" width="30" height="24">
             </a>
             {% else %}
             <a class="nav-link nav-link-profile" href="{{url_for('login')}}">
-                <img src="{{url_for('static', filename = 'images/1_ksb_64_generated.jpg')}}" alt="profile icon" width="30" height="24" class="d-inline-block align-text-top">
+                <img src="{{url_for('static', filename = 'images/1_ksb_64_generated.jpg')}}" class="d-inline-block align-text-top" alt="profile icon" width="30" height="24">
             </a>
             {% endif %}
         </div>
