@@ -304,6 +304,7 @@ function startGame() {
         }
     }
 
+    indicateActiveSeason();
     initializeAmbushCards();
     initializeExploreDeck();
     determineNumberOfCardsThisSeason();
@@ -477,6 +478,20 @@ function determineNumberOfCardsThisSeason() {
         }
         numberOfCards++;
     }
+}
+
+/**
+ * Colour the "Season n" labels to indicate which seasons have been scored and which season is the current season.
+ * The current season is underlined, and scored seasons are coloured grey.
+ */
+function indicateActiveSeason() {
+    for (let i = 1; i <= seasonsScored; i++) {
+        document.getElementById("season" + i).style.color = "grey";
+        document.getElementById("season" + i).style.textDecoration = "";
+    }
+    if (seasonsScored < 3) {
+        document.getElementById("season" + (seasonsScored + 1)).style.textDecoration = "underline";
+    }   
 }
 
 /**
@@ -905,6 +920,7 @@ function checkIfSeasonOver() {
             scoreCards[seasonsScored].function(gameBoard);
         }
         renderPlayerPoints();
+        indicateActiveSeason();
         checkIfGameOver();
     }
 }
