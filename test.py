@@ -13,15 +13,17 @@ class UserModelCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
+    #Test that the password checking works as expected
     def test_password_hashing(self):
-        u = User(username='JooKai', email='joo@gmail.com')
+        u = User(username='user1', email='test1@gmail.com')
         u.set_password('Pass1')
         self.assertFalse(u.check_password('notAPassword'))
         self.assertTrue(u.check_password('Pass1'))
     
+    #Test that scorelists are correctly added to users in the database
     def test_add_scorelist(self):
-        u1 = User(username='JooKai', email='joo@gmail.com')
-        u2 = User(username='Josh', email='josh@gmail.com')
+        u1 = User(username='user1', email='test1@gmail.com')
+        u2 = User(username='user2', email='test2@gmail.com')
         db.session.add(u1)
         db.session.add(u2)
         db.session.commit()
@@ -35,6 +37,7 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u1.scorelists, s1)
         self.assertEqual(u2.scorelists, s2)
 
+    #Test that scorecards are correctly added to users' scorelists in the database
     def test_add_scorecards(self):
         u1 = User(username='user1', email='test1@gmail.com')
         u2 = User(username='user2', email='test2@gmail.com')
