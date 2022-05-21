@@ -280,3 +280,15 @@ td, .gameboard_icon {
     background: rgba(255,255,255,0.3);
 }
 
+#myTab li.active a {
+    border-bottom-color: transparent;background-color:blue;
+}
+
+.errorHeader {
+    color: royalblue;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.errorText {
+    color: royalblue;
+}
