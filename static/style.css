@@ -280,7 +280,11 @@ td, .gameboard_icon {
     border-bottom-color: transparent;background-color:blue;
 }
 
-.errorText {
+.errorHeader {
     color: royalblue;
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.errorText {
+    color: royalblue;
 }
