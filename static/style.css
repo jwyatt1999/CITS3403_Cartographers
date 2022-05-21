@@ -288,3 +288,7 @@ td, .gameboard_icon {
 .errorText {
     color: royalblue;
 }
+
+.loginErrorText, .registerErrorText {
+    color: red;
+}
