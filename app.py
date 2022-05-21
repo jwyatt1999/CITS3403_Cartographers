@@ -18,7 +18,7 @@ db = SQLAlchemy(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
-import models, routes
+import models, routes, errors
 
 # Used to initalize database
 db.create_all()
