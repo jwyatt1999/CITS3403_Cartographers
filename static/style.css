@@ -47,12 +47,14 @@ body {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
+
+
 .hero-title {
     font-size: 8rem;
     font-size: 8vh;
 }
 
-.credits_paragraph, .rules_paragraph {
+.credits_paragraph, .rules_text {
     text-align: center;
     position: relative;
     top: 8vh;
@@ -75,8 +77,15 @@ body {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
-.credits_paragraph h1, .credits_paragraph h3, .rules_paragraph h1, .rules_paragraph h3 {
+.credits_paragraph h1, .credits_paragraph h3, .rules_text h1, .rules_text h3 {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.rules_paragraph {
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    max-height: 52vh;
+    max-width: 600px;
 }
 
 .board {
@@ -130,6 +139,56 @@ body {
     background: transparent;
 }
 
+.gameContents {
+    display: none;
+}
+
+#leftButton {
+    left: 1.5vw;
+    bottom: 27vh;
+}
+
+#rightButton {
+    left: 10.5vw;
+    bottom: 27vh;
+}
+
+#upButton {
+    left: 6vw;
+    bottom: 36vh;
+}
+
+#downButton {
+    left: 6vw;
+    bottom: 18vh;
+}
+
+#rotateButton {
+    right: 10.5vw;
+    bottom: 27vh;
+}
+
+#flipButton {
+    right: 6vw;
+    bottom: 36vh;
+}
+
+#swapButton {
+    right: 6vw;
+    bottom: 18vh;
+}
+
+#placeButton {
+    right: 1.5vw;
+    bottom: 27vh;
+}
+
+.scorecard_container {
+    text-align: center;
+    color: white;
+    overflow-x: auto;
+}
+
 .nav-link, .nav-item {
     color: white;
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
@@ -151,6 +210,11 @@ body {
 
  .profile-text h1, .profile-text h3, .leaderboard-text h1, .leaderboard-text h3 {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+ }
+
+ .board {
+    margin-left: auto;
+    margin-right: auto;
  }
 
  .nav-link-profile {
@@ -215,9 +279,13 @@ td, .gameboard_icon {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
- .scorecards_header {
+#season3, #cardsRemaining3 {
+    transform: translate(50%);
+}
+
+.scorecards_header {
     background-color: royalblue;
     color: white;
     font-weight: bold;
@@ -275,9 +343,14 @@ td, .gameboard_icon {
 .interactiveButton:hover {
     background-color: red;
 }
+
 .list-group-item {
     color: royalblue;
     background: rgba(255,255,255,0.3);
+}
+
+.rules_link {
+    display: block;
 }
 
 .errorHeader {
