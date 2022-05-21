@@ -256,6 +256,10 @@ function startGame() {
     //Initialize the pseudo-random number generator with the given seed.
     rand = mulberry32(seed());
     
+    //The gameContents are hidden by default because all /game/<n> links are valid (don't throw 404 error) but we only want to show
+    //the game for valid links eg. /game/daily, /game/freeplay, and /game/test.
+    document.getElementById("gameContents").style.display = 'block';
+
     gameBoard = [
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0],
