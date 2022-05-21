@@ -280,7 +280,3 @@ td, .gameboard_icon {
     background: rgba(255,255,255,0.3);
 }
 
-#myTab li.active a {
-    border-bottom-color: transparent;background-color:blue;
-}
-
