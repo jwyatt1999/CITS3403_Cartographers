@@ -1,0 +1,155 @@
+/* Style for game buttons */
+.interactiveButton {
+    position: fixed;
+    z-index: 99;
+    border: 2px solid black;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+    cursor: pointer;
+    width: 8vw;
+    height: 6vh;
+    min-height: 30px;
+    border-radius: 10px;
+    font-size: 1.8vh;
+    touch-action: manipulation; /* Prevent double-tap from zooming in on touch-screen devices */
+}
+
+.interactiveButton:hover {
+    background-color: red;
+}
+
+#leftButton {
+    left: 1.5vw;
+    bottom: 27vh;
+}
+
+#rightButton {
+    left: 10.5vw;
+    bottom: 27vh;
+}
+
+#upButton {
+    left: 6vw;
+    bottom: 36vh;
+}
+
+#downButton {
+    left: 6vw;
+    bottom: 18vh;
+}
+
+#rotateButton {
+    right: 10.5vw;
+    bottom: 27vh;
+}
+
+#flipButton {
+    right: 6vw;
+    bottom: 36vh;
+}
+
+#swapButton {
+    right: 6vw;
+    bottom: 18vh;
+}
+
+#placeButton {
+    right: 1.5vw;
+    bottom: 27vh;
+}
+/* End style for game buttons */
+
+
+/* Style for scorecards */
+.scorecard {
+    min-width: 300px;
+    display: inline-block;
+}
+
+.scorecard_description {
+    min-height: 135px;
+    padding: 2% !important;
+}
+
+.scorecard_text, .points_text {
+    padding: 0px;
+    margin: 0px;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.scorecards_container {
+    text-align: center;
+    color: white;
+    overflow-x: auto;
+}
+
+.scorecards_header {
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+#season3, #cardsRemaining3 {
+    transform: translate(50%);
+}
+/* End style for scorecards */
+
+
+/* Style for gameboard */
+.board {
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+    text-align:center;
+ }
+
+td, .gameboard_icon {
+    height: 11vw;
+    width: 11vw;
+    max-height: 60px; 
+    max-width: 60px;
+    display: inline-table;
+}
+/* End style for gameboard */
+
+
+/* Style for points and coins box */
+.points_container {
+    background-color: royalblue;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    line-height: 60px;
+    display: inline-flex;
+    justify-content: space-around;
+    border: 2px solid black;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* End style for points and coins box */
+
+
+/* Style for end of game modal */
+.btn_start_freeplay {
+    opacity: 0.9;
+    background-color: orange;
+    border-color: royalblue;
+    border-width: 5px;
+    color: royalblue;
+    font-weight: bold;
+    font-size: 2vw;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+#facebookShareLink {
+    color: white;
+    text-decoration: none;
+}
+/* End style for end of game modal */

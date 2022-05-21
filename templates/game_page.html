@@ -4,7 +4,7 @@
 
 <br>
 
-<div id="gameContents">
+<div>
     <div class="gameplayButtons">
         <button onclick="buttonMoveLeft()"   class="interactiveButton" id="leftButton">&#8592;</button> 
         <button onclick="buttonMoveRight()"  class="interactiveButton" id="rightButton">&#8594;</button> 
@@ -16,7 +16,7 @@
         <button onclick="buttonPlacePiece()" class="interactiveButton" id="placeButton">Place (&#9166;)</button>
     </div>
     <div class="container scorecards_header">
-        <div class="row flex-nowrap scorecard_container">
+        <div class="row flex-nowrap scorecards_container">
             <div class="col scorecard scorecard_text">
                 <p class="scorecard_text" id="scoreCard1">scoreCard1</p>
                 <p class="scorecard_text scorecard_description" id="scoreCardDescription1">scoreCardDescription1</p>
@@ -93,13 +93,13 @@
             <div class="modal-body">
                 <div>
                     <p class="centred_content" id="gameOver"></p>
-                    <a class="btn btn-primary btn_start" href="{{url_for('game', type = 'freeplay')}}" role="button">Start New Freeplay Game!</a>
+                    <a class="btn btn-primary btn_start_freeplay" href="{{url_for('game', type = 'freeplay')}}" role="button">Start New Freeplay Game!</a>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" onclick="tweetIt()">Tweet</button>
-                <a class="btn btn-primary fb-xfbml-parse-ignore" id="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=" target="_blank">Facebook</a>
+                <a class="btn btn-primary fb-xfbml-parse-ignore" id="facebookShareLink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=" target="_blank">Facebook</a>
             </div>
         </div>
     </div>
