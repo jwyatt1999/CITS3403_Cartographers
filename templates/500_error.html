@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1 class="errorHeader">An unexpected error has occurred</h1>
+    <p class="errorText">Sorry for the inconvenience!</p>
+    <p><a class="btn btn-primary" href="{{url_for('main_page')}}">Home</a></p>
+
+{% endblock %}
