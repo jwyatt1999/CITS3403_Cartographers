@@ -66,7 +66,11 @@ def leaderboard():
     if daily_avg == None:
         daily_avg = 0.00
     daily_avg = "{:.2f}".format(daily_avg)
-    return render_template('leaderboard_page.html', user=user, daily_avg=daily_avg, score_freeplay=scores_freeplay, score_daily=scores_daily, freeplay_highscore=freeplay_highscore, daiy_highscore=daily_highscore)
+    freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.type == 2).all()[0][0]
+    if freeplay_avg == None:
+        freeplay_avg = 0.00
+    freeplay_avg = "{:.2f}".format(freeplay_avg)
+    return render_template('leaderboard_page.html', user=user, daily_avg=daily_avg, freeplay_avg=freeplay_avg, score_freeplay=scores_freeplay, score_daily=scores_daily, freeplay_highscore=freeplay_highscore, daiy_highscore=daily_highscore)
 
 @app.route('/update_daily', methods = ['POST'])
 def update_daily():
