@@ -246,6 +246,10 @@ td, .gameboard_icon {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 }
 
+.centred_content {
+    text-align: center;
+}
+
 .scorecard_description {
     min-height: 135px;
     padding: 2%;

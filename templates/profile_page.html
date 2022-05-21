@@ -37,7 +37,7 @@
             <h3>Your Recent Daily Scores:</h3>
             <ul>
                 {% for score in user.daily_scorecards() %}
-                    <li class="list-group-item" name="dailyScore">{{ score }}</li>
+                    <li class="list-group-item dailyScore">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>
@@ -57,7 +57,7 @@
             <h3>Your Recent Freeplay Scores:</h3>
             <ul>
                 {% for score in user.freeplay_scorecards() %}
-                    <li class="list-group-item" name="freeplayScore">{{ score }}</li>
+                    <li class="list-group-item freeplayScore">{{ score }}</li>
                 {% endfor %}
             </ul>
             <br>

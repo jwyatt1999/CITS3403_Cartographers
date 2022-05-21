@@ -83,27 +83,23 @@
     <!-- Modal -->
     <div class="modal fade" id="gameOverModal" tabindex="-1" aria-labelledby="gameOverModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="gameOverModalLabel" style="text-align:center">Game Over!</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <p id="gameOver" style="text-align:center"></p>
-                    <a class="btn btn-primary btn_start" href="{{url_for('game', type = 'freeplay')}}" role="button">Start New Freeplay Game!</a>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gameOverModalLabel" style="text-align:center">Game Over!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p id="gameOver" style="text-align:center"></p>
+                        <a class="btn btn-primary btn_start" href="{{url_for('game', type = 'freeplay')}}" role="button">Start New Freeplay Game!</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" onclick="tweetIt()" class="btn btn-primary">Tweet</button>
+                    <a class="btn btn-primary fb-xfbml-parse-ignore" id="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=" target="_blank">Facebook</a>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" onclick="tweetIt()" class="btn btn-primary">Tweet</button>
-                <button type="button" id="facebookbtn" class="btn btn-primary">
-                    <div class="fb-share-button" data-href="https://afternoon-castle-17520.herokuapp.com/" data-layout="button_count" data-size="small">
-                        <a target="_blank" id="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=come join me" class="fb-xfbml-parse-ignore">Facebook</a>
-                    </div>
-                </button>
-            </div>
-        </div>
         </div>
     </div>
 
