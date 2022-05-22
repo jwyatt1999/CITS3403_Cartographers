@@ -255,7 +255,9 @@ function startGame() {
 
     //Initialize the pseudo-random number generator with the given seed.
     rand = mulberry32(seed());
-   
+    
+    //The gameContents are hidden by default because all /game/<n> links are valid (don't throw 404 error) but we only want to show
+    //the game for valid links eg. /game/daily, /game/freeplay, and /game/test.
     document.getElementById("gameContents").style.display = 'block';
 
     gameBoard = [
@@ -384,13 +386,13 @@ function renderBoard(board) {
             let c = gameBoardRow.charAt(j);
             switch (parseInt(c)) {
                 case EMPTY:
-                    colourBoard += "<td style=\"color:white;background-color:white;\">0</td>";
+                    colourBoard += "<td style=\"color:white;background-color:white;\"></td>";
                     break;
                 case MOUNTAIN:
                     colourBoard += "<td style=\"color:brown;background-color:brown;outline:solid black thin;\" name=\"mountain\"><img src='/static/images/MountainIcon.png' alt='mountain' class='gameboard_icon'></td>";
                     break;
                 case BLOCKED:
-                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\" name=\"blocked\">2</td>";
+                    colourBoard += "<td style=\"color:black;background-color:black;outline:solid black thin;\" name=\"blocked\"></td>";
                     break;
                 case FARM:
                     colourBoard += "<td style=\"color:yellow;background-color:yellow;outline:solid black thin;\" name=\"farm\"><img src='/static/images/FarmIcon.png' alt='farm' class='gameboard_icon'></td>";

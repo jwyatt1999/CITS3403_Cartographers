@@ -1,0 +1,226 @@
+/* Style for background image */
+body {
+    background-image: url("./images/main_bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 1;
+}
+/* End style for background image */
+
+
+/* Style for navbar */
+.navbar-brand {
+    color: white;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.navbar-inner {
+    background: transparent;
+}
+
+.navbar-toggler {
+    text-align: center;
+}
+
+.nav-credits {
+    color: green !important;
+}
+
+.nav-home {
+    color: royalblue !important;
+}
+
+.nav-leaderboard {
+    color: yellow !important;
+}
+
+.nav-link, .nav-item {
+    color: white;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+    font-weight: bold;
+    font-size: large;
+    z-index: 1;
+    width: fit-content;
+}
+
+.nav-link-profile {
+    position: fixed;
+    right: 2vw;
+    top: 2vh;
+}
+
+.nav-login {
+    color: blue !important;
+}
+
+.nav-logout {
+    color: purple !important;
+}
+
+.nav-rules {
+    color: red !important;
+}
+/* End style for navbar */
+
+
+/* Style for home page */
+.btn_daily {
+    background-color: orange;
+    opacity: 0.9;
+    border-color: royalblue;
+    border-width: 5px;
+    color: royalblue;
+    font-weight: bold;
+    font-size: 50px;
+    font-size: 8vh;
+    max-width: 960px;
+}
+
+.btn_freeplay {
+    opacity: 0.9;
+    background-color: orange;
+    border-color: royalblue;
+    border-width: 5px;
+    color: royalblue;
+    font-weight: bold;
+    font-size: 30px;
+    font-size: 6vh;
+    max-width: 960px;
+}
+
+.btn_sec {
+    opacity: 0.9;
+    background-color: orange;
+    border-color: royalblue;
+    border-width: 5px;
+    color: royalblue;
+    font-weight: bold;
+    font-size: 25px;
+    font-size: 3vh;
+    width: 49%; /* Slightly less than 50% to prevent splitting onto 2 lines */
+    max-width: 480px;
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: royalblue;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.hero-title {
+    font-size: 8rem;
+    font-size: 8vh;
+}
+/* End style for home page */
+
+
+/* Style for 404 and 500 error pages */
+.errorHeader {
+    color: royalblue;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.errorText {
+    color: royalblue;
+}
+/* End style for 404 and 500 error pages */
+
+
+/* Style for login and register pages */
+.centred_content {
+    text-align: center;
+}
+
+.loginErrorText, .registerErrorText {
+    color: red;
+}
+
+.sign-in-text, .register-text {
+    color: royalblue;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+/* End style for login and register pages */
+
+
+/* Style for profile and leaderboard pages */
+.list-group-item {
+    color: royalblue;
+    background: rgba(255,255,255,0.3);
+    width: max-content;
+}
+
+.profile-text, .leaderboard-text {
+    color: royalblue;
+    font-size: large;
+}
+
+.profile-text h1, .profile-text h3, .leaderboard-text h1, .leaderboard-text h3 {
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.profile-page-button, .leaderboard-page-button {
+    color: royalblue !important; 
+    border-color: black !important;
+}
+/* End style for profile and leaderboard pages */
+
+
+/* Style for rules and credits pages */
+.credits_text, .rules_text {
+    text-align: center;
+    position: relative;
+    top: 8vh;
+    left: 50%;
+    transform: translate(-50%);
+    font: 2rem;
+    color: royalblue;
+    padding: 5px;
+}
+
+.credits_text h1, .credits_text h3, .rules_text h1, .rules_text h3 {
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.credits_scroll, .rules_scroll {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -18%);
+    max-height: 100%;
+    max-width: 100%;
+    z-index: -1;
+}
+
+.rules_header {
+    text-align: center;
+    position: relative;
+    top: 8vh;
+    left: 50%;
+    transform: translate(-50%);
+    font: 2rem;
+    color: royalblue;
+    padding: 5px;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+}
+
+.rules_paragraph {
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    max-height: 52vh;
+    max-width: 600px;
+}
+
+.rules_link {
+    display: block;
+}
+/* End style for rules and credits pages */

@@ -2,60 +2,62 @@
 
 {% block content %}
     
-    <div class="container-fluid leaderboard-text">
-        <h1>Global Ranking</h1>
-    </div>
+<div class="container-fluid leaderboard-text">
+    <h1>Global Ranking</h1>
+</div>
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
+<!-- Nav tabs -->
+<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
         <button class="nav-link leaderboard-page-button active" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily" type="button" role="tab" aria-controls="daily" aria-selected="true">Daily</button>
-        </li>
-        <li class="nav-item" role="presentation">
+    </li>
+    <li class="nav-item" role="presentation">
         <button class="nav-link leaderboard-page-button" id="freeplay-tab" data-bs-toggle="tab" data-bs-target="#freeplay" type="button" role="tab" aria-controls="freeplay" aria-selected="false">Freeplay</button>
-        </li>
-    </ul>
-    
-    <!-- Tab panes -->
-    <div class="tab-content leaderboard-text">
-        <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
-            <h1>Daily Highscores</h1>
-            <label for="leaderboard_daily_date">Select date:</label>
-            <input type="date" id='leaderboard_daily_date' value="2022-05-01">           
-            <button id ="submit_btn" type="button" onclick="postDate()">Submit</button>
-            <br>
-            <ul>
-                {% for score in score_daily %}
-                    <li class="list-group-item leaderboard-text dailyScore">{{ score }}</li>
-                {% endfor %}
-            </ul>
-            <br>
-            <h3>The average score for the day:</h3>
-            <ul>
-                <li id="leaderboard_dailyAvg">{{ daily_avg }}</li>
-            </ul>
-            <h3>Your highest attempt:</h3>
-            <ul>
-                <li id="leaderboard_dailyHighscore">{{ daily_highscore }}</li>
-            </ul>
-        </div>
-        <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
-            <h1>Freeplay Highscores</h1>
-            <ul>
-                {% for score in score_freeplay %}
-                    <li class="list-group-item freeplayScore">{{ score }}</li>
-                {% endfor %}
-            </ul>
-            <br>
-            <h3>The average freeplay score:</h3>
-            <ul>
-                <li id="leaderboard_freeplayAvg">{{ freeplay_avg }}</li>
-            </ul>
-            <h3>Your highest attempt:</h3>
-            <ul>
-                <li id="leaderboard_freeplayHighscore">{{ freeplay_highscore }}</li>
-            </ul>
-        </div>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content leaderboard-text">
+    <!-- Daily pane -->
+    <div class="tab-pane active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
+        <h1>Daily Highscores</h1>
+        <label for="leaderboard_daily_date">Select date:</label>
+        <input type="date" id='leaderboard_daily_date' value="2022-05-01">           
+        <button id ="submit_btn" type="button" onclick="postDate()">Submit</button>
+        <br>
+        <ul>
+            {% for score in score_daily %}
+                <li class="list-group-item leaderboard-text dailyScore">{{ score }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <h3>The average score for the day:</h3>
+        <ul>
+            <li id="leaderboard_dailyAvg">{{ daily_avg }}</li>
+        </ul>
+        <h3>Your highest attempt:</h3>
+        <ul>
+            <li id="leaderboard_dailyHighscore">{{ daily_highscore }}</li>
+        </ul>
     </div>
+    <!-- Freeplay pane -->
+    <div class="tab-pane" id="freeplay" role="tabpanel" aria-labelledby="freeplay-tab">
+        <h1>Freeplay Highscores</h1>
+        <ul>
+            {% for score in score_freeplay %}
+                <li class="list-group-item freeplayScore">{{ score }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <h3>The average freeplay score:</h3>
+        <ul>
+            <li id="leaderboard_freeplayAvg">{{ freeplay_avg }}</li>
+        </ul>
+        <h3>Your highest attempt:</h3>
+        <ul>
+            <li id="leaderboard_freeplayHighscore">{{ freeplay_highscore }}</li>
+        </ul>
+    </div>
+</div>
 
 {% endblock %}

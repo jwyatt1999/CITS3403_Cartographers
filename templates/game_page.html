@@ -2,109 +2,107 @@
 
 {% block content %}
 
+<br>
+
+<div id="gameContents">
+    <div class="gameplayButtons">
+        <button onclick="buttonMoveLeft()"   class="interactiveButton" id="leftButton">&#8592;</button> 
+        <button onclick="buttonMoveRight()"  class="interactiveButton" id="rightButton">&#8594;</button> 
+        <button onclick="buttonMoveUp()"     class="interactiveButton" id="upButton">&#8593;</button> 
+        <button onclick="buttonMoveDown()"   class="interactiveButton" id="downButton">&#8595;</button> 
+        <button onclick="buttonRotate()"     class="interactiveButton" id="rotateButton">Rotate (r)</button> 
+        <button onclick="buttonFlip()"       class="interactiveButton" id="flipButton">Flip (f)</button> 
+        <button onclick="buttonSwapType()"   class="interactiveButton" id="swapButton">Swap (t)</button> 
+        <button onclick="buttonPlacePiece()" class="interactiveButton" id="placeButton">Place (&#9166;)</button>
+    </div>
+    <div class="container scorecards_header">
+        <div class="row flex-nowrap scorecards_container">
+            <div class="col scorecard scorecard_text">
+                <p class="scorecard_text" id="scoreCard1">scoreCard1</p>
+                <p class="scorecard_text scorecard_description" id="scoreCardDescription1">scoreCardDescription1</p>
+                <p class="scorecard_text" id="season1">Season 1</p>
+                <p class="scorecard_text" id="cardsRemaining1"></p>
+            </div>
+            <div class="col scorecard scorecard_text">
+                <p class="scorecard_text" id="scoreCard2">scoreCard2</p>
+                <p class="scorecard_text scorecard_description" id="scoreCardDescription2">scoreCardDescription2</p>
+                <p class="scorecard_text" id="season2">Season 2</p>
+                <p class="scorecard_text" id="cardsRemaining2"></p>
+            </div>
+            <div class="col scorecard scorecard_text">
+                <p class="scorecard_text" id="scoreCard3">scoreCard3</p>
+                <p class="scorecard_text scorecard_description" id="scoreCardDescription3">scoreCardDescription3</p>
+                <p class="scorecard_text" id="season3">Season 3</p>
+                <p class="scorecard_text" id="cardsRemaining3"></p>
+            </div>
+            <div class="col scorecard scorecard_text">
+                <p class="scorecard_text" id="scoreCard4">scoreCard4</p>
+                <p class="scorecard_text scorecard_description" id="scoreCardDescription4">scoreCardDescription4</p>
+            </div>
+        </div>
+    </div>
     <br>
-
-    <div id="gameContents" style="display:none;">
-        <div class="gameplayButtons">
-            <button onclick="buttonMoveLeft()"   class="interactiveButton" id="leftButton" style="left:1.5vw;bottom:27vh;">&#8592;</button> 
-            <button onclick="buttonMoveRight()"  class="interactiveButton" id="rightButton" style="left:10.5vw;bottom:27vh;">&#8594;</button> 
-            <button onclick="buttonMoveUp()"     class="interactiveButton" id="upButton" style="left:6vw;bottom:36vh;">&#8593;</button> 
-            <button onclick="buttonMoveDown()"   class="interactiveButton" id="downButton" style="left:6vw;bottom:18vh;">&#8595;</button> 
-            <button onclick="buttonRotate()"     class="interactiveButton" id="rotateButton" style="right:10.5vw;bottom:27vh;">Rotate (r)</button> 
-            <button onclick="buttonFlip()"       class="interactiveButton" id="flipButton" style="right:6vw;bottom:36vh;">Flip (f)</button> 
-            <button onclick="buttonSwapType()"   class="interactiveButton" id="swapButton" style="right:6vw;bottom:18vh;">Swap (t)</button> 
-            <button onclick="buttonPlacePiece()" class="interactiveButton" id="placeButton" style="right:1.5vw;bottom:27vh;">Place (&#9166;)</button>
-        </div>
-        <div class="container scorecards_header">
-            <div class="row flex-nowrap" style="text-align:center; color:white; overflow-x:auto;" >
-                <div class="col scorecard scorecard_text">
-                    <p class="scorecard_text" id="scoreCard1">scoreCard1</p>
-                    <p class="scorecard_text scorecard_description" id="scoreCardDescription1">scoreCardDescription1</p>
-                    <p class="scorecard_text" id="season1">Season 1</p>
-                    <p class="scorecard_text" id="cardsRemaining1"></p>
-                </div>
-                <div class="col scorecard scorecard_text">
-                    <p class="scorecard_text" id="scoreCard2">scoreCard2</p>
-                    <p class="scorecard_text scorecard_description" id="scoreCardDescription2">scoreCardDescription2</p>
-                    <p class="scorecard_text" id="season2">Season 2</p>
-                    <p class="scorecard_text" id="cardsRemaining2"></p>
-                </div>
-                <div class="col scorecard scorecard_text">
-                    <p class="scorecard_text" id="scoreCard3">scoreCard3</p>
-                    <p class="scorecard_text scorecard_description" id="scoreCardDescription3">scoreCardDescription3</p>
-                    <p class="scorecard_text" id="season3" style="transform:translate(50%)">Season 3</p>
-                    <p class="scorecard_text" id="cardsRemaining3" style="transform:translate(50%)"></p>
-                </div>
-                <div class="col scorecard scorecard_text">
-                    <p class="scorecard_text" id="scoreCard4">scoreCard4</p>
-                    <p class="scorecard_text scorecard_description" id="scoreCardDescription4">scoreCardDescription4</p>
-                    <p></p>
-                    <p></p>
-                </div>
+    <table class="board">
+        <tr id="boardRow0">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow1">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow2">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow3">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow4">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow5">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow6">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+        <tr id="boardRow7">
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+        </tr>
+    </table>
+    <br>
+    <div class="container">
+        <div class="center">
+            <div class="points_container" id="points_container">
+                <p class="points_text" id="playerPoints">Points: 0</p>
+                <p class="points_text" id="playerCoins">Coins: 0</p>
+                <p class="points_text" id="pieceCoin">You will gain a coin:</p>
             </div>
         </div>
-        <br>
-        <table class="board" style="margin-left:auto;margin-right:auto;">
-            <tr id="boardRow0">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow1">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow2">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow3">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow4">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow5">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow6">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="boardRow7">
-                <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-        </table>
-        <br>
-        <div class="container">
-            <div class="center">
-                <div class="points_container" id="points_container">
-                    <p class="points_text" id="playerPoints">Points: 0</p>
-                    <p class="points_text" id="playerCoins">Coins: 0</p>
-                    <p class="points_text" id="pieceCoin">You will gain a coin:</p>
+    </div>  
+</div>
+
+<br> 
+
+<!-- End of Game modal -->
+<div class="modal fade" id="gameOverModal" tabindex="-1" aria-labelledby="gameOverModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gameOverModalLabel">Game Over!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p class="centred_content" id="gameOver"></p>
+                    <a class="btn btn-primary btn_start_freeplay" href="{{url_for('game', type = 'freeplay')}}" role="button">Start New Freeplay Game!</a>
                 </div>
             </div>
-        </div>  
-    </div>
-
-    <br> 
-  
-    <!-- Modal -->
-    <div class="modal fade" id="gameOverModal" tabindex="-1" aria-labelledby="gameOverModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="gameOverModalLabel" style="text-align:center">Game Over!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <p id="gameOver" style="text-align:center"></p>
-                        <a class="btn btn-primary btn_start" href="{{url_for('game', type = 'freeplay')}}" role="button">Start New Freeplay Game!</a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" onclick="tweetIt()" class="btn btn-primary">Tweet</button>
-                    <a class="btn btn-primary fb-xfbml-parse-ignore" id="sharelink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=" target="_blank">Facebook</a>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="tweetIt()">Tweet</button>
+                <a class="btn btn-primary fb-xfbml-parse-ignore" id="facebookShareLink" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fafternoon-castle-17520.herokuapp.com%2F&amp;src=sdkpreparse&quote=" target="_blank">Facebook</a>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}
