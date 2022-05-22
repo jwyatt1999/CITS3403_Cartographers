@@ -12,7 +12,7 @@ from sqlalchemy import func
 def main_page():
     return render_template("index.html", user=current_user)
 
-#Route for the gamne page, takes type (daily or freeplay) as an argument
+#Route for the game page, takes type (daily or freeplay) as an argument
 #Login is required to visit the game page 
 @app.route("/game/<type>", methods=['GET', 'POST'])
 @login_required
@@ -20,7 +20,8 @@ def game(type):
     #Renders the game page for the user
     if request.method == 'GET':
         return render_template("game_page.html", user=current_user)
-    #Scores are posted once the game ends, uses the argument <type> to determine what type of scorecard is created
+    #Scores are posted once the game ends, uses the argument <type> to determine what type of scorecard is created. 
+    #If not 'daily' or 'freeplay', no score is posted
     if request.method == 'POST':
         output = int(request.get_json())
         user = current_user
@@ -49,18 +50,18 @@ def credits():
 @login_required
 def user(username):
     user = current_user
-    #Calculates the average score of a user, with checks to ensure that the page doesn't crash if their average is 0
+    #Calculates the average score of a user, with checks to ensure that the page doesn't crash if they haven't played any games
     total_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).all()[0][0]
     if total_avg == None:
         total_avg = 0.00
     total_avg = "{:.2f}".format(total_avg)
-    #Calculates the average freeplay score of a user, with checks to ensure that the page doesn't crash if their average is 0
+    #Calculates the average freeplay score of a user, with checks to ensure that the page doesn't crash if they haven't played any games
     freeplay_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 2).all()[0][0]
     if freeplay_avg == None:
         freeplay_avg = 0.00
     freeplay_avg = "{:.2f}".format(freeplay_avg)
     daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.uname == user.username).filter(Scorecard.type == 1).all()[0][0]
-    #Calculates the average daily score of a user, with checks to ensure that the page doesn't crash if their average is 0
+    #Calculates the average daily score of a user, with checks to ensure that the page doesn't crash if they haven't played any games
     if daily_avg == None:
         daily_avg = 0.00
     daily_avg = "{:.2f}".format(daily_avg)
@@ -74,10 +75,10 @@ def leaderboard():
     #Database query to return the top 10 scores of all time for freeplay mode
     scores_freeplay = Scorecard.query.filter(Scorecard.type == 2).order_by(Scorecard.score.desc()).limit(10)
     freeplay_highscore = Scorecard.query.filter(Scorecard.type == 2).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
-    #Databse query to return the top 10 freeplay scores of the current date
+    #Databse query to return the top 10 daily scores of the current date
     scores_daily = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).order_by(Scorecard.score.desc()).limit(10)
     daily_highscore = Scorecard.query.filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).filter(Scorecard.uname == user.username).order_by(Scorecard.score.desc()).first()
-    #Calculates the average scores for freeplay and daily modes, with checks to ensure that the page doesn't crash if their average is 0
+    #Calculates the average scores for freeplay and daily modes, with checks to ensure that the page doesn't crash if they haven't played any games
     daily_avg = Scorecard.query.with_entities(func.avg(Scorecard.score)).filter(Scorecard.type == 1).filter(Scorecard.date == datetime.now().date()).all()[0][0]
     if daily_avg == None:
         daily_avg = 0.00
@@ -88,7 +89,7 @@ def leaderboard():
     freeplay_avg = "{:.2f}".format(freeplay_avg)
     return render_template('leaderboard_page.html', user=user, daily_avg=daily_avg, freeplay_avg=freeplay_avg, score_freeplay=scores_freeplay, score_daily=scores_daily, freeplay_highscore=freeplay_highscore, daiy_highscore=daily_highscore)
 
-#Route to allow users to view scores of a selected date
+#Route to allow users to view daily scores of a selected date
 @app.route('/update_daily', methods = ['POST'])
 def update_daily():
     user = current_user
@@ -137,7 +138,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        #If the user is successfully, logged in, return to the main page
+        #If the user is successfully logged in, return to the main page
         return redirect(url_for('main_page'))
     return render_template('login_page.html', title='Sign In', form=form, user=current_user)
 
@@ -148,7 +149,7 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-#Route to get server date for use in producing daily seeds 
+#Route to get server date for use in producing seeds and prepoulating forms on the leaderboard page
 @app.route('/get_date', methods=['GET'])
 @login_required
 def get_date():

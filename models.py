@@ -6,7 +6,7 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 from datetime import datetime
 
-#User model takes a username, email and password hash. Scorelists will be added on creation
+#User model takes a username, email and password hash. When a scorelist is created, it will be added to the user
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
