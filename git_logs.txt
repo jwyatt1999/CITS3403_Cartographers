@@ -1,0 +1,1956 @@
+*   commit 2f580309d7dcb977c22b59fafbf69b4449af5a38 (HEAD -> main, origin/main, origin/HEAD)
+|\  Merge: a30c87e a934f34
+| | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | Date:   Sun May 22 17:03:16 2022 +0800
+| | 
+| |     Merge pull request #42 from jwyatt1999/JK_add_comments_flask
+| |     
+| |     Added comments to flask files
+| | 
+| * commit a934f34885bb9def1cd474d8fb56c66e1a1283d2
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Sun May 22 12:06:14 2022 +0800
+| | 
+| |     Ammended files after comments
+| | 
+| * commit 8121c68764f4db835b25b4d0caf42e75021b2ec5
+|/  Author: Bsubs <bsubs02@gmail.com>
+|   Date:   Sun May 22 11:38:22 2022 +0800
+|   
+|       Added comments to flask files
+|   
+*   commit a30c87e739219e33d4405696e64656a22e155c03
+|\  Merge: a53f9b8 4a1e89f
+| | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | Date:   Sun May 22 10:56:29 2022 +0800
+| | 
+| |     Merge pull request #41 from jwyatt1999/jwyatt_QualityCheck_HTMLAndCSSImprovements
+| |     
+| |     Improve Quality of HTML and CSS
+| | 
+| * commit 4a1e89fed8bf8645e38b6aad378b22e251ea9e93 (origin/jwyatt_QualityCheck_HTMLAndCSSImprovements, jwyatt_QualityCheck_HTMLAndCSSImprovements)
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 23:20:50 2022 +0800
+| | 
+| |     updated requirements
+| | 
+| * commit c2ab62f8d14bc8fb346dbe7866be54cb493d6d41
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 23:01:08 2022 +0800
+| | 
+| |     re-added game hiding
+| | 
+| * commit 7397bd8ec89ac1ed8eb549fb6088c9d4f2f01feb
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 22:16:15 2022 +0800
+| | 
+| |     split out css into two pages and organised css to improve maintainability
+| | 
+| * commit 2fd023743a813dd8b3959ef076fbcbb97e7ffcbf
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 21:10:19 2022 +0800
+| | 
+| |     fixed inconsistencies among html files
+| | 
+| * commit f55b544defe8336c3dd653ec9bbf67bb008cd42c
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 20:55:04 2022 +0800
+| | 
+| |     moved all style out of html pages
+| | 
+| * commit 34dc69e17d22342b6fb618a094dbef8865dde826
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 19:51:47 2022 +0800
+| | 
+| |     fixed consistency among html files, moved style out from html into css
+| |   
+| *   commit 46c068c0ae78d7757af250b2b4bc29731b853145
+| |\  Merge: daab0d5 a53f9b8
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/|   Date:   Sat May 21 19:28:02 2022 +0800
+| |   
+| |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_QualityCheck_HTMLAndCSSImprovements
+| | 
+* | commit a53f9b80e0f6c793f3352110f321b78270f4d3e4 (heroku/main)
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 17:53:32 2022 +0800
+| | 
+| |     added season label to game page
+| | 
+* | commit 5e5aac6d60b3dcb2de9869a42437d02161145226
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 16:12:51 2022 +0800
+| | 
+| |     delete add_test_users
+| | 
+* | commit 206bda210a2c97862e062f7db6bd4561be051cdb
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 16:05:03 2022 +0800
+| | 
+| |     reworded daily average score on leaderboard and added system tests for leaderboard averages
+| |   
+* |   commit 434c164f34876c40f9065f881af3deaa8a234bac
+|\ \  Merge: 7d05273 7f22056
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat May 21 15:24:55 2022 +0800
+| | | 
+| | |     Merge pull request #40 from jwyatt1999/JK_Add_Average_to_Leaderboard
+| | |     
+| | |     Updated leaderboard page to show average daily score
+| | | 
+| * | commit 7f22056d4afa07ecae7b4b5753489f1d70dea287
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sat May 21 15:22:50 2022 +0800
+| | | 
+| | |     Added average scores to freeplay tab in leaderboard page
+| | | 
+| * | commit 3676ab07b4f7a5f7ed6025cf7d89384c62e264ff
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sat May 21 14:30:25 2022 +0800
+| | | 
+| | |     Updated leaderboard page to show average daily score
+| | |   
+* | |   commit 7d05273ccfa0321920344d34f69a087804029c86
+|\ \ \  Merge: e1f7c84 58f192d
+| |/ /  Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+|/| |   Date:   Sat May 21 15:17:51 2022 +0800
+| | |   
+| | |       Merge pull request #39 from jwyatt1999/JK_adding_users_script
+| | |       
+| | |       Added script to add demo users to the databse
+| | | 
+| * | commit 58f192d39585d51bb7fe663722d5a600572718a2
+|/ /  Author: Bsubs <bsubs02@gmail.com>
+| |   Date:   Sat May 21 14:57:57 2022 +0800
+| |   
+| |       Added script to add demo users to the databse
+| | 
+| * commit daab0d5d9939e4c3b171d0d5f17a2f521200a3c8
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 14:30:27 2022 +0800
+| | 
+| |     removed unnecessary css line
+| |   
+| *   commit 103d2a8eabfde54bb5e968623b58dff1ac326257
+| |\  Merge: cc04b09 e1f7c84
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/|   Date:   Sat May 21 14:30:09 2022 +0800
+| |   
+| |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_QualityCheck_HTMLAndCSSImprovements
+| | 
+* | commit e1f7c845db1fc1f2a37ecadfab553e34f20c747d
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 14:05:23 2022 +0800
+| | 
+| |     fixed issue with placement of form on leaderboard page
+| | 
+* | commit 0a42f90c24bbe5d4d87459b4dfc6073e08c67735
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat May 21 14:01:57 2022 +0800
+| | 
+| |     fixed small issue with text on rules page overlapping scroll base
+| |   
+* |   commit d9e6cc46e60f5be649d234a4cf3ec966460404ba
+|\ \  Merge: 2afd264 a7cb1e5
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Sat May 21 13:39:43 2022 +0800
+| | | 
+| | |     Merge pull request #37 from jwyatt1999/jwyatt_QualityCheck_HTMLAndCSSValidation
+| | |     
+| | |     Quality Check: HTML and CSS Validation
+| | |   
+| * |   commit a7cb1e5cfb9dd63690926f50781108e1c1418503 (origin/jwyatt_QualityCheck_HTMLAndCSSValidation, jwyatt_QualityCheck_HTMLAndCSSValidation)
+| |\ \  Merge: 1b951da 2afd264
+| |/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/| |   Date:   Sat May 21 12:46:21 2022 +0800
+| | |   
+| | |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_QualityCheck_HTMLAndCSSValidation
+| | |   
+* | |   commit 2afd264ae2d267285b93ad03f7cfd1ec06d5008d
+|\ \ \  Merge: f02d4bb 95b0eca
+| | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | Date:   Sat May 21 12:45:50 2022 +0800
+| | | | 
+| | | |     Merge pull request #38 from jwyatt1999/JK_update_error_handling
+| | | |     
+| | | |     Added 404 and 500 error pages
+| | | | 
+| * | | commit 95b0ecab7004e09d8fdd078ef93db30191c4481a
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat May 21 12:11:25 2022 +0800
+| | | | 
+| | | |     Changed class of 404 page to error Header
+| | | | 
+| * | | commit 6f03a40426b9282f81c0fc55d1cd2198debeaa48
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat May 21 12:08:21 2022 +0800
+| | | | 
+| | | |     Changed changed font color of error text to blue
+| | | | 
+| * | | commit ec37ead64c8d5b0f334a818d408a2085c74ed785
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat May 21 12:06:05 2022 +0800
+| | | | 
+| | | |     Changed links in 404 and 500 into buttons
+| | | | 
+| * | | commit 76bcd8d5c911f48a19490df6c6318d40b3e9a16e
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat May 21 11:55:44 2022 +0800
+| | | | 
+| | | |     Added 404 and 500 error pages
+| | | |   
+* | | |   commit f02d4bb3907226eae64ec6d48a04a9305e38d191
+|\ \ \ \  Merge: 9540af1 9676d01
+| |/ / /  Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+|/| | |   Date:   Sat May 21 12:36:00 2022 +0800
+| | | |   
+| | | |       Merge pull request #36 from jwyatt1999/jwyatt_QualityCheck_JSFilesAndUnitTests
+| | | |       
+| | | |       Quality Check: JS Files and Unit Tests
+| | | |   
+| * | |   commit 9676d01cf26f8a95f199c0c13db451582130da6f (origin/jwyatt_QualityCheck_JSFilesAndUnitTests)
+| |\ \ \  Merge: 2ca23b5 9540af1
+| |/ / /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/| | |   Date:   Sat May 21 11:55:28 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_QualityCheck_JSFilesAndUnitTests
+| | | |   
+* | | |   commit 9540af11c0ba219d07a50cb4ff9cbee259c79493
+|\ \ \ \  Merge: 021a060 de244c1
+| | | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | | Date:   Sat May 21 11:04:51 2022 +0800
+| | | | | 
+| | | | |     Merge pull request #35 from jwyatt1999/jwyatt_UpdateRules
+| | | | |     
+| | | | |     Update Rules Page
+| | | | | 
+* | | | | commit 021a060cc340815669e3bf8d4a798eb7696b5bc9
+| | | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | | Date:   Fri May 20 23:54:07 2022 +0800
+| | | | | 
+| | | | |     Fixed problems with readme indentation
+| | | | | 
+| | | | * commit cc04b09da001fea848e98bc3d6872a06728742d0
+| | | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | |   Date:   Sat May 21 11:55:03 2022 +0800
+| | | |   
+| | | |       removed useless element from style
+| | | | 
+| | | * commit 1b951da8f9402082ee9f420eb12d1dfd25613e08
+| | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | |   Date:   Sat May 21 01:00:18 2022 +0800
+| | |   
+| | |       fixed issues caught by validator
+| | | 
+| | * commit 2ca23b5a73569cf488d66c7d1e7bb81a962c3215
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 20 23:52:14 2022 +0800
+| | | 
+| | |     added comments to unit test files
+| | | 
+| | * commit 9f5d1a8a415b2bd9002e2cd5f353d4eec92421d4
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Fri May 20 23:39:25 2022 +0800
+| |   
+| |       improved quality of js files
+| |   
+| *   commit de244c1510c25b63abb2093bae30b42a973c62d4 (origin/jwyatt_UpdateRules, origin/jwyatt_404And500ErrorPages)
+| |\  Merge: 548799a af475db
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/|   Date:   Fri May 20 21:37:50 2022 +0800
+| |   
+| |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_UpdateRules
+| |   
+* |   commit af475dba5b2e257ffdb7ae537117a76f6dda5a1f
+|\ \  Merge: 24a8fae 241ac2f
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Fri May 20 18:15:05 2022 +0800
+| | | 
+| | |     Merge pull request #34 from jwyatt1999/jwyatt_UpdateReadme
+| | |     
+| | |     Update Readme
+| | | 
+| * | commit 241ac2f71e87cbef0e5dcaf10920bee993eea36a (origin/jwyatt_UpdateReadme)
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Thu May 19 22:05:48 2022 +0800
+| | | 
+| | |     made some changes to readme
+| | | 
+| | * commit 548799ab382153bd443b79142ae189f9b0777716
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 20 21:37:11 2022 +0800
+| | | 
+| | |     added playtesters to credits
+| | | 
+| | * commit 186fe3bad78bd2c281ff4b2f91f92411e97a0e14
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 20 21:18:05 2022 +0800
+| | | 
+| | |     added break to match leaderboard_daily
+| | | 
+| | * commit a6367bbd4fde070eed13479dac585a2e4764b103
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 20 20:58:25 2022 +0800
+| | | 
+| | |     fixed variety of bugs and unified style
+| | | 
+| | * commit 34e88ebb8af4b0114365e43de1660964d402cc19
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Thu May 19 18:15:46 2022 +0800
+| |   
+| |       updated rules
+| | 
+| * commit 3eb70ce3c975871964bde5793fd9debb24cbfbd8
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 17:53:12 2022 +0800
+| | 
+| |     added comment
+| | 
+| * commit f9a71e2bb091dc24ea894a9f61cf484f549614bc
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 16:35:08 2022 +0800
+| | 
+| |     updated readme
+| | 
+| * commit 2bb97e4e21357dd19dafa678f72f39b62eb40205
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 13:52:28 2022 +0800
+| | 
+| |     added some sleeping to system test so you don't have seizures
+| | 
+| * commit 8342c4e5a8a4ef52915514838b727ca81981830a
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 13:42:47 2022 +0800
+| | 
+| |     renamed systemtest
+| | 
+| * commit 4cb5b0d364ca5f7ce9fce3d8bc5cc47dfbc1e5ab
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 13:42:20 2022 +0800
+| | 
+| |     renamed seleniumtests
+| | 
+| * commit da78f85a7c454b9efe2dcae657293be61ed3895d
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 13:36:25 2022 +0800
+| | 
+| |     fixed annoying bug where page would intermittently be blank due to order js files were loaded
+| | 
+| * commit 06d585ef7398c44364fea84fd064cc546441f880
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 12:21:41 2022 +0800
+| | 
+| |     removed unnecessary imports
+| |   
+| *   commit d7207341c98aeb01a0819a06e662d8e508a590ec
+| |\  Merge: 94ece18 24a8fae
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/|   Date:   Thu May 19 11:48:56 2022 +0800
+| |   
+| |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_UpdateReadme
+| |   
+* |   commit 24a8faedf2f497cff67d27c9592f5f84d523e36d
+|\ \  Merge: bcbbd4a 0d554f8
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Thu May 19 11:22:33 2022 +0800
+| | | 
+| | |     Merge pull request #33 from jwyatt1999/jwyatt_AddingUnitTests
+| | |     
+| | |     Add Front-End Unit Tests
+| | | 
+| | * commit 94ece180efb69d61c21c8c05f4c7a6444e933957
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Thu May 19 11:48:09 2022 +0800
+| | | 
+| | |     fixed intermittent issue of certain functions not being loaded before being called in startGame()
+| | | 
+| | * commit a88ef6054320ea348a1f175191dae1b5d293e584
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Thu May 19 11:13:22 2022 +0800
+| | | 
+| | |     updated readme
+| | |   
+| | | * commit 285ee01f933d26a8171ab0bba07112debf3112aa (origin/jwyatt_AddingUnitTests)
+| | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |/|   Date:   Thu May 19 11:29:28 2022 +0800
+| | |   
+| | |       fixed intermittent issue of certain functions not loading before being called in startGame()
+| | | 
+| * | commit 0d554f84f34a0db10e446970c5740d308830e070
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Thu May 19 11:17:48 2022 +0800
+| |   
+| |       fixed issues caught by code review
+| | 
+| * commit 8a49a4840519128cf13b8ea02fd8dda0bdbef56c
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 19 00:22:47 2022 +0800
+| | 
+| |     improved getDate
+| | 
+| * commit 3a04e3d6e927ca69e5a4f0599c30b57484516bd0
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed May 18 23:25:51 2022 +0800
+| | 
+| |     implemented final test of game functionality
+| | 
+| * commit 7c357c4da6fb0db059b84b34a48de393dc771120
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed May 18 21:45:48 2022 +0800
+| | 
+| |     got all test minus game function working and fixed some bugs with leaderboard page
+| | 
+| * commit 1a65f6114d667f18240e259ccf8cfbfaaed2d2f6
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed May 18 20:21:10 2022 +0800
+| | 
+| |     fixed issues with profile page
+| |   
+| *   commit 3d63cf6db4f6f71f4cd8f5c518fc066644d3e496
+| |\  Merge: b808a82 bcbbd4a
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/|   Date:   Wed May 18 19:59:27 2022 +0800
+| |   
+| |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_AddingUnitTests
+| |   
+* |   commit bcbbd4a145dfd778c6b9215cccb217c01918b7b0
+|\ \  Merge: 215f0fb 7486cef
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Tue May 17 22:02:41 2022 +0800
+| | | 
+| | |     Merge pull request #32 from jwyatt1999/JK_unit_tests
+| | |     
+| | |     Jk unit tests
+| | | 
+| * | commit 7486cef3eda6b314091cab98994607a60ad225d3
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Mon May 16 16:34:53 2022 +0800
+| | | 
+| | |     Fixed changes as indicated by comments
+| | | 
+| * | commit 0950b217a15a4b4031109cddbdef36e2a581c961
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Mon May 16 12:52:13 2022 +0800
+| | | 
+| | |     Added tests for scorecards
+| | | 
+| * | commit 969f18940d5b62af4994da9e31c64af62808968d
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Mon May 16 11:46:54 2022 +0800
+| | | 
+| | |     Cleaned up queries in user route
+| | | 
+| * | commit 58b10d8c884cbe0cedd02d644b95ccf302761e08
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sun May 15 15:28:48 2022 +0800
+| | | 
+| | |     Added test for scorelists
+| | | 
+| * | commit dbf9ea7f46306dc5fe621ef72db4d0d532308450
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sun May 15 15:20:36 2022 +0800
+| | | 
+| | |     Added test for User model
+| | | 
+| * | commit 8863638110c12bc8c071c65ba3860b13b5eb84b7
+|/ /  Author: Bsubs <bsubs02@gmail.com>
+| |   Date:   Sun May 15 15:20:18 2022 +0800
+| |   
+| |       Updated queries in /user route
+| | 
+| * commit b808a82a7018e521b005525cd3e736e399c77c72
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed May 18 19:57:30 2022 +0800
+| | 
+| |     implemented 3 of 5 user tests
+| | 
+| * commit 1ea8e746d14707b5f5af7525f5f2643eadec0f42
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Tue May 17 22:21:28 2022 +0800
+| | 
+| |     added test route for game
+| | 
+| * commit c8811a7f2ecb356d2d6bd930a6deae22f23733ad
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 16 23:09:39 2022 +0800
+| | 
+| |     added extra pseudo code
+| | 
+| * commit 8a377a9454e482740790cfc4bef165ac8d7d02e2
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 16 23:07:49 2022 +0800
+| | 
+| |     added pseudo-code to selenium tests
+| | 
+| * commit ee50219e68450e35ad9d284ed63ec64da335fa04
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 16 22:43:38 2022 +0800
+| | 
+| |     fixed bug with 1x1 square
+| | 
+| * commit b443ba50a64b8535e80876fa65671a34feeb6815
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 16 22:34:38 2022 +0800
+| | 
+| |     fixed long-time bug of coin flipping without type flipping
+| | 
+| * commit fa826b5d8bcac2569f43301fb9a590145de82b96
+|/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|   Date:   Mon May 16 19:41:20 2022 +0800
+|   
+|       wip selenium tests
+| 
+* commit 215f0fbbd87fc2a75ea94e95156cbafd86d6dd51
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Sat May 14 17:08:31 2022 +0800
+| 
+|     remove double tap zoom from game buttons
+| 
+* commit 6db86c3ba8800a0fd3ff1a4f2c76c3d5e93ea61d
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Sat May 14 16:58:37 2022 +0800
+| 
+|     modified width of secondary buttons to prevent breaking onto two lines on lower resolutions
+| 
+* commit 893fceacf546ac8b128b4a4c9c8f403561088954
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Sat May 14 16:44:06 2022 +0800
+| 
+|     fixed gameboard icons not resizing correctly with board
+| 
+* commit 2c0b00462f40cb1455472d0eb7c86144cda7722b
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Sat May 14 16:35:10 2022 +0800
+| 
+|     added padding to scorecard descriptions to allow easier reading
+| 
+* commit 5a5e4ab5f2fe35263785858a1b2424eb06244960
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Sat May 14 16:15:57 2022 +0800
+| 
+|     reverted change to item width
+| 
+* commit 2fa63852ab388d16a0a1e323aef268e923f7f286
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Sat May 14 16:02:09 2022 +0800
+| 
+|     fixed spacing of leaderboard and profile page scores
+|   
+*   commit 1434cef34793106d127d0f29bd71e63a75b85db8
+|\  Merge: 4f16360 3004e63
+| | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | Date:   Sat May 14 15:53:51 2022 +0800
+| | 
+| |     Merge pull request #31 from jwyatt1999/JK_social_media_integration
+| |     
+| |     Jk social media integration
+| | 
+| * commit 3004e63fc5e9d391705254e1d7f20d46ba3aba72
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Sat May 14 03:55:28 2022 +0800
+| | 
+| |     Removed some unecessary code
+| |   
+| *   commit 707f2c5be53b8ae11e8e2ee554f53b623a464d6f
+| |\  Merge: e0e9d81 4f16360
+| |/  Author: Bsubs <bsubs02@gmail.com>
+|/|   Date:   Sat May 14 03:40:52 2022 +0800
+| |   
+| |       Merge remote-tracking branch 'origin/main' into JK_social_media_integration
+| |   
+* |   commit 4f163601c42632d48d7eb098e852832cf4c7b13a
+|\ \  Merge: 9928b8c 33feded
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Sat May 14 11:24:13 2022 +0800
+| | | 
+| | |     Merge pull request #30 from jwyatt1999/jwyatt_UpdateRenderingOnMobile
+| | |     
+| | |     Improve Rendering and Usability on Mobile
+| | | 
+| * | commit 33feded7793e7fc8fae59586606158a82a010eb0 (origin/jwyatt_UpdateRenderingOnMobile)
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 13 21:35:27 2022 +0800
+| | | 
+| | |     removed useless gameOver text
+| | | 
+| * | commit 25923afe0f18b3c6b508d65eb75abe62b6fbdc28
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 13 19:37:52 2022 +0800
+| | | 
+| | |     fixed leaderboard and profile page text colours
+| | | 
+| * | commit f823df1391116c3dd40cb1ed514f9c22fd897af5
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Fri May 13 19:08:24 2022 +0800
+| | | 
+| | |     fixed navbar toggler and other navbar issues on mobile
+| | | 
+| * | commit bd4c882d365a65b548014433f3860371c481f311
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Thu May 12 23:27:42 2022 +0800
+| | | 
+| | |     fixed buttons showing over things and scorecards behaving weirdly at certain widths
+| | | 
+| * | commit f6bf357983c0843216fc7667d9996dd84039de27
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Thu May 12 22:51:40 2022 +0800
+| | | 
+| | |     added black outline around gamepage text for readability
+| | | 
+| * | commit fa0cfaf0b7f647bbbc2cee609d141f150c470518
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Thu May 12 22:49:00 2022 +0800
+| | | 
+| | |     board is now always square and you can scroll through the scorecards
+| | | 
+| * | commit 0db3ef716641e3372a935ca9e2fea46de700c2e0
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Tue May 10 17:43:22 2022 +0800
+| | | 
+| | |     moved style into stylesheet
+| | | 
+| * | commit 76afc91bbe770a651ed8a4ca2ef12ac03479c74c
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Tue May 10 17:40:43 2022 +0800
+| | | 
+| | |     fixed scaling of buttons on home page
+| | |   
+| * |   commit 311dd9d24d9abc68e31ba8432704571bec30dc3d
+| |\ \  Merge: 9281aa7 3e47faa
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Tue May 10 08:44:12 2022 +0800
+| | | | 
+| | | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_UpdateRenderingOnMobile
+| | | | 
+| * | | commit 9281aa77771505763c43b69abf98d6261938011d
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon May 9 16:58:28 2022 +0800
+| | | | 
+| | | |     made some changes to index page
+| | | |   
+| * | |   commit 272e265797638d3228bd780030f45b9ec8c17e0d
+| |\ \ \  Merge: 817fe1c bc9eba9
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Mon May 9 16:48:09 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_UpdateRenderingOnMobile
+| | | | | 
+| * | | | commit 817fe1c5d3e672c66130b697c99b89b1efb865f2
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Thu May 5 18:57:20 2022 +0800
+| | | | | 
+| | | | |     changed login to redirect to main page
+| | | | | 
+| * | | | commit 9c85b6b7b2cfc3d2be442a71051b73ecefd605df
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Thu May 5 18:53:16 2022 +0800
+| | | | | 
+| | | | |     fixed leaderboard and profile page text
+| | | | | 
+| * | | | commit 2029b6afd37003e9b3cd044ef9d7c998adaa22f4
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Thu May 5 18:45:40 2022 +0800
+| | | | | 
+| | | | |     made navbar toggler visible
+| | | | | 
+| | | | * commit e0e9d8173a2c1782e1441d8eaea7143d048912da
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Sat May 14 03:38:54 2022 +0800
+| | | | | 
+| | | | |     Moved social media functions to page_logic.js
+| | | | | 
+| | | | * commit d50d9b77066e87c9d4bae6b745735e49bbaddfd0
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Fri May 13 17:59:16 2022 +0800
+| | | | | 
+| | | | |     Moved facebook button into popup modal
+| | | | | 
+| | | | * commit 1ea3b4f4eaff22332de1212c3daf549217cd8d77
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Fri May 13 17:15:14 2022 +0800
+| | | | | 
+| | | | |     Added a facebook share button
+| | | | | 
+| | | | * commit f406d9347cd17932f406ab1d2b634d02aa02aa01
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Thu May 12 12:00:02 2022 +0800
+| | | | | 
+| | | | |     Removed extra "." from pre composed twitter sting
+| | | | | 
+| | | | * commit 99c0d28ea3cbf1987daba4a9865f338384e73112
+| |_|_|/  Author: Bsubs <bsubs02@gmail.com>
+|/| | |   Date:   Wed May 11 23:47:52 2022 +0800
+| | | |   
+| | | |       Added popup modal at end of game with a tweet button
+| | | |   
+* | | |   commit 9928b8cd6ae3ea97607167f1430580319f0f8ef5
+|\ \ \ \  Merge: 3e47faa 263addc
+| |_|_|/  Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+|/| | |   Date:   Tue May 10 13:45:14 2022 +0800
+| | | |   
+| | | |       Merge pull request #29 from jwyatt1999/jwyatt_TerrainIcons
+| | | |       
+| | | |       Add Terrain Icons
+| | | | 
+| * | | commit 263addc759d99d62fbab92938265b7687bcc785d (origin/jwyatt_TerrainIcons)
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Tue May 10 13:34:44 2022 +0800
+| | | | 
+| | | |     added icons and border to board
+| | | | 
+| * | | commit 00341b6b817b4466904f6f19b31b81fec99f3c79
+|/ / /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | |   Date:   Tue May 10 12:50:19 2022 +0800
+| | |   
+| | |       added icons
+| | |   
+* | |   commit 3e47faab19764956bca8ea83e35992233368433a
+|\ \ \  Merge: bc9eba9 4dac8ce
+| |_|/  Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+|/| |   Date:   Tue May 10 08:36:43 2022 +0800
+| | |   
+| | |       Merge pull request #28 from jwyatt1999/JK_profile_page_update
+| | |       
+| | |       Moved highscore in profile page above list of recent scores
+| | | 
+| * | commit 4dac8ceb8faa2c8f5f9e836f92170d4fae8e93a5 (origin/JK_profile_page_update)
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Mon May 9 09:14:51 2022 +0800
+| | | 
+| | |     Moved highscore in profile page above list of recent scores
+| | | 
+* | | commit bc9eba924623e3cb24c4dcc549997ae4d17bd4ca
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sun May 8 20:53:08 2022 +0800
+| | | 
+| | |     Update README.md
+| | | 
+* | | commit 56b4bb500aef4697a0d4c2799323fff77ae57188
+|\| | Merge: e268d12 61eb974
+| |/  Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+|/|   Date:   Sun May 8 20:01:12 2022 +0800
+| |   
+| |       Merge pull request #27 from jwyatt1999/JK_Extended_Database_Functions
+| |       
+| |       Jk extended database functions
+| | 
+| * commit 61eb974ca7bea413d69d0d18429517f3189803a4 (origin/JK_Extended_Database_Functions)
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Sat May 7 05:34:11 2022 +0800
+| | 
+| |     Resolved issues from initial review
+| |   
+| *   commit f2b1093ce167466b2f5aa86dfd16ba61f4fc7aaa
+| |\  Merge: 9a1b992 e268d12
+| |/  Author: Bsubs <bsubs02@gmail.com>
+|/|   Date:   Fri May 6 14:54:56 2022 +0800
+| |   
+| |       Merge remote-tracking branch 'origin/main' into JK_Extended_Database_Functions
+| | 
+* | commit e268d12281c4779856879d12a741676a427bf032
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 5 17:22:06 2022 +0800
+| | 
+| |     fixed daily seed setting
+| | 
+* | commit b5155b93213338cd505d5adfeb5c9e2ab5095d65
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 5 16:56:17 2022 +0800
+| | 
+| |     modified app
+| | 
+* | commit 96bf872f4b878e6e86563d32e0caffb2ec91733e
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu May 5 16:47:19 2022 +0800
+| | 
+| |     migrated to postresql database instead of sqlite
+| | 
+* | commit a3777170887182b3f40dc42c3fb56c05d5e41356
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 2 18:05:45 2022 +0800
+| | 
+| |     added a bit to credits page
+| | 
+* | commit ed0271a83e97d8c86cb65f121d6bd36a57a4a5c2
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 2 17:58:43 2022 +0800
+| | 
+| |     removed tutorial button
+| | 
+* | commit 7de7e5a8b1caca9eb5f6c8feb08f9e60c7567229
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Mon May 2 17:45:41 2022 +0800
+| | 
+| |     fix registration redirection
+| |   
+* |   commit a5f17fede8ccf4c869cc26a2cc31f1e977a32066
+|\ \  Merge: 6cf24de 111070e
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Mon May 2 17:26:27 2022 +0800
+| | | 
+| | |     Merge pull request #26 from jwyatt1999/JK_register_bug_fix
+| | |     
+| | |     Updated routes to work with new models
+| | | 
+| * | commit 111070e607dd7a9ef6b00e693bcff7fffbcc3b6e
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Mon May 2 12:52:19 2022 +0800
+| | | 
+| | |     Changed post method in javascript to work correctly
+| | | 
+| * | commit dd62ef1956edd2d101ac9f8abe9779daf6d033df
+|/ /  Author: Bsubs <bsubs02@gmail.com>
+| |   Date:   Mon May 2 12:42:02 2022 +0800
+| |   
+| |       Updated routes to work with new models
+| | 
+| * commit 9a1b992b9c8292f951f419d84cb52f591165d4fb
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Fri May 6 14:50:13 2022 +0800
+| | 
+| |     Implemented being able to filter daily scores by date on leaderboard page
+| | 
+| * commit 7cd70d6d11a8226fd2b271529a7c097a17d3c922
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Wed May 4 15:20:16 2022 +0800
+| | 
+| |     Show highest score for daily and freeplay mode on profile page
+| | 
+| * commit 9cb8f1e17abc1441f3218ac43c88e734698fc754
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Wed May 4 14:56:11 2022 +0800
+| | 
+| |      Extend profile page to include new functionalities - average points in daily/freeplay/overall, total games completed in daily/freeplay/overall
+| | 
+| * commit e4f0651a1fb9415380685758ff33ed2df4745f4c
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Mon May 2 14:38:37 2022 +0800
+| | 
+| |     Cleaned up ignored files
+| | 
+| * commit b03205724eab9adf52b6694bed1c3c63644ae358
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Mon May 2 14:38:24 2022 +0800
+| | 
+| |     Cleaned up ignored files
+| | 
+| * commit 277f3178b20a9e7db332ee41763e9415550971da
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Mon May 2 12:18:06 2022 +0800
+| | 
+| |     Reverted changes to routes to work with new models
+| | 
+| * commit 18bbd4b4cb07f23a31c74e15f2b480d5279520ea
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Sun May 1 21:31:33 2022 +0800
+| | 
+| |     Pulled in launch version of main
+| |   
+| *   commit 3430fac9075eace57d8cfaf4b6149c8c43620259
+| |\  Merge: 3572c74 6cf24de
+| |/  Author: Bsubs <bsubs02@gmail.com>
+|/|   Date:   Sun May 1 21:31:07 2022 +0800
+| |   
+| |       Merge remote-tracking branch 'origin/main' into JK_Extended_Database_Functions
+| | 
+* | commit 6cf24de000a7f135f7e18deb7af68cf418083314
+| | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | Date:   Sun May 1 17:11:33 2022 +0800
+| | 
+| |     Update README.md
+| | 
+* | commit 22f51282f14721a96048a3b23cc60d11451253e7
+| | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | Date:   Sun May 1 17:11:13 2022 +0800
+| | 
+| |     Update README.md
+| |   
+* |   commit 83cae69f6f3ee7946f0d957f3414303f81547cb4
+|\ \  Merge: 6939e57 4cb2bf1
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Sun May 1 16:59:41 2022 +0800
+| | | 
+| | |     Merge pull request #25 from jwyatt1999/jwyatt_RulesInformationPages
+| | |     
+| | |     Add Content to Credits and Rules Pages
+| | | 
+| * | commit 4cb2bf108dc817bb2f9c0dd1303ee8961477a142 (origin/jwyatt_RulesInformationPages)
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sun May 1 16:58:19 2022 +0800
+| | | 
+| | |     added link to official rules for cartographers
+| | | 
+| * | commit 2a1980c4ebdf8e5bdba990526c8da3143315fb97
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 19:17:41 2022 +0800
+| | | 
+| | |     fixed issues caught by validator
+| | | 
+| * | commit 5fc149ed0dcd53e59ea7cbeb31b528da11661c61
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 19:16:51 2022 +0800
+| | | 
+| | |     fixed problems caught by validator
+| | | 
+| * | commit 00231da12d580ee4fa2245fc17a410b82334a9e4
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 19:14:32 2022 +0800
+| | | 
+| | |     add button symbols
+| | | 
+| * | commit 8a59fbe9299cbe4b883fbd182defdcdcac737ae2
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 19:08:47 2022 +0800
+| | | 
+| | |     finished rules page
+| | | 
+| * | commit f14ff40348a8d3d4f7bdcc16eb33579b0804387b
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 17:50:12 2022 +0800
+| | | 
+| | |     added some rules to rules page
+| | | 
+| * | commit 8dcc2308e48d8d9c9ab7f183e522c5400ca274b1
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 16:41:29 2022 +0800
+| | | 
+| | |     some changes to rules page
+| | | 
+| * | commit 5c698b179e0e193d02ab192a3e950704681e1dd6
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 16:40:08 2022 +0800
+| | | 
+| | |     fixed indentation
+| | | 
+| * | commit 63ae9fb697e03b6c23581949eeaa72d702de4bb1
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 16:39:03 2022 +0800
+| | | 
+| | |     more changes to credits page
+| | | 
+| * | commit e90a0f94c3aa36392d89b69c6fec8c8f4da33c3e
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 16:33:02 2022 +0800
+| | | 
+| | |     finished credits page
+| | | 
+| * | commit afd3d503fda41c4d1848efd92598b8281320ddd3
+|/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Sat Apr 30 15:54:13 2022 +0800
+| |   
+| |       renamed information to credits
+| | 
+* | commit 6939e57f17e7b14a2193744ad7dbc2aa526369e3
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat Apr 30 14:44:35 2022 +0800
+| | 
+| |     added hidden to startbuttons to stop it from showing when loading is taking a while
+| |   
+* |   commit 3082b8f3b98f80b3cd28004d67b4ef39a81de74d
+|\ \  Merge: febfba1 5668cea
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Sat Apr 30 14:06:05 2022 +0800
+| | | 
+| | |     Merge pull request #24 from jwyatt1999/jwyatt_RemoveStartButtons
+| | |     
+| | |     Add Automatic Starting of Game Based on URL
+| | | 
+| * | commit 5668cead3c5b297fd31fe3494ee77b829ce03726 (origin/jwyatt_RemoveStartButtons)
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 13:42:13 2022 +0800
+| | | 
+| | |     added more type checking
+| | | 
+| * | commit d4055e59d046db759f3856a25f43b5c718a622b3
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 13:08:47 2022 +0800
+| | | 
+| | |     added more type checking
+| | | 
+| * | commit 5165c825f19c61ea6bf33bcb002625d52653bbff
+|/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Sat Apr 30 12:59:24 2022 +0800
+| |   
+| |       removed start button and added url-dependent game
+| | 
+* | commit febfba1733380988086cc0888e2c4d279a196f45
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat Apr 30 11:10:49 2022 +0800
+| | 
+| |     add flask db to procfile
+| |   
+* |   commit eadc718b1ae22adc3fd9467a46305eacb6efa374
+|\ \  Merge: 044c805 edba7a4
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 11:05:02 2022 +0800
+| | | 
+| | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers
+| | | 
+| * | commit edba7a47210913fe0d72dc9c0fc4a59084c5830e
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 30 09:44:12 2022 +0800
+| | | 
+| | |     Update README.md
+| | | 
+| * | commit f5a9fe1da4b4f429a2c9d5ab8436a9a42947bce4
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 30 09:43:25 2022 +0800
+| | | 
+| | |     Update README.md
+| | | 
+* | | commit 044c805e404c8c78fffefbb29c4d4a5ae1f6cb2c
+|/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Sat Apr 30 11:04:57 2022 +0800
+| |   
+| |       delete myDB
+| |   
+* |   commit 86558f41d7ac7aa72faf9b052fbd0e3519397f23
+|\ \  Merge: 0dfafb9 08be389
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 30 09:40:13 2022 +0800
+| | | 
+| | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers
+| | | 
+| * | commit 08be38909c7e75d9c46816b63fc20b343a4dce6b
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 30 09:24:35 2022 +0800
+| | | 
+| | |     Update README.md
+| | | 
+| * | commit b261f9a04c89a383f7d3021d228740f27aff5cdd
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 30 09:21:06 2022 +0800
+| | | 
+| | |     Update README.md
+| | | 
+* | | commit 0dfafb944c1e9a8714f2ea8fda50331c7b609c75
+|/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Sat Apr 30 09:40:08 2022 +0800
+| |   
+| |       increased width of scorecards to prevent having to scroll
+| | 
+* | commit f8a4d6090bb7d0b5700c200187e135986e5cb6f7
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat Apr 30 09:13:23 2022 +0800
+| | 
+| |     renamed static and templates
+| | 
+* | commit 5b388c88e6cfb03dbdf7fb5763d9caa75ee25538
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat Apr 30 09:12:50 2022 +0800
+| | 
+| |     renamed static and templates
+| | 
+* | commit fc0e071dc54f86e9f7319101090dbe38f2138a7e
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Sat Apr 30 09:09:15 2022 +0800
+| | 
+| |     extra change to app
+| | 
+* | commit b2d99ad81ffb735b6129ade78d90f10a3f972868
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 14:00:28 2022 +0800
+| | 
+| |     edited procfile
+| | 
+* | commit b1716767e052ac952077641f414b1a3736e32523
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:57:54 2022 +0800
+| | 
+| |     updated procfile and app
+| | 
+* | commit ffc85fd03a1cc1b2baf92d428d5941919fa02406
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:50:19 2022 +0800
+| | 
+| |     added location of template folder
+| | 
+* | commit c8de1e05abf9930e3f6cca7f75a4cfdb7b65c41d
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:44:43 2022 +0800
+| | 
+| |     renamed templates
+| | 
+* | commit 1bccbeefebe8d6830c31a0c2db7925cf8fb791d9
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:41:37 2022 +0800
+| | 
+| |     moved index
+| | 
+* | commit 816376d33e8ca42eefaa2b4e0250701123301730
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:39:51 2022 +0800
+| | 
+| |     updated routes
+| | 
+* | commit d8b5776e83ed0e38725265ab94ada9629e986aac
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:37:27 2022 +0800
+| | 
+| |     changed hardcoded paths
+| | 
+* | commit 3657739de28c522f0d4f73f992e77c754929606c
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:24:37 2022 +0800
+| | 
+| |     changed app one last time
+| | 
+* | commit 4856bc8a6d65438e7806824de4654ad679968bb7
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:21:02 2022 +0800
+| | 
+| |     changed file structure
+| | 
+* | commit f400f7ce1ad9cd7d50f03e084f51c53e9b6aa43f
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:16:29 2022 +0800
+| | 
+| |     moved app
+| | 
+* | commit 7de5d7f2eaf62630de8259360d853414a0b2bcd2
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:10:03 2022 +0800
+| | 
+| |     edited app file
+| | 
+* | commit ae273df8ecf66aebe569eb2674595361ab85fec2
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:09:38 2022 +0800
+| | 
+| |     edited procfile
+| | 
+* | commit 53a82e5c34ca41892a1d4a66e468542c6b330dfd
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:05:16 2022 +0800
+| | 
+| |     change order
+| | 
+* | commit 19f0d266857537d499f616d4b5f262622870fb7e
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 13:02:25 2022 +0800
+| | 
+| |     another change to procfile
+| | 
+* | commit cd0d629f9ce7273732a7f26a312bfd743f052d1a
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:58:44 2022 +0800
+| | 
+| |     last change hopefully
+| | 
+* | commit a2930f11f5b1fe72c993d14c43cb9adac60c899d
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:57:23 2022 +0800
+| | 
+| |     another change
+| | 
+* | commit 9abca95ab422ac06ab617715711a13d42a22b100
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:56:49 2022 +0800
+| | 
+| |     changes to fix the issue?????
+| | 
+* | commit 9f985d08c01f6925d7a7b67e9281d48f43043b54
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:53:52 2022 +0800
+| | 
+| |     added gunicorn
+| | 
+* | commit d1a50c86fe2748d4fb998756c6591ff5f9302f8d
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:48:50 2022 +0800
+| | 
+| |     updated run file
+| | 
+* | commit a64bdf6b106ec18aacb6b88df889c64e836cf2a1
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:47:57 2022 +0800
+| | 
+| |     renamed app
+| | 
+* | commit 7beef663ed2df8649f9560e317af7a3e78cc0db7
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:47:29 2022 +0800
+| | 
+| |     changed import because thats failing
+| | 
+* | commit 62211bdd0efa98771a59447586829235415ca828
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:33:52 2022 +0800
+| | 
+| |     please please work
+| | 
+* | commit 5bdb780a2ff6e9aad3e717a2e39bc5c3b62c8641
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:24:58 2022 +0800
+| | 
+| |     changed flaskenv to maybe fix the problem
+| | 
+* | commit 269f1299b941897cb01fd7fde669d8683da5234e
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:23:24 2022 +0800
+| | 
+| |     undone change to routes
+| | 
+* | commit 4709b41f4c41969aa3065a41de78c460d7d2805e
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:20:07 2022 +0800
+| | 
+| |     changed route.py to see if that fixes the problem
+| | 
+* | commit 5ce74b7673184d79694151d456158598e6473d56
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:17:07 2022 +0800
+| | 
+| |     re-updated procfile to hopefully work
+| | 
+* | commit 426110914a60280fcab874ed7546cd5e069c1c1a
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:16:09 2022 +0800
+| | 
+| |     updated procfile to hopefully work...
+| | 
+* | commit 2ceba87eab86c8d44f99ab29458a62a39164472b
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:09:44 2022 +0800
+| | 
+| |     added pytohn dotenv to requirements
+| | 
+* | commit 4a5051e92311a4a3cdcaaa4fdf00375074edb8b6
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:06:56 2022 +0800
+| | 
+| |     fixed flaskenv
+| | 
+* | commit b05f84365e9a0f746e0a90ec09e2d94b615c5d84
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 12:04:29 2022 +0800
+| | 
+| |     added flaskenv
+| | 
+* | commit 06ed32034407eb9be79fe1b6d7105846c4787b53
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 11:58:58 2022 +0800
+| | 
+| |     Added procfile
+| | 
+* | commit 90e14ef6e117621beae2dc8e68b272f9c10923ea
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Apr 29 11:35:38 2022 +0800
+| | 
+| |     fixed requirements.txt
+| | 
+| * commit 3572c7499516e230befd2d7635ebd1caeb344c59
+| | Author: Bsubs <bsubs02@gmail.com>
+| | Date:   Sun May 1 21:26:08 2022 +0800
+| | 
+| |     Fixed bug with registrtion routing
+| |   
+| *   commit 71c14ffc108a4e5a8cc1685e65624930423ead09
+| |\  Merge: 666320d a9f1702
+| |/  Author: Bsubs <bsubs02@gmail.com>
+|/|   Date:   Thu Apr 28 17:53:28 2022 +0800
+| |   
+| |       Merge remote-tracking branch 'origin/main' into JK_Extended_Database_Functions
+| |   
+* |   commit a9f1702b464e86f84150f4dfd21c457fbda3eb2d
+|\ \  Merge: cff6c80 4515b73
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Mon Apr 25 21:04:09 2022 +0800
+| | | 
+| | |     Merge pull request #21 from jwyatt1999/jwyatt_AddSeed
+| | |     
+| | |     Add Functionality to Allow Seeding the Pseudo-Random Number Generator
+| | | 
+| * | commit 4515b731758c65e557ff56e3563f56d211644a56 (origin/jwyatt_AddSeed)
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Mon Apr 25 20:16:24 2022 +0800
+| | | 
+| | |     updated daily button to take current date from server
+| | | 
+| * | commit c9456e063354815ae0b7e249ab353104eed97ba7
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Mon Apr 25 18:49:40 2022 +0800
+| | | 
+| | |     increased width of game buttons
+| | |   
+| * |   commit f54c50d97eb53f76395bafa4f004072bf59fc10b
+| |\ \  Merge: a9a9959 cff6c80
+| |/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/| |   Date:   Mon Apr 25 18:47:21 2022 +0800
+| | |   
+| | |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_AddSeed
+| | |   
+* | |   commit cff6c808bbaecc5a91b2819ebc6e1244716ab89f
+|\ \ \  Merge: 9a69bff 08e718a
+| | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | Date:   Mon Apr 25 17:09:10 2022 +0800
+| | | | 
+| | | |     Merge pull request #20 from jwyatt1999/jwyatt_MouseInteraction
+| | | |     
+| | | |     Add Mouse / Touchscreen Interaction
+| | | | 
+| * | | commit 08e718a9bd2875f93a47607530c00ec938e8f84b (origin/jwyatt_MouseInteraction)
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 25 16:46:50 2022 +0800
+| | | | 
+| | | |     another minor change to gamepage
+| | | | 
+| * | | commit 62678a10071a1b785c05dc882c47a919deb3c281
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 25 16:46:19 2022 +0800
+| | | | 
+| | | |     minor change to gamepage
+| | | | 
+| * | | commit 001b264a65fd85dc39ac695d56d10b2b2e447582
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 25 16:43:08 2022 +0800
+| | | | 
+| | | |     updated game page
+| | | | 
+| * | | commit 7cf462a646df82918fde8d3ed98647c04b6f69f9
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 25 16:39:31 2022 +0800
+| | | | 
+| | | |     updated style.css
+| | | |   
+| * | |   commit 7c6da2384bff5cfe6f7aab3d0562bc346390f863
+| |\ \ \  Merge: 8a9be44 de4ff3a
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Mon Apr 25 16:38:29 2022 +0800
+| | | | | 
+| | | | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_MouseInteraction
+| | | | | 
+* | | | | commit 9a69bff86e2ac6e922c6357f8e2901495e678680
+| |/ / /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/| | |   Date:   Mon Apr 25 17:07:14 2022 +0800
+| | | |   
+| | | |       added required files to deploy to heroku
+| | | |   
+* | | |   commit de4ff3ace8d7e3864d75dd60f805e35e670d9b65
+|\ \ \ \  Merge: f2f8f12 aa99f8f
+| | | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | | Date:   Mon Apr 25 16:03:27 2022 +0800
+| | | | | 
+| | | | |     Merge pull request #19 from jwyatt1999/jwyatt_ScoreCards
+| | | | |     
+| | | | |     Add Full Implementation of Score Cards
+| | | | | 
+| * | | | commit aa99f8f3d2a2bee5ea0987bb5c5f4eb8375acd55 (origin/jwyatt_ScoreCards)
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Mon Apr 25 14:01:29 2022 +0800
+| | | | | 
+| | | | |     removed file
+| | | | | 
+| * | | | commit e6063362af626e13c674762795ccb3a9e9c1d01d
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Mon Apr 25 12:09:23 2022 +0800
+| | | | | 
+| | | | |     made points box not hidden
+| | | | | 
+| * | | | commit 6c1044bd6e38be8968c8f91e8be977a0398b191e
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Mon Apr 25 11:59:17 2022 +0800
+| | | | | 
+| | | | |     added pyvenv.cfg to gitignore
+| | | | | 
+| * | | | commit 06552804a04d957b80712573a6e1216facb43179
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Sat Apr 23 17:49:32 2022 +0800
+| | | | | 
+| | | | |     added missing div
+| | | | | 
+| * | | | commit 285df822b7a6f94c55cf238380eaf00569da13d9
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Sat Apr 23 17:29:07 2022 +0800
+| | | | | 
+| | | | |     amended changes post proper merge
+| | | | |   
+| * | | |   commit ca3d67f5063c98bd1055e59db35d3823749f65ad
+| |\ \ \ \  Merge: e6b75f0 f2f8f12
+| |/ / / /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/| | | |   Date:   Sat Apr 23 17:27:02 2022 +0800
+| | | | |   
+| | | | |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_ScoreCards
+| | | | | 
+| * | | | commit e6b75f0c7880626ed3b5d3406e31662950c1f150
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Sat Apr 23 17:24:05 2022 +0800
+| | | | | 
+| | | | |     moved some files around
+| | | | | 
+| * | | | commit 1885283c1592604fbab98fd023983b3aef7664c9
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Sat Apr 23 17:20:25 2022 +0800
+| | | | | 
+| | | | |     Merge in main
+| | | | |   
+| * | | |   commit 795466cfd4ba0336651acd19edf20d326e771c07
+| |\ \ \ \  Merge: c181e98 e508a3d
+| | | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | | Date:   Fri Apr 22 18:08:59 2022 +0800
+| | | | | | 
+| | | | | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_ScoreCards
+| | | | | | 
+| | | | * | commit a9a9959015fefa81139f177f0bf047b9188c5a75 (origin/jwyatt_RulesPage)
+| | | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | | Date:   Sat Apr 23 15:06:26 2022 +0800
+| | | | | | 
+| | | | | |     fixed issues caught by validator
+| | | | | | 
+| | | | * | commit 68eb94e163ad8e8cbeaa01b8368eaa995e870fc5
+| | | |/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | |   Date:   Sat Apr 23 15:03:06 2022 +0800
+| | | | |   
+| | | | |       Added PRNG and daily gamemode
+| | | | | 
+| | | * | commit 8a9be449bff2476a8d76b6770818c6da869f43cf
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Sat Apr 23 13:47:28 2022 +0800
+| | | | | 
+| | | | |     fixed issues found by validator
+| | | | | 
+| | | * | commit 6d1ae27143ea761253cab23e430e0a71647458ef
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Sat Apr 23 12:24:07 2022 +0800
+| | | | | 
+| | | | |     altered buttons and made everything hidden before start button is pressed
+| | | | | 
+| | | * | commit 5b4b3c419aa5b166054efd7c03adb36806e59b16
+| | | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | | Date:   Fri Apr 22 22:36:02 2022 +0800
+| | | | | 
+| | | | |     tuned interactive buttons location and size
+| | | | | 
+| | | * | commit f33a9453b53f75da9348c707f7104c5ce8863094
+| | |/ /  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |/| |   Date:   Fri Apr 22 18:08:36 2022 +0800
+| | | |   
+| | | |       added buttons to control with mouse and on mobile
+| | | | 
+| | | * commit 666320d080e164f9e92e0a377c3e16e89eb8cb34
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Thu Apr 28 17:46:51 2022 +0800
+| | | | 
+| | | |     Updated leaderboard page to only display the top 10 scores
+| | | | 
+| | | * commit 1375fe335049af6e466e1c98139ce00d2cb01e10
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Mon Apr 25 16:26:53 2022 +0800
+| | | | 
+| | | |     Added tabs in leaderboard page to seperate daily and freeplay highscores
+| | | | 
+| | | * commit 7ad16a6e78b72a34d53cc74dde48dcaf837d0ef4
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Mon Apr 25 16:02:39 2022 +0800
+| | | | 
+| | | |     Added seperate database tracking for daily and freeplay games
+| | | | 
+| | | * commit f32e65f617399d40298225ade32265625f262eb8
+| |_|/  Author: Bsubs <bsubs02@gmail.com>
+|/| |   Date:   Mon Apr 25 15:29:49 2022 +0800
+| | |   
+| | |       Changed all static urls to dynamic ones using url_for
+| | |   
+* | |   commit f2f8f12be033d954f8d6d1481db35904f50d84df
+|\ \ \  Merge: e508a3d b83539f
+| |_|/  Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+|/| |   Date:   Sat Apr 23 16:59:42 2022 +0800
+| | |   
+| | |       Merge pull request #22 from jwyatt1999/JooKai_Flask_App
+| | |       
+| | |       Change of file structure and conversion to flask app from base html files
+| | | 
+| * | commit b83539f6da60e43bbffa5eda29e8040902e71e33 (origin/JooKai_Flask_App)
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sat Apr 23 16:17:48 2022 +0800
+| | | 
+| | |     Amended files according to comments
+| | | 
+| * | commit 84399cc37ccf10e6a0c489e7ee08dda1a5d3d102
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sat Apr 23 15:33:15 2022 +0800
+| | | 
+| | |     Renamed statistics page as leaderboard
+| | | 
+| * | commit b74c623c3c19aa414c453746f929285f5c43d28c
+| | | Author: Bsubs <bsubs02@gmail.com>
+| | | Date:   Sat Apr 23 12:04:16 2022 +0800
+| | | 
+| | |     Updated folder structure
+| | | 
+| * | commit 091ebcfdbd5e3b5edcfe19d60bf6b6d9112b7f34
+|/ /  Author: Bsubs <bsubs02@gmail.com>
+| |   Date:   Sat Apr 23 12:03:56 2022 +0800
+| |   
+| |       Created new branch for flask app
+| |   
+* |   commit e508a3d111e8533988abff5b37115f9e12f053a1 (origin/jwyatt_RulesAndInformationPage)
+|\ \  Merge: de960c5 2b48172
+| | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | Date:   Fri Apr 22 16:32:20 2022 +0800
+| | | 
+| | |     Merge pull request #17 from jwyatt1999/jwyatt_AmbushCards
+| | |     
+| | |     Add Ambush Cards
+| | | 
+* | | commit de960c5216fffd03b83a4389f40b1b17ba0272ec
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sun Apr 17 14:23:20 2022 +0800
+| | | 
+| | |     Revert "Merge pull request #15 from jwyatt1999/main_page_css"
+| | |     
+| | |     This reverts commit 5b46eb2006e506e44e23847d325090e465984484, reversing
+| | |     changes made to ac2bd86dc67f5ab2bfd0db8604dd735b0debf3b9.
+| | | 
+* | | commit 04a74cd43ac5a2c13f865fa61e4b3dfe678fc00c
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 16 12:23:57 2022 +0800
+| | | 
+| | |     Update README.md
+| | | 
+* | | commit dd9bed8ec6ff36ec922ed630ac9fec3dd445a2ce
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 16 12:22:11 2022 +0800
+| | | 
+| | |     Delete README.md
+| | | 
+* | | commit 7f78303f6d598647c48692ef4d629655a011ba6a
+| | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | Date:   Sat Apr 16 12:21:54 2022 +0800
+| | | 
+| | |     Create README.md
+| | |   
+* | |   commit 5b46eb2006e506e44e23847d325090e465984484
+|\ \ \  Merge: ac2bd86 6c1b422
+| | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | Date:   Sat Apr 16 12:19:37 2022 +0800
+| | | | 
+| | | |     Merge pull request #15 from jwyatt1999/main_page_css
+| | | |     
+| | | |     Creation of Flask App
+| | | |   
+| | | | * commit 1edef6c9cf68d75c740ea7e95abcd02b68b00d68 (origin/main_page_css)
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Fri Apr 22 16:54:37 2022 +0800
+| | | | | 
+| | | | |     Pulled in main after merging PR17
+| | | | | 
+| | | | * commit 2405040d0f280beb8dfdf8d1621ebb9682a738ff
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Fri Apr 22 16:24:58 2022 +0800
+| | | | | 
+| | | | |     Added rudimentary score tracking per user and global leaderboard ranking
+| | | | | 
+| | | | * commit 755cf888eeef7315b2ae556adfc62b671f035643
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Mon Apr 18 09:09:57 2022 +0800
+| | | | | 
+| | | | |     Cleaned up ignored files
+| | | | | 
+| | | | * commit c638ca264328328c14ed389726b0813383937661
+| | | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | | Date:   Mon Apr 18 09:09:46 2022 +0800
+| | | | | 
+| | | | |     Cleaned up ignored files
+| | | | | 
+| | | | * commit 7bb67f5c9534c5350cf90e0e4aa9e27a7023121f
+| | |_|/  Author: Bsubs <bsubs02@gmail.com>
+| |/| |   Date:   Mon Apr 18 08:57:33 2022 +0800
+| | | |   
+| | | |       Updated gitignore file
+| | | |   
+| * | |   commit 6c1b422e8d86bc9e7642b847ef74acb0ffd51461 (origin/jktay_CreationOfFlaskApp)
+| |\ \ \  Merge: 77a1fe7 ac2bd86
+| |/ / /  Author: Bsubs <bsubs02@gmail.com>
+|/| | |   Date:   Sat Apr 16 04:18:11 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' into main_page_css
+| | | | 
+* | | | commit ac2bd86dc67f5ab2bfd0db8604dd735b0debf3b9
+| | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | Date:   Sat Apr 16 11:54:16 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+* | | | commit e7d1504ebe8ce5b9c81042eb81fb32b5632b1804
+| | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | Date:   Sat Apr 9 17:53:43 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+* | | | commit a88fad897f2eeb3d6e8325efbe283585710600da
+| | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | Date:   Sat Apr 9 17:53:05 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+* | | | commit ef3e7a99fd689180dff8b491dcd14db09423b91d
+| | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | Date:   Sat Apr 9 11:17:31 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+* | | | commit df6327eab88edc9538574f04786f82497bc5839a
+| | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | Date:   Sat Apr 9 11:01:19 2022 +0800
+| | | | 
+| | | |     Update README.md
+| | | | 
+| * | | commit 77a1fe7467f44ede0d218390dcb87db6e3f158ba
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat Apr 16 04:07:35 2022 +0800
+| | | | 
+| | | |     Updated README
+| | | | 
+| * | | commit 4e102ed758c55895bec1d6e17dc34a912968fe85
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat Apr 16 03:58:40 2022 +0800
+| | | | 
+| | | |     Removed uncecessary commented code from game_page.html
+| | | | 
+| * | | commit 2dc42ca66b74afdeebc0f3dad1af67e3dccda446
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat Apr 9 11:44:50 2022 +0800
+| | | | 
+| | | |     Fixed bugs with images not displaying on profile page
+| | | | 
+| * | | commit 6364a610aff541c1adcaaad0952cf147a94e9747
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Mon Apr 4 11:46:39 2022 +0800
+| | | | 
+| | | |     Added working prototype of database and app to log users in and out
+| | | | 
+| * | | commit adad28f034c779f548abb3e6ff32421f384bc821
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sun Apr 3 16:16:43 2022 +0800
+| | | | 
+| | | |     Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into main_page_css
+| | | |   
+| * | |   commit 63ca9689d8d297a68363729e86ea25390076db30
+| |\ \ \  Merge: 501138f 50b733b
+| |/ / /  Author: Bsubs <bsubs02@gmail.com>
+|/| | |   Date:   Sat Apr 2 17:29:57 2022 +0800
+| | | |   
+| | | |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into main_page_css
+| | | | 
+| * | | commit 501138f64d399a33d584382c71dea24817cbfc22
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat Apr 2 01:51:30 2022 +0800
+| | | | 
+| | | |     Begin conversion from pure html files to Flask app
+| | | | 
+| * | | commit a874f2a5c432ebc66d51fe13e0c5c1344f96f6a0
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sun Mar 27 22:05:11 2022 +0800
+| | | | 
+| | | |     Added white borders to the buttons
+| | | | 
+| * | | commit 06e24315d67d6a5bf392f1e2c291898306a22eec
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sun Mar 27 17:29:53 2022 +0800
+| | | | 
+| | | |     added styling to main page buttons
+| | | | 
+| * | | commit 09ced15f16e5efb947cc5ad72dc32e4465752fde
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sun Mar 27 17:12:29 2022 +0800
+| | | | 
+| | | |     Added buttons to main page which link to the game page
+| | | | 
+| * | | commit 20ce24ffd2aeef10c2a40b59f491c95a5a9f2b32
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sun Mar 27 16:10:42 2022 +0800
+| | | | 
+| | | |     Added skeleton pages for informationa and rules
+| | | | 
+| * | | commit 4c95bdac7a43410f046ec1a5f5405e196d7e7638
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sun Mar 27 16:10:05 2022 +0800
+| | | | 
+| | | |     Added skeleton pages for rules and information
+| | | | 
+| * | | commit e81d813ae8e43feb0fd0d30e63dbe09e29b4b55a
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Sat Mar 26 12:05:04 2022 +0800
+| | | | 
+| | | |     Updated css for mainpage
+| | | | 
+| * | | commit 0128c56c0f7190bcc193c1379ab972fc4f8bf5ad
+| | | | Author: Bsubs <bsubs02@gmail.com>
+| | | | Date:   Fri Mar 25 17:02:43 2022 +0800
+| | | | 
+| | | |     Added css for main page
+| | | |   
+| | | | * commit 7ff44e9229a88b21b332f318eee9b4eb51b82f65 (origin/jwyatt_ShowCurrentPieceAndAmbush)
+| | | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | |   Date:   Fri Apr 22 14:52:43 2022 +0800
+| | | |   
+| | | |       add textbox to tell user of what part of the piece alternates
+| | | | 
+| | | * commit c181e98fab658cbbfd5ee694280152743fd82645
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Fri Apr 22 14:04:52 2022 +0800
+| | | | 
+| | | |     added score card randomization and displaying score card description
+| | | | 
+| | | * commit e1e99463d711f5382a9a7e61e9a839f556b78f29
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Fri Apr 22 12:52:40 2022 +0800
+| | | | 
+| | | |     add accessor method to score card files
+| | | | 
+| | | * commit 01f989c3b62ec1d698ba711ad4c233e97151dd8d
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Fri Apr 22 09:39:44 2022 +0800
+| | | | 
+| | | |     Implemented village score cards
+| | | | 
+| | | * commit d33384a2aa66cfb7ca49a86e9651142280dacf3e
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 18 01:08:06 2022 +0800
+| | | | 
+| | | |     implemented placement score cards
+| | | | 
+| | | * commit 6af30e91f7c1ced2efe26ef63e3dfd481d9b6ef6
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 18 00:35:10 2022 +0800
+| | | | 
+| | | |     implemented jorekburg score card
+| | | | 
+| | | * commit c7dfc280fc3379e4f1f571eca4fd52b2f32f16c4
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 18 00:29:22 2022 +0800
+| | | | 
+| | | |     implemented mages valley score card
+| | | | 
+| | | * commit 258fc74fe0aff3f1e5b57e0da4896cb1a9f7756c
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Mon Apr 18 00:25:35 2022 +0800
+| | | | 
+| | | |     implemented canal lake score card
+| | | | 
+| | | * commit e0020a303f75c1160b9c3a59514078dfa8a69681
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Sun Apr 17 21:35:51 2022 +0800
+| | | | 
+| | | |     implemented Faunlost Thicket score card
+| | | | 
+| | | * commit 3782167147ac3933a06fb310dd4431ef950fccad
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Sun Apr 17 19:22:42 2022 +0800
+| | | | 
+| | | |     implemented Greenbough score card
+| | | | 
+| | | * commit 508a46318df0c8f721cb1964950c3629d5b6b7dc
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Sun Apr 17 19:12:46 2022 +0800
+| | | | 
+| | | |     implemented sentinelWood score card
+| | | | 
+| | | * commit aefa9f9ffa03ca6a971a46cd0a4a9d26ca30698d
+| | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | |   Date:   Sun Apr 17 17:26:09 2022 +0800
+| | |   
+| | |       added new empty files for score cards
+| | | 
+| | * commit 2b48172f8dd1e67ca98c9774c361d44506534021 (origin/jwyatt_AmbushCards)
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sun Apr 17 15:26:02 2022 +0800
+| | | 
+| | |     self review
+| | | 
+| | * commit 8272ac14d035d3aee8a820a1ce6b3fdc7a1b50ff
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sun Apr 17 15:20:47 2022 +0800
+| | | 
+| | |     added delimiter to use strict to make validator happy
+| | | 
+| | * commit fa55c8807d6e56517db2808baf8401d835a823f6
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 2 22:55:28 2022 +0800
+| | | 
+| | |     fixed shapes of ambush cards
+| | | 
+| | * commit 4faa7868ba319f7bea685d9b2474214acd5ead20
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 2 22:47:39 2022 +0800
+| | | 
+| | |     updated ambush card shapes
+| | | 
+| | * commit eb1bcc0c231cd8854aa38ac5b64c958329d3b7b2
+| | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | Date:   Sat Apr 2 18:31:56 2022 +0800
+| | | 
+| | |     added ambush card logic
+| | |   
+| | *   commit fa74fe4e340c8d05f1aad7b8aa36e07470fc6124
+| | |\  Merge: 6c57df9 50b733b
+| |_|/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|/| |   Date:   Sat Apr 2 14:14:32 2022 +0800
+| | |   
+| | |       Merge branch 'main' of https://github.com/jwyatt1999/CITS3403_Cartographers into jwyatt_AmbushCards
+| | |   
+* | |   commit 50b733b2d2ddd23a70228117952965cfea0f8f8f
+|\ \ \  Merge: 3de130d a2853d1
+| | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | Date:   Sat Apr 2 14:06:26 2022 +0800
+| | | | 
+| | | |     Merge pull request #16 from jwyatt1999/jwyatt_Coins_ExtendedExploreCards_AmbushCards
+| | | |     
+| | | |     Implemented coins and remaining base explore cards
+| | | |   
+* | | |   commit 3de130dfe56147cc9549730664f9bf17555bb732
+|\ \ \ \  Merge: c6ce7d6 c1735e8
+| | | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | | Date:   Sat Apr 2 11:35:20 2022 +0800
+| | | | | 
+| | | | |     Merge pull request #14 from jwyatt1999/jwyatt_randomizedBoard
+| | | | |     
+| | | | |     Add randomized starting board
+| | | | |   
+* | | | |   commit c6ce7d61908a4c3abde233e819ad6dcf70c9c07d
+|\ \ \ \ \  Merge: 5744a62 a2cbe46
+| | | | | | Author: Bsubs <56755990+Bsubs@users.noreply.github.com>
+| | | | | | Date:   Mon Mar 28 11:19:50 2022 +0800
+| | | | | | 
+| | | | | |     Merge pull request #1 from jwyatt1999/jwyatt_prototypeGame
+| | | | | |     
+| | | | | |     Barebones prototype of game
+| | | | | | 
+* | | | | | commit 5744a62ace61a9fe62f2f916e843f0f9d245f4d8
+| | | | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | | | Date:   Sat Mar 26 11:50:21 2022 +0800
+| | | | | | 
+| | | | | |     Update README.md
+| | | | | | 
+* | | | | | commit 8402ffa40eb5116b45e979e24074fbcdecaa0398
+| | | | | | Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+| | | | | | Date:   Sat Mar 26 11:48:59 2022 +0800
+| | | | | | 
+| | | | | |     Update README.md
+| | | | | | 
+* | | | | | commit 508f54d9a6a9d6706ed49d357a58053918e28719
+| |_|_|/ /  Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+|/| | | |   Date:   Fri Mar 25 17:37:18 2022 +0800
+| | | | |   
+| | | | |       Update README.md
+| | | | | 
+| | | | * commit 6c57df91edc41c628dd632a60d4775a6f3f94e20
+| | | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | |   Date:   Sat Apr 2 14:14:00 2022 +0800
+| | | |   
+| | | |       added strict
+| | | | 
+| | | * commit a2853d103e63cda56010875c18a0029f7a3c1bd1 (origin/jwyatt_Coins_ExtendedExploreCards_AmbushCards)
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Fri Apr 1 23:01:42 2022 +0800
+| | | | 
+| | | |     added card times and calculated cards per season
+| | | | 
+| | | * commit 4d9d5d742f2656273206f3189efa0626ae1183d1
+| | | | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | | | Date:   Fri Apr 1 22:09:14 2022 +0800
+| | | | 
+| | | |     added coins and coin logic
+| | | | 
+| | | * commit 4dc220d0342bb1410e8c91ca6f24aee108e26f77
+| | |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | |   Date:   Mon Mar 28 21:42:31 2022 +0800
+| | |   
+| | |       added piece type swapping
+| | | 
+| | * commit c1735e83cc43e1d05fd831d12084195eae7806d8 (origin/jwyatt_randomizedBoard)
+| |/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| |   Date:   Sat Mar 26 16:53:17 2022 +0800
+| |   
+| |       Added random map generation
+| | 
+| * commit a2cbe46b4efcc64d816c9b6702479a05c898276f (origin/jwyatt_prototypeGame)
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Mar 25 16:48:23 2022 +0800
+| | 
+| |     Changes to fix validator issues
+| | 
+| * commit 41fb54e3c665c680a8bc4965b6367af09d7783b7
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Mar 25 16:39:52 2022 +0800
+| | 
+| |     fixed broken coordinate logic
+| | 
+| * commit 76e1056f2e4b3de4b435e29185be7d9e8f541419
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Mar 25 16:26:50 2022 +0800
+| | 
+| |     reordered methods
+| | 
+| * commit 7b2d7f7eed8c0fff39033ce448b8a9c44e3799e6
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Mar 25 16:19:14 2022 +0800
+| | 
+| |     last set of comments (for now!)
+| | 
+| * commit bec737a7375ee25aed7606d473f693615a012ce1
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Fri Mar 25 15:39:55 2022 +0800
+| | 
+| |     added some more comments
+| | 
+| * commit 5d7700061fbadf3e713de628a4987ceff9d4e5e3
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Thu Mar 24 21:37:30 2022 +0800
+| | 
+| |     added some comments
+| | 
+| * commit 00e4add6003cc7596dc84b1723157b10207360d6
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed Mar 23 19:55:46 2022 +0800
+| | 
+| |     working prototype complete!
+| | 
+| * commit 854ca54d9ae8f3efa0119cc5a5166ffa0c87eca7
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed Mar 23 19:11:01 2022 +0800
+| | 
+| |     nearly complete prototype
+| | 
+| * commit f14523721b714533f8e084255aa7a93c0b73e55e
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed Mar 23 18:38:53 2022 +0800
+| | 
+| |     Added piece flipping and rotation
+| | 
+| * commit 2aa2ba72958a86a4b0ccaef302a0b772cda55e3b
+| | Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| | Date:   Wed Mar 23 18:24:53 2022 +0800
+| | 
+| |     Added piece rendering and piece control
+| | 
+| * commit 8d7358fe038d3a578272e34ea5c018b1a98234e0
+|/  Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+|   Date:   Wed Mar 23 15:57:43 2022 +0800
+|   
+|       Added board rendering and start button
+| 
+* commit d19841d6221ebc3248146da475ccc1a40a13428c
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Wed Mar 23 12:35:30 2022 +0800
+| 
+|     Added bootrstrap and some global CSS
+| 
+* commit 6e209fc90b365836d1eebe3fd2e6ea1217576cd0
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Wed Mar 23 12:24:39 2022 +0800
+| 
+|     Added style sheet to game page and main page
+| 
+* commit 49b409755022b7277e4933378e5c697d0946cc33
+| Author: jwyatt1999 <joshua.wyatt1999@gmail.com>
+| Date:   Wed Mar 23 12:22:18 2022 +0800
+| 
+|     initial commit - skeleton files
+| 
+* commit 58dc191d167f2d4c4ea8c0a23a2c980ef143d3e5
+  Author: jwyatt1999 <88421309+jwyatt1999@users.noreply.github.com>
+  Date:   Wed Mar 23 11:58:18 2022 +0800
+  
+      Initial commit
