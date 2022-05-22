@@ -79,6 +79,7 @@ class UserModelCase(unittest.TestCase):
         db.session.add(c12)
         db.session.commit()
 
+        #Tests that the methods found in models.py work as intended
         self.assertEqual(u1.scorelists.scorecards.all(), [c1,c2,c3,c4,c5,c6])
         self.assertEqual(u2.scorelists.scorecards.all(), [c7,c8,c9,c10,c11,c12])
 
